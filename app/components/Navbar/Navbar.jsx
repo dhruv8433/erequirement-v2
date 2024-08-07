@@ -2,11 +2,14 @@ import React from "react";
 import Link from "next/link";
 import Routes from "@/app/Routes/Routes";
 import MyContainer from "@/app/common/MyContainer";
+import { IconButton } from "@mui/material";
+import { SettingsOutlined } from "@mui/icons-material";
+import LocaleSwitcher from "@/app/common/LocaleSwitcher";
 
 const Navbar = () => {
   return (
     <div>
-      <div className="nav bg-gray-200 py-6">
+      <div className="nav bg-white py-6">
         {/* reusable component */}
         <MyContainer
           maxWidth="xl"
@@ -20,10 +23,14 @@ const Navbar = () => {
           <div className="links flex gap-4">
             <Routes />
           </div>
-          <div className="user">
+          <div className="user flex items-center">
             <Link href="/login">
               <h1>Login</h1>
             </Link>
+            <IconButton className="hover:animate-spin">
+              <SettingsOutlined />
+            </IconButton>
+            <LocaleSwitcher />
           </div>
         </MyContainer>
       </div>
