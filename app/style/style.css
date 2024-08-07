@@ -1,13 +1,13 @@
 .swiper-button-next {
   padding: 30px 20px;
-  background: #fff;
+  background: #ff9a00;
   border-radius: 10px;
   margin-right: -20px;
 }
 
 .swiper-button-prev {
   padding: 30px 20px;
-  background: #fff;
+  background: #ff9a00;
   border-radius: 10px;
   margin-left: -20px;
 }
@@ -15,5 +15,5 @@
 .swiper-button-prev::after,
 .swiper-button-next::after {
   font-size: 24px !important;
-  color: #ff9a00 !important;
+  color: #fff !important;
 }
