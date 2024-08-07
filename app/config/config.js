@@ -27,3 +27,6 @@ export const routes = [
     url: "/contact",
   },
 ];
+
+export const ApiUrl = "https://e-requirement-backend-v2.vercel.app/api/v2";
+export const BaseUrl = "https://e-requirement-backend-v2.vercel.app/";
