@@ -1,8 +1,8 @@
 "use client";
 
+import React from "react";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
-import React, { useTransition } from "react";
 
 export default function LocaleSwitcher() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function LocaleSwitcher() {
     router.replace(`/${nextLocale}`);
   };
   return (
-    <div className="border-2 rounded">
+    <div className="border-2 rounded px-2">
       <p className="sr-only">Change Language</p>
       <select
         defaultValue={localeActive}
