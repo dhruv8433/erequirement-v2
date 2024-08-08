@@ -32,7 +32,7 @@ const Provider = ({ provider }) => {
         <Divider />
 
         <div
-          className={`btn text-center p-2 hover:bg-[${myPrimaryColor}] hover:text-white`}
+          className={`view-more btn text-center p-2 hover:bg-[${myPrimaryColor}] hover:text-white`}
         >
           <p>view more</p>
         </div>
