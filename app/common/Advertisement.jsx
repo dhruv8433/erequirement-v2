@@ -1,8 +1,9 @@
+import { Box } from "@mui/material";
 import React from "react";
 
 const Advertisement = ({ ads }) => {
   return (
-    <div className="h-[500px]">
+    <Box height={{ xs: "230px", md: "500px" }}>
       <img
         src={ads.image}
         height={"100%"}
@@ -11,7 +12,7 @@ const Advertisement = ({ ads }) => {
         alt=""
       />
       ;
-    </div>
+    </Box>
   );
 };
 
