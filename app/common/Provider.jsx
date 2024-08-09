@@ -10,7 +10,7 @@ const Provider = ({ provider }) => {
         <div className="banner h-[200px] w-full overflow-hidden">
           <img
             src={provider.banner_image}
-            className="h-[200px] w-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-105"
             alt={provider.title}
           />
         </div>
