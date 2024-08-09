@@ -7,6 +7,7 @@ import { getHomeScreen } from "../utils/HomeScreen";
 import TopProviders from "../components/home/TopProviders";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreHomeScreenData } from "../actions/action";
+import TopServices from "../components/home/TopServices";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -49,6 +50,7 @@ export default function Home() {
         <Categories data={data.categorys} loading={loading} />
         <Slider data={data.swiper} loading={loading} />
         <TopProviders data={data.top_categories} loading={loading} />
+        <TopServices data={data.top_services} loading={loading} />
       </div>
     </div>
   );

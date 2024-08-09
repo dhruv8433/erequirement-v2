@@ -11,7 +11,7 @@ const TopProviders = ({ data, loading }) => {
           <h1>Loading...</h1>
         ) : (
           data.slice(0, 4).map((provider) => (
-            <Grid item key={provider.id} xs={12} md={3}>
+            <Grid item key={provider.id} xs={12} sm={6} md={3}>
               <Provider provider={provider} key={provider.id} />
             </Grid>
           ))
