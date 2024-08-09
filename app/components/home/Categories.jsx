@@ -1,12 +1,12 @@
 "use client";
 
 import "swiper/css";
+import React  from "react";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import MySkeleton from "@/app/common/MySkeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
-import React, { useEffect, useState } from "react";
 import CategoryCard from "@/app/common/CategoryCard";
 import { getHomeScreen } from "@/app/utils/HomeScreen";
 import { SwiperBreakPoints } from "@/app/config/config";
