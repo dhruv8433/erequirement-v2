@@ -12,7 +12,7 @@ const PhoneAd = () => {
       <Grid container spacing={4}>
         {/* Left Side: Mobile Phone Image */}
         <Grid item xs={12} md={4}>
-          <div className="flex justify-center">
+          <div className="flex justify-center md:justify-start">
             <img
               src={PhoneImage.src}
               alt="Phone Advertisement"
