@@ -1,0 +1,22 @@
+@import "./variables";
+@import "./minixs";
+
+.swiper-button-next {
+    @include SwiperButton();
+    margin-right: -20px;
+}
+
+.swiper-button-prev {
+    @include SwiperButton();
+    margin-left: -20px;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 24px !important;
+    color: #fff !important;
+}
+
+.view-more:hover {
+    background-color: $OrangePrimary;
+}
