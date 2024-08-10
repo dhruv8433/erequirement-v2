@@ -1,10 +1,10 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import PhoneImage from "@/app/assets/phone.jpg";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import BuildIcon from "@mui/icons-material/Build";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SpeedIcon from "@mui/icons-material/Speed";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 const PhoneAd = () => {
   return (
