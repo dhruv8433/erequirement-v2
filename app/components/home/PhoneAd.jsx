@@ -1,10 +1,10 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import PhoneImage from "@/app/assets/phone.jpg";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import BuildIcon from "@mui/icons-material/Build";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SpeedIcon from "@mui/icons-material/Speed";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 const PhoneAd = () => {
   return (
@@ -12,7 +12,7 @@ const PhoneAd = () => {
       <Grid container spacing={4}>
         {/* Left Side: Mobile Phone Image */}
         <Grid item xs={12} md={4}>
-          <div className="flex justify-center">
+          <div className="flex justify-center md:justify-start">
             <img
               src={PhoneImage.src}
               alt="Phone Advertisement"
