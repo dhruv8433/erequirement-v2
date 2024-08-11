@@ -1,14 +1,15 @@
 "use client";
 
-import Categories from "../components/home/Categories";
-import Slider from "../components/home/Slider";
 import { useEffect, useState } from "react";
+import Slider from "../components/home/Slider";
 import { getHomeScreen } from "../utils/HomeScreen";
-import TopProviders from "../components/home/TopProviders";
+import Subscribe from "../components/home/Subscribe";
 import { useDispatch, useSelector } from "react-redux";
+import Categories from "../components/home/Categories";
 import { StoreHomeScreenData } from "../actions/action";
 import TopServices from "../components/home/TopServices";
-import PhoneAd from "../components/home/PhoneAd";
+import TopProviders from "../components/home/TopProviders";
+import Testimonials from "../components/home/Testomonials";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -52,7 +53,10 @@ export default function Home() {
         <Slider data={data.swiper} loading={loading} />
         <TopProviders data={data.top_categories} loading={loading} />
         <TopServices data={data.top_services} loading={loading} />
-        <PhoneAd />
+        {/* subscriber */}
+        <Subscribe />
+        {/* Testomonials */}
+        <Testimonials testimonials={data.customer_reviews} loading={loading} />
       </div>
     </div>
   );
