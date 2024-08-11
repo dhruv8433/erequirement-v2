@@ -31,4 +31,8 @@
 .css-kp9ftd-MuiIcon-root {
   height: auto !important;
   width: auto !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ff9a00 !important;
 }/*# sourceMappingURL=style.css.map */
