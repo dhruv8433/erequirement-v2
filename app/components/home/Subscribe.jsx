@@ -6,7 +6,7 @@ import SpeedIcon from "@mui/icons-material/Speed";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
-const PhoneAd = () => {
+const Subscribe = () => {
   return (
     <div className="p-6">
       <Grid container spacing={4}>
@@ -94,4 +94,4 @@ const PhoneAd = () => {
   );
 };
 
-export default PhoneAd;
+export default Subscribe;

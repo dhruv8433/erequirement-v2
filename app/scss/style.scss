@@ -20,3 +20,18 @@
 .view-more:hover {
     background-color: $OrangePrimary;
 }
+
+.flex-item-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.css-kp9ftd-MuiIcon-root {
+    height: auto !important;
+    width: auto !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: $OrangePrimary !important;
+}
