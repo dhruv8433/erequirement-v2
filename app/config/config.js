@@ -1,7 +1,16 @@
+import {
+  ContactPageOutlined,
+  HandymanOutlined,
+  HomeOutlined,
+  InfoOutlined,
+  MiscellaneousServicesOutlined,
+} from "@mui/icons-material";
 import { useTranslations } from "next-intl";
 
 export const ApiUrl = "https://e-requirement-backend-v2.vercel.app/api/v2";
 export const BaseUrl = "https://e-requirement-backend-v2.vercel.app/";
+
+export const WebName = "ERequirement";
 
 // Website Routes
 export const routes = [
@@ -9,26 +18,31 @@ export const routes = [
     id: 1,
     name: "Home",
     url: "/",
+    icon: <HomeOutlined fontSize="small" />,
   },
   {
     id: 2,
     name: "About",
     url: "/about",
+    icon: <InfoOutlined fontSize="small" />,
   },
   {
     id: 3,
     name: "Categories",
     url: "/categories",
+    icon: <MiscellaneousServicesOutlined fontSize="small" />,
   },
   {
     id: 4,
     name: "Providers",
     url: "/providers",
+    icon: <HandymanOutlined fontSize="small" />,
   },
   {
     id: 5,
     name: "Contact",
     url: "/contact",
+    icon: <ContactPageOutlined fontSize="small" />,
   },
 ];
 
