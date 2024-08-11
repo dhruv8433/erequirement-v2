@@ -20,4 +20,15 @@
 
 .view-more:hover {
   background-color: #ff9a00;
+}
+
+.flex-item-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.css-kp9ftd-MuiIcon-root {
+  height: auto !important;
+  width: auto !important;
 }/*# sourceMappingURL=style.css.map */
