@@ -5,7 +5,7 @@ import Slider from "../components/home/Slider";
 import { getHomeScreen } from "../utils/HomeScreen";
 import Subscribe from "../components/home/Subscribe";
 import { useDispatch, useSelector } from "react-redux";
-import Categories from "../components/home/Categories";
+import Categories from "../components/home/TopCategories";
 import { StoreHomeScreenData } from "../actions/action";
 import TopServices from "../components/home/TopServices";
 import TopProviders from "../components/home/TopProviders";

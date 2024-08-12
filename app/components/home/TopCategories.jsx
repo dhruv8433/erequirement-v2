@@ -1,31 +1,28 @@
 "use client";
 
 import "swiper/css";
-import React  from "react";
+import React from "react";
+import Link from "next/link";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useLocale } from "next-intl";
 import { Navigation } from "swiper/modules";
 import MySkeleton from "@/app/common/MySkeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CategoryCard from "@/app/common/CategoryCard";
 import { SwiperBreakPoints } from "@/app/config/config";
+import { CategorySkeleton } from "@/app/common/CustomSkeleton";
 
 const Categories = ({ data, loading }) => {
-  
+  const locale = useLocale();
   return (
     <div className="my-4">
       <h1 className="my-4 text-2xl font-semibold">Categories</h1>
       <div className="flex gap-4">
         {loading ? (
           <div className="flex gap-12">
-            {Array.of(1, 2, 3, 4, 5).map((index) => (
-              <MySkeleton
-                key={index + 1}
-                className="rounded"
-                variant="rectangular"
-                height={160}
-                width={260}
-              />
+            {Array.from({ length: 5 }).map((index) => (
+              <CategorySkeleton key={index} />
             ))}
           </div>
         ) : (
@@ -41,7 +38,11 @@ const Categories = ({ data, loading }) => {
             {data.map((category) => (
               <SwiperSlide key={category.id}>
                 {/* reusable component call */}
-                <CategoryCard category={category} />
+                <Link
+                  href={`${locale}/categories/${category.id}/${category.slug}`}
+                >
+                  <CategoryCard category={category} />
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
