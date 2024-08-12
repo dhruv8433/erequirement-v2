@@ -19,12 +19,7 @@ const Footer = () => {
               <div className="px-3">
                 <h1 className="my-4 text-xl font-medium">About us</h1>
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Optio consequuntur explicabo earum neque voluptates! Illo
-                  blanditiis molestiae nostrum, ipsam tempora asperiores commodi
-                  fugiat, minus dicta debitis corrupti. Molestiae omnis modi
-                  nemo. Nisi deleniti et id consequuntur doloremque quia minima
-                  facere.
+                  At ERequirement, you can find all the service related to home. we can provide home cleaning, laundry, electric repair, carpenter, plumber, electrician, and many more services. basically, it is the one place where you can find all services related to home.
                 </p>
               </div>
             </Grid>
@@ -69,7 +64,7 @@ const Footer = () => {
           </Grid>
         </div>
         <Divider />
-        <div className="mt-8 pt-2 text-center">
+        <div className="py-6 text-center">
           <p className="text-gray-400">
             &copy; {new Date().getFullYear()} E-Requirement. All rights
             reserved.

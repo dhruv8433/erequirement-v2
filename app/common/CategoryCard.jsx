@@ -4,7 +4,7 @@ const CategoryCard = ({ category }) => {
   return (
     <div
       key={category.id}
-      className="border-2 border-gray-700 p-3 rounded-2xl text-center hover:bg-white group hover:pointer"
+      className="border-2 border-gray-700 p-3 m-3 rounded-2xl text-center hover:bg-white group hover:pointer"
     >
       <img
         src={category.image}

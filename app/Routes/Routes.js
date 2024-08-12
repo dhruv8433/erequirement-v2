@@ -1,16 +1,22 @@
+'use client';
 import Link from "next/link";
-
-import { routes } from "../config/config";
 import { Icon } from "@mui/material";
+import { useLocale } from "next-intl";
+import { routes } from "../config/config";
+import { usePathname } from "next/navigation";
 
 const Routes = ({ isResponsive }) => {
+  const locale = useLocale();
+  const pathname = usePathname();
+
+  const hasLocaleInPath = new RegExp(`^/${locale}/${locale}`).test(pathname);
+
   return (
     <>
       {routes.map((link) => (
         <Link
           key={link.id}
-          href={link.url}
-          // Add hover effect on responsive nav items
+          href={hasLocaleInPath ? `${link.url}` : `/${locale}/${link.url}`}
           className={`flex items-center ${
             isResponsive && "hover:bg-gray-300 p-1 rounded-md"
           }`}

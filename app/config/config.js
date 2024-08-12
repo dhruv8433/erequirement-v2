@@ -17,31 +17,31 @@ export const routes = [
   {
     id: 1,
     name: "Home",
-    url: "/",
+    url: "",
     icon: <HomeOutlined fontSize="small" />,
   },
   {
     id: 2,
     name: "About",
-    url: "/about",
+    url: "about",
     icon: <InfoOutlined fontSize="small" />,
   },
   {
     id: 3,
     name: "Categories",
-    url: "/categories",
+    url: "categories",
     icon: <MiscellaneousServicesOutlined fontSize="small" />,
   },
   {
     id: 4,
     name: "Providers",
-    url: "/providers",
+    url: "providers",
     icon: <HandymanOutlined fontSize="small" />,
   },
   {
     id: 5,
     name: "Contact",
-    url: "/contact",
+    url: "contact",
     icon: <ContactPageOutlined fontSize="small" />,
   },
 ];
@@ -50,23 +50,23 @@ export const routes = [
 export const SwiperBreakPoints = {
   300: {
     slidesPerView: 1,
-    spaceBetween: 20,
+    spaceBetween: 5,
   },
   440: {
     slidesPerView: 2,
-    spaceBetween: 20,
+    spaceBetween: 10,
   },
   640: {
     slidesPerView: 3,
-    spaceBetween: 30,
+    spaceBetween: 10,
   },
   840: {
     slidesPerView: 4,
-    spaceBetween: 40,
+    spaceBetween: 20,
   },
   1024: {
     slidesPerView: 5,
-    spaceBetween: 50,
+    spaceBetween: 30,
   },
 };
 
