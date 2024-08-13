@@ -7,10 +7,10 @@ export const ProviderSkeletons = () => {
       <div className="flex justify-center relative -top-10">
         <Skeleton variant="circular" width={100} height={100} />
       </div>
-      <div className="my-1 text-center relative bottom-8">
+      <div className="my-1 text-center flex flex-col justify-center w-full items-center relative bottom-8">
         <Skeleton variant="text" width="60%" />
         <Skeleton variant="text" width="40%" />
-        <Skeleton variant="text" width="50%" />
+        <Skeleton variant="text" width="30%" />
       </div>
       <Divider />
       <Skeleton variant="rectangular" width="100%" height={50} />
