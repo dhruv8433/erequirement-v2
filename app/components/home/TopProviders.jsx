@@ -2,15 +2,16 @@ import React from "react";
 import { Grid } from "@mui/material";
 import Provider from "@/app/common/Provider";
 import { ProviderSkeletons } from "@/app/common/CustomSkeleton";
+import MyTitle from "@/app/common/MyTitle";
 
 const TopProviders = ({ data, loading }) => {
   return (
     <div className="my-4">
-      <h1 className="text-2xl font-semibold my-4"> Top Providers</h1>
+      <MyTitle title={"Top Providers"}/>
       <Grid container>
         {loading
           ? Array.from({ length: 4 }).map((_, index) => (
-              <Grid item key={_} xs={12} sm={6} md={3}>
+              <Grid item key={index} xs={12} sm={6} md={3}>
                 <ProviderSkeletons />
               </Grid>
             ))

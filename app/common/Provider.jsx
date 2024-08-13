@@ -1,14 +1,16 @@
 import React from "react";
 import { useLocale } from "next-intl";
-import { Divider } from "@mui/material";
+import { Divider, useTheme } from "@mui/material";
 import { myPrimaryColor } from "../config/config";
 import Link from "next/link";
+import { MyPrimaryBox } from "./MyBox";
 
 const Provider = ({ provider }) => {
   const locale = useLocale();
+  const theme = useTheme();
   return (
     <Link href={`/${locale}/providers/${provider.id}/${provider.slug}`}>
-      <div className="m-2 rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer hover:bg-white group">
+      <MyPrimaryBox className="m-2 rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
         <div className="card">
           {/* banner image */}
           <div className="banner h-[200px] w-full overflow-hidden">
@@ -22,7 +24,7 @@ const Provider = ({ provider }) => {
           <div className="logo h-[100px] flex justify-center relative -top-10">
             <img
               src={provider.logo_image}
-              className={`h-[100px] -mb-5 rounded-full border-4 border-[${myPrimaryColor}] bg-white w-[100px] p-4 object-cover scale-100`}
+              className={`h-[100px] -mb-5 rounded-full border-4 bg-white w-[100px] p-4 object-cover scale-100`}
               alt={provider.title}
             />
           </div>
@@ -36,12 +38,12 @@ const Provider = ({ provider }) => {
           <Divider />
 
           <div
-            className={`view-more btn text-center p-2 hover:bg-[${myPrimaryColor}] hover:text-white`}
+            className={`view-more btn text-center p-2 hover:text-white`}
           >
             <p>view more</p>
           </div>
         </div>
-      </div>
+      </MyPrimaryBox>
     </Link>
   );
 };
