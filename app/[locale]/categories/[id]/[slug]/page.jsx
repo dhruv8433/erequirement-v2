@@ -1,9 +1,12 @@
-import React from 'react'
+import CategoriesDetailed from "@/app/components/categories/CategoriesDetailed";
+import React from "react";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <CategoriesDetailed />
+    </div>
+  );
+};
 
-export default page
+export default page;

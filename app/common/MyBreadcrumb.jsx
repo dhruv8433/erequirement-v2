@@ -2,11 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { Breadcrumbs, Typography } from "@mui/material";
 import { ChevronRight } from "@mui/icons-material";
+import MyTitle from "./MyTitle";
 
 const MyBreadcrumb = ({ breadcrumbs, activeIndex, title }) => {
   return (
     <div className="my-5">
-      <h1 className="text-3xl font-semibold">{title}</h1>
+      <MyTitle title={title} />
       <Breadcrumbs
         separator={<ChevronRight fontSize="small" />}
         aria-label="breadcrumb"

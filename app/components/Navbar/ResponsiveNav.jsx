@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Menu } from "@mui/icons-material";
+import { Menu, SettingsOutlined } from "@mui/icons-material";
 import { Box, Drawer, IconButton } from "@mui/material";
 import { WebName } from "@/app/config/config";
 import MenuDrawer from "@/app/drawer/MenuDrawer";
 
-const ResponsiveNav = ({ locale }) => {
+const ResponsiveNav = ({ locale, setSettingOpen }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -26,6 +26,12 @@ const ResponsiveNav = ({ locale }) => {
         </div>
         <div className="">
           <h1>Login</h1>
+          <IconButton
+            className="hover:animate-spin"
+            onClick={() => setSettingOpen(true)}
+          >
+            <SettingsOutlined />
+          </IconButton>
         </div>
       </div>
 
