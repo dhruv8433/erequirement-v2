@@ -2,5 +2,16 @@
     "Index": {
         "welcome": "Welcome",
         "login": "Login"
+    },
+    "home": {
+        "title": "All Your Requirements in One Place",
+        "subscribe": "Discover the ultimate convenience with our service-based website, where all home-related services can be found in a single place. Whether you need plumbing, electrical work, cleaning, or renovation services, we've got you covered.",
+        "subscribe_subtitle": "Subscribe now to stay updated on the latest services and offers!",
+        "why_us": "Why Choose Us?",
+        "wide_range": "Wide range of services",
+        "high_skill": "Highly skilled professionals",
+        "price": "Affordable pricing",
+        "quick": "Quick and reliable service",
+        "subscribe_button": "Subscribe"
     }
 }
