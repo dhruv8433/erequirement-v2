@@ -1,9 +1,8 @@
 import React from "react";
-import { useLocale } from "next-intl";
-import { Divider, useTheme } from "@mui/material";
-import { myPrimaryColor } from "../config/config";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 import { MyPrimaryBox } from "./MyBox";
+import { Divider, useTheme } from "@mui/material";
 
 const Provider = ({ provider }) => {
   const locale = useLocale();
