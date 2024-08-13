@@ -1,20 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import Slider from "../components/home/Slider";
 import { getHomeScreen } from "../utils/HomeScreen";
 import Subscribe from "../components/home/Subscribe";
 import { useDispatch, useSelector } from "react-redux";
 import Categories from "../components/home/TopCategories";
-import { StoreHomeScreenData } from "../actions/action";
 import TopServices from "../components/home/TopServices";
 import TopProviders from "../components/home/TopProviders";
 import Testimonials from "../components/home/Testomonials";
+import { setHomeScreenData } from "../reducer/homeScreenReducers";
 
 export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const t = useTranslations('home');
 
   const homeScreen = useSelector((state) => state.homeScreen?.data || []);
 
@@ -23,7 +25,7 @@ export default function Home() {
   async function getHomeScreenData() {
     try {
       const response = await getHomeScreen();
-      dispatch(StoreHomeScreenData(response)); // Dispatching action to store data in Redux
+      dispatch(setHomeScreenData(response)); // Dispatching action to store data in Redux
       setData(response); // Local state update
     } catch (error) {
       console.log("error: " + error);
@@ -54,7 +56,7 @@ export default function Home() {
         <TopProviders data={data.top_categories} loading={loading} />
         <TopServices data={data.top_services} loading={loading} />
         {/* subscriber */}
-        <Subscribe />
+        <Subscribe t={t} />
         {/* Testomonials */}
         <Testimonials testimonials={data.customer_reviews} loading={loading} />
       </div>
