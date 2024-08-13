@@ -1,9 +1,12 @@
 import { MyPrimaryBox } from "@/app/common/MyBox";
 import MyBreadcrumb from "@/app/common/MyBreadcrumb";
 import { Grid, Rating } from "@mui/material";
+import { useLocale } from "next-intl";
+import Link from "next/link";
 import React from "react";
 
 const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
+  const locale = useLocale();
   return (
     <div>
       {loading ? (
@@ -44,16 +47,22 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
                   </div>
                   {/* Provider info */}
                   <div className="my-1 text-center relative bottom-8">
-                    <h1 className="text-2xl font-semibold primary-text">{provider.title}</h1>
-                    <p className="text-xl">{provider.order_complete} order completed</p>
-                    <p className="text-xl">{provider.years_of_work} years of work</p>
+                    <h1 className="text-2xl font-semibold primary-text">
+                      {provider.title}
+                    </h1>
+                    <p className="text-xl">
+                      {provider.order_complete} order completed
+                    </p>
+                    <p className="text-xl">
+                      {provider.years_of_work} years of work
+                    </p>
                   </div>
                 </div>
               </MyPrimaryBox>
             </Grid>
             <Grid item xs={12} md={8}>
-              <div className="provider-card border mx-1 rounded-2xl m-2 p-2">
-                <div className="border p-4 rounded-2xl flex justify-between items-center px-4">
+              <div className="provider-card border mx-1 rounded-2xl m-4 p-2">
+                <div className="border p-4 rounded-2xl flex justify-between items-center m-2">
                   <h1>Services</h1>
                   <h1>About</h1>
                   <h1>Promo Code</h1>
@@ -66,32 +75,38 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
                     ) : (
                       services.map((service, index) => (
                         <Grid item xs={12} md={6} key={index}>
-                          <div className="border m-2 flex rounded-2xl overflow-hidden">
-                            <div className="serviceImg h-[200px] w-[200px] flex-shrink-0">
-                              <img
-                                src={service.serviceImg}
-                                className="h-full w-full object-cover rounded-l-2xl"
-                                alt={service.ServiceName}
-                              />
-                            </div>
-                            <div className="p-4 flex-1 flex flex-col justify-between">
-                              <div>
-                                <h1 className="text-2xl font-semibold">{service.ServiceName}</h1>
-                                <p className="text-sm text-gray-600">{service.ShortDesc}</p>
-                              </div>
-                              <div className="flex justify-between items-center mt-4">
-                                <Rating
-                                  name={`rating-${index}`}
-                                  value={service.AvgRatings}
-                                  precision={0.5}
-                                  readOnly
+                          <Link href={`/${locale}/services/${service.serviceID}/${service.Slug}`}>
+                            <div className="border m-2 flex rounded-2xl overflow-hidden">
+                              <div className="serviceImg h-[200px] w-[200px] flex-shrink-0">
+                                <img
+                                  src={service.serviceImg}
+                                  className="h-full w-full object-cover rounded-l-2xl"
+                                  alt={service.ServiceName}
                                 />
-                                <button className="primary-bg text-white p-1 rounded-lg ">
-                                  Add to Cart
-                                </button>
+                              </div>
+                              <div className="p-4 flex-1 flex flex-col justify-between">
+                                <div>
+                                  <h1 className="text-2xl font-semibold">
+                                    {service.ServiceName}
+                                  </h1>
+                                  <p className="text-sm text-gray-600">
+                                    {service.ShortDesc}
+                                  </p>
+                                </div>
+                                <div className="flex justify-between items-center mt-4">
+                                  <Rating
+                                    name={`rating-${index}`}
+                                    value={service.AvgRatings}
+                                    precision={0.5}
+                                    readOnly
+                                  />
+                                  <button className="primary-bg text-white p-1 rounded-lg ">
+                                    Add to Cart
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          </Link>
                         </Grid>
                       ))
                     )}
