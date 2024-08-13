@@ -70,9 +70,6 @@ export const SwiperBreakPoints = {
   },
 };
 
-export function MyTranslation(translationkey) {
-  const t = useTranslations(translationkey);
-  return t;
-}
+
 
 export const myPrimaryColor = "#ff9a00";
