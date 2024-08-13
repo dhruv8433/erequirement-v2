@@ -1,16 +1,24 @@
-import { SetHomeScreenData } from "./Constants";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [],
 };
 
-export const homeScreenReducers = (state = initialState, action) => {
-  switch (action.type) {
-    case SetHomeScreenData:
-      return {
-        data: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+const homeScreenReducers = createSlice({
+  // name of the reducer
+  name: "homeScreen",
+  // set initial state
+  initialState,
+  // define reducer
+  reducers: {
+    setHomeScreenData: (state, action) => {
+      state.data = action.payload;
+    },
+  },
+});
+
+// define action
+export const { setHomeScreenData } = homeScreenReducers.actions;
+
+// export reducer
+export default homeScreenReducers.reducer;
