@@ -76,7 +76,7 @@ const ServiceDetailed = ({ service, loading }) => {
                 <p className="my-4">{service.LongDesc}</p>
               </div>
               <div className="border border-gray-400 p-4 rounded-2xl">
-                <h1 className="text-2xl font-semibold my-2">
+                <h1 className="text-2xl primary-text font-semibold my-2">
                   Provider Info :{" "}
                 </h1>
                 <p className="text-sm">
@@ -95,7 +95,18 @@ const ServiceDetailed = ({ service, loading }) => {
               </div>
 
               <div className=" my-4 border border-gray-400 p-4 rounded-2xl">
-                <div className="flex items-center my-2">
+                <div className="mb-4">
+                  <h2 className="text-2xl font-bold">
+                    Price:{" "}
+                    <span className="primary-text">
+                      ${service.DiscountedPrice}
+                    </span>
+                  </h2>
+                  <p className="text-sm line-through">
+                    Actual Price: ${service.ActualPrice}
+                  </p>
+                </div>
+                <div className="flex items-center my-4">
                   <Rating
                     name="read-only"
                     value={service.AvgRatings}
@@ -105,14 +116,6 @@ const ServiceDetailed = ({ service, loading }) => {
                   <span className="ml-2 text-sm">
                     ({service.ReviewsCount} reviews)
                   </span>
-                </div>
-                <div className="mb-4">
-                  <h2 className="text-2xl font-bold">
-                    Price: <span className="primary-text">${service.DiscountedPrice}</span>
-                  </h2>
-                  <p className="text-sm line-through">
-                    Actual Price: ${service.ActualPrice}
-                  </p>
                 </div>
               </div>
             </Grid>
@@ -144,7 +147,7 @@ const ServiceDetailed = ({ service, loading }) => {
                   {service.Tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="bg-orange-100 primary-text font-semibold px-3 py-1 rounded-full text-sm"
+                      className="tag primary-text font-semibold px-3 py-1 rounded-full text-sm"
                     >
                       {tag}
                     </span>
