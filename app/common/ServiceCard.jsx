@@ -1,8 +1,11 @@
+import { useLocale } from "next-intl";
+import Link from "next/link";
 import React from "react";
 
 const ServiceCard = ({ service }) => {
+  const locale = useLocale();
   return (
-    <div>
+    <Link href={`${locale}/services/${service.serviceID}/${service.Slug}`}>
       {/* Container for the entire service card */}
       <div className="service-card m-4 border-2 rounded-2xl overflow-hidden relative group hover:cursor-pointer">
         {/* Container for the image and overlay */}
@@ -23,7 +26,7 @@ const ServiceCard = ({ service }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
