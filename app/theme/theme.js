@@ -8,12 +8,15 @@ const lightTheme = createTheme({
     },
     background: {
       default: "#eee", // light gray
-      paper: "#ffffff",  // white nav, footer
-      primary: "#ffffff" 
+      paper: "#ffffff", // white nav, footer
+      primary: "#ffffff",
+      card: "#f8f9fa", // light white
+      cardhover: "#f8edeb",
     },
     text: {
-      primary: "#0000000"
-    }
+      primary: "#0000000",
+      secondary: "#343a40",
+    },
   },
 });
 
@@ -26,11 +29,14 @@ const darkTheme = createTheme({
     background: {
       default: "#292929", // light black
       paper: "#000000", // black nav, footer
-      primary: "#000000"
+      primary: "#000000",
+      card: "#1a1a1a", // light black
+      cardhover: "#0d0906;",
     },
     text: {
-      primary: "#ffffff"
-    }
+      primary: "#ffffff",
+      secondary: "#dee2e6",
+    },
   },
 });
 
