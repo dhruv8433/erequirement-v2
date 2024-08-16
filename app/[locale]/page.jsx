@@ -11,12 +11,13 @@ import TopServices from "../components/home/TopServices";
 import TopProviders from "../components/home/TopProviders";
 import Testimonials from "../components/home/Testomonials";
 import { setHomeScreenData } from "../reducer/homeScreenReducers";
+import { WebName } from "../config/config";
 
 export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const t = useTranslations('home');
+  const t = useTranslations("home");
 
   const homeScreen = useSelector((state) => state.homeScreen?.data || []);
 
@@ -46,6 +47,8 @@ export default function Home() {
   useEffect(() => {
     DecideSendRequestOrNot();
   }, []);
+
+  document.title = `Home | ${WebName}`;
 
   return (
     <div>

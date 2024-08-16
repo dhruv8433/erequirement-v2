@@ -1,15 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
-import { MyPrimaryBox } from "./MyBox";
-import { Divider, useTheme } from "@mui/material";
+import { MyCardBox } from "./MyBox";
+import { Divider } from "@mui/material";
 
 const Provider = ({ provider }) => {
   const locale = useLocale();
-  const theme = useTheme();
   return (
     <Link href={`/${locale}/providers/${provider.id}/${provider.slug}`}>
-      <MyPrimaryBox className="m-2 rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
+      <MyCardBox className="m-2 rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
         <div className="card">
           {/* banner image */}
           <div className="banner h-[200px] w-full overflow-hidden">
@@ -36,13 +35,11 @@ const Provider = ({ provider }) => {
 
           <Divider />
 
-          <div
-            className={`view-more btn text-center p-2 hover:text-white`}
-          >
+          <div className={`view-more btn text-center p-2 hover:text-white`}>
             <p>view more</p>
           </div>
         </div>
-      </MyPrimaryBox>
+      </MyCardBox>
     </Link>
   );
 };

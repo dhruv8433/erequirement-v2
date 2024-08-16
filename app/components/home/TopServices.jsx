@@ -4,13 +4,13 @@ import React from "react";
 import ServiceCard from "@/app/common/ServiceCard";
 import MySkeleton from "@/app/common/MySkeleton";
 import { Grid } from "@mui/material";
-import MyTitle from "@/app/common/MyTitle";
+import { MyHeading } from "@/app/common/MyText";
 
 const TopServices = ({ data, loading }) => {
   console.log("Services", data);
   return (
     <div>
-      <MyTitle title={"Top Services"} />
+      <MyHeading title={"Top Services"} className={"text-2xl my-2 font-semibold"}/>
       <div className="services">
         <Grid container>
           {loading ? (

@@ -14,7 +14,7 @@ const ServiceCard = ({ service }) => {
           <img
             src={service.serviceImg}
             className="h-full w-full object-cover transform transition-transform duration-300 group-hover:scale-105"
-            alt={service.name}
+            alt={service.name || "image" + service.id}
           />
 
           {/* Overlay with text, background fades on hover */}

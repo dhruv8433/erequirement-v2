@@ -26,7 +26,7 @@ const LaptopNav = ({ locale, setSettingOpen }) => {
           className="hover:animate-spin"
           onClick={() => setSettingOpen(true)}
         >
-          <SettingsOutlined />
+          <SettingsOutlined aria-label="Settings"/>
         </IconButton>
         <LocaleSwitcher />
       </div>
