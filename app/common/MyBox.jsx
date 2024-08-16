@@ -13,4 +13,17 @@ const MySecondaryBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
 
-export { MyPrimaryBox, MySecondaryBox };
+// cards box
+const MyCardBox = styled(Box)(({ theme }) => ({
+  background: theme.palette.background.card,
+}));
+
+// hover card box
+const MyHoverCardBox = styled(Box)(({ theme }) => ({
+  background: theme.palette.background.card,
+  "&:hover": {
+    background: theme.palette.background.cardhover,
+  },
+}));
+
+export { MyPrimaryBox, MySecondaryBox, MyCardBox, MyHoverCardBox };
