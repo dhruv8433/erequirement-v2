@@ -1,8 +1,8 @@
 import React from "react";
-import MyTitle from "../common/MyTitle";
 import { setTheme } from "../reducer/ThemeReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { Divider, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { MyHeading } from "../common/MyText";
 
 const SettingDrawer = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const SettingDrawer = () => {
 
   return (
     <div className="p-2">
-      <MyTitle title={"Settings"} />
+      <MyHeading title={"Settings"} className={"text-2xl my-2 font-semibold"}/>
       <Divider />
       <div className="theme-buttons my-4">
         <ToggleButtonGroup
