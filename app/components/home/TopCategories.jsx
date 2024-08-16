@@ -11,13 +11,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import CategoryCard from "@/app/common/CategoryCard";
 import { SwiperBreakPoints } from "@/app/config/config";
 import { CategorySkeleton } from "@/app/common/CustomSkeleton";
-import MyTitle from "@/app/common/MyTitle";
+import { MyHeading } from "@/app/common/MyText";
 
 const Categories = ({ data, loading }) => {
   const locale = useLocale();
   return (
     <div className="my-4">
-      <MyTitle title={"Top Categories"} />
+      <MyHeading title={"Top Categories"} className={"text-2xl my-2 font-semibold"}/>
       <div className="flex gap-4">
         {loading ? (
           <div className="flex gap-12">
