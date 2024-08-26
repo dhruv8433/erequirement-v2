@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
-import { MyCardBox } from "./MyBox";
+import { MyCardBox } from "../custom/MyBox";
 import { Divider } from "@mui/material";
 
 const Provider = ({ provider }) => {
