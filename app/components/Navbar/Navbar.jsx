@@ -49,7 +49,7 @@ const Navbar = () => {
           <MyCardBox
             width={{ xs: "500px", md: "900px" }}
             paddingInline={{xs : "20px", md: "0px"}}
-            paddingRight={{xs : "0px", md: "10px"}}
+            paddingRight={{xs : "10px", md: "10px"}}
             className=" h-[600px] rounded-2xl overflow-hidden"
           >
             <AuthModal setModel={setModel} />
