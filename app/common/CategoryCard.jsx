@@ -1,5 +1,5 @@
 import React from "react";
-import { MyHoverCardBox } from "./MyBox";
+import { MyHoverCardBox } from "../custom/MyBox";
 
 const CategoryCard = ({ category }) => {
   return (
