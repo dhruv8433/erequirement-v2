@@ -1,6 +1,6 @@
 "use client";
 
-import MyBreadcrumb from "@/app/common/MyBreadcrumb";
+import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 import Categories from "@/app/components/categories/Categories";
 import { getCategories } from "@/app/utils/GetCategories";
 import React, { useEffect, useState } from "react";
