@@ -10,6 +10,7 @@ import { ProviderStore } from "../store/StoreProvider";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme, darkTheme } from "../theme/theme";
 import { useSelector } from "react-redux";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({ children, params }) {
             <MyContainer>{children}</MyContainer>
             <Footer />
           </ThemeSelector>
+          <Toaster />
         </ProviderStore>
       </body>
     </html>
@@ -33,5 +35,9 @@ export default function RootLayout({ children, params }) {
 
 function ThemeSelector({ children }) {
   const theme = useSelector((state) => state.theme.theme);
-  return <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      {children}
+    </ThemeProvider>
+  );
 }
