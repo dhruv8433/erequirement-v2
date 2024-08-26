@@ -4,7 +4,7 @@ import ServiceInfo from "./ServiceInfo";
 import ServiceFaqs from "./ServiceFaqs";
 import Rating from "@mui/material/Rating";
 import ServiceImages from "./ServiceImages";
-import { ServiceDetailedSkeleton } from "@/app/common/CustomSkeleton";
+import { ServiceDetailedSkeleton } from "@/app/custom/CustomSkeleton";
 
 const ServiceDetailed = ({ service, loading }) => {
   const [selectedImage, setSelectedImage] = useState(service.serviceImg);
