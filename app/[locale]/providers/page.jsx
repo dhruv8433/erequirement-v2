@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Providers from "@/app/components/providers/Providers";
 import { getProviders } from "@/app/utils/GetProviders";
-import MyBreadcrumb from "@/app/common/MyBreadcrumb";
+import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 import { useLocale } from "next-intl";
 
 const page = () => {
