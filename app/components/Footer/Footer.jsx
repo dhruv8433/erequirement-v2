@@ -1,5 +1,5 @@
-import { MySecondaryBox } from "@/app/common/MyBox";
-import MyContainer from "@/app/common/MyContainer";
+import { MySecondaryBox } from "@/app/custom/MyBox";
+import MyContainer from "@/app/custom/MyContainer";
 import { WebName } from "@/app/config/config";
 import Routes from "@/app/Routes/Routes";
 import { Facebook, Instagram, LinkedIn, Twitter } from "@mui/icons-material";
