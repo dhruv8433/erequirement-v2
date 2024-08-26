@@ -5,13 +5,12 @@ import Grid from "@mui/material/Grid";
 import PhoneImage from "@/app/assets/phone.jpg";
 import BuildIcon from "@mui/icons-material/Build";
 import SpeedIcon from "@mui/icons-material/Speed";
+import { MyStyledIcon } from "@/app/custom/MyIcon";
+import { MyPrimaryButton } from "@/app/custom/MyButton";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import {
-  MyPrimaryText,
-  MySecondaryText,
-  MyHeading,
-} from "@/app/common/MyText";
+import { MyPrimaryText, MySecondaryText, MyHeading } from "@/app/custom/MyText";
+import { MySecondaryBox } from "@/app/custom/MyBox";
 
 const Subscribe = ({ t }) => {
   return (
@@ -46,9 +45,10 @@ const Subscribe = ({ t }) => {
                 placeholder="Enter your email"
                 className="p-3 rounded-l-lg border border-gray-300 flex-grow"
               />
-              <button className="p-3 primary-bg text-white font-semibold rounded-r-lg hover:bg-orange-600 transition duration-300">
-                {t("subscribe_button")}
-              </button>
+              <MyPrimaryButton
+                className="p-3 primary-bg text-white font-semibold rounded-r-lg hover:bg-orange-600 transition duration-300"
+                title={t("subscribe_button")}
+              />
             </div>
 
             {/* Additional Content */}
@@ -59,36 +59,36 @@ const Subscribe = ({ t }) => {
               />
               <ul className="space-y-2">
                 <li className="flex items-center">
-                  <div className="bg-white w-max p-1 rounded-md">
-                    <CheckCircleIcon className="primary-text" />
-                  </div>
+                  <MySecondaryBox className="rounded-md p-1">
+                    <MyStyledIcon Icon={<CheckCircleIcon />} />
+                  </MySecondaryBox>
                   <MySecondaryText
                     title={t("wide_range")}
                     className="text-gray-600 ml-2"
                   />
                 </li>
                 <li className="flex items-center">
-                  <div className="bg-white w-max p-1 rounded-md">
-                    <BuildIcon className="primary-text" />
-                  </div>
+                  <MySecondaryBox className="p-1 rounded-md">
+                    <MyStyledIcon Icon={<BuildIcon />} />
+                  </MySecondaryBox>
                   <MySecondaryText
                     title={t("high_skill")}
                     className="text-gray-600 ml-2"
                   />
                 </li>
                 <li className="flex items-center">
-                  <div className="bg-white w-max p-1 rounded-md">
-                    <AttachMoneyIcon className="primary-text" />
-                  </div>
+                  <MySecondaryBox className="p-1 rounded-md">
+                    <MyStyledIcon Icon={<AttachMoneyIcon />} />
+                  </MySecondaryBox>
                   <MySecondaryText
                     title={t("price")}
                     className="text-gray-600 ml-2"
                   />
                 </li>
                 <li className="flex items-center">
-                  <div className="bg-white w-max p-1 rounded-md">
-                    <SpeedIcon className="primary-text" />
-                  </div>
+                  <MySecondaryBox className="p-1 rounded-md">
+                    <MyStyledIcon Icon={<SpeedIcon />} />
+                  </MySecondaryBox>
                   <MySecondaryText
                     title={t("quick")}
                     className="text-gray-600 ml-2"

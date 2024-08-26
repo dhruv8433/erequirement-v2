@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import Provider from "@/app/common/Provider";
-import { ProviderSkeletons } from "@/app/common/CustomSkeleton";
-import { MyHeading } from "@/app/common/MyText";
+import { ProviderSkeletons } from "@/app/custom/CustomSkeleton";
+import { MyHeading } from "@/app/custom/MyText";
 
 const TopProviders = ({ data, loading }) => {
   return (

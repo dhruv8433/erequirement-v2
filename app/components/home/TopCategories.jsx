@@ -7,17 +7,20 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useLocale } from "next-intl";
 import { Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import CategoryCard from "@/app/common/CategoryCard";
-import { SwiperBreakPoints } from "@/app/config/config";
-import { CategorySkeleton } from "@/app/common/CustomSkeleton";
-import { MyHeading } from "@/app/common/MyText";
+import { CategorySkeleton } from "@/app/custom/CustomSkeleton";
+import { MyHeading } from "@/app/custom/MyText";
+import { MyBreakPointSwiper } from "@/app/custom/MySwiper";
 
 const Categories = ({ data, loading }) => {
   const locale = useLocale();
   return (
     <div className="my-4">
-      <MyHeading title={"Top Categories"} className={"text-2xl my-2 font-semibold"}/>
+      {/* <MyHeading
+        title={"Top Categories"}
+        className={"text-2xl my-2 font-semibold"}
+      /> */}
       <div className="flex gap-4">
         {loading ? (
           <div className="flex gap-12">
@@ -26,14 +29,10 @@ const Categories = ({ data, loading }) => {
             ))}
           </div>
         ) : (
-          <Swiper
+          <MyBreakPointSwiper
             slidesPerView={5}
-            spaceBetween={30}
-            navigation={true}
             modules={[Navigation]}
-            // breakpoints set in config file
-            breakpoints={SwiperBreakPoints}
-            className="mySwiper"
+            navigation={true}
           >
             {data.map((category, index) => (
               <SwiperSlide key={category.slug || index}>
@@ -45,7 +44,7 @@ const Categories = ({ data, loading }) => {
                 </Link>
               </SwiperSlide>
             ))}
-          </Swiper>
+          </MyBreakPointSwiper>
         )}
       </div>
     </div>

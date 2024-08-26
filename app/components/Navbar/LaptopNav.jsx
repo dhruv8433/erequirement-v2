@@ -4,9 +4,9 @@ import Routes from "@/app/Routes/Routes";
 import { IconButton } from "@mui/material";
 import { WebName } from "@/app/config/config";
 import { SettingsOutlined } from "@mui/icons-material";
-import LocaleSwitcher from "@/app/common/LocaleSwitcher";
+import { MyPrimaryButton } from "@/app/custom/MyButton";
 
-const LaptopNav = ({ locale, setSettingOpen }) => {
+const LaptopNav = ({ locale, setSettingOpen, setModel }) => {
   return (
     <div className="flex justify-between items-center">
       <div className="logo text-3xl hover:scale-100 duration-500 ease-in-out transition-transform transform">
@@ -18,17 +18,18 @@ const LaptopNav = ({ locale, setSettingOpen }) => {
       <div className="links flex gap-4">
         <Routes />
       </div>
-      <div className="user flex items-center">
-        <Link href="/login">
-          <h1>Login</h1>
-        </Link>
+      <div className="user flex items-center gap-2">
+        <MyPrimaryButton
+          title={"Login"}
+          className={"px-3 py-1"}
+          onClickFunction={() => setModel(true)}
+        />
         <IconButton
           className="hover:animate-spin"
           onClick={() => setSettingOpen(true)}
         >
-          <SettingsOutlined aria-label="Settings"/>
+          <SettingsOutlined aria-label="Settings" />
         </IconButton>
-        <LocaleSwitcher />
       </div>
     </div>
   );
