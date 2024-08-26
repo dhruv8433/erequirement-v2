@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import CategoriesDetailed from "@/app/components/categories/CategoriesDetailed";
+import React, { useEffect, useState } from "react";
 import { getSubCategories } from "@/app/utils/GetSubCategories";
+import CategoriesDetailed from "@/app/components/categories/CategoriesDetailed";
 
 const page = () => {
-  const [subCategories, setSubCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [subCategories, setSubCategories] = useState([]);
 
-  const { id } = useParams();
+  const { id, slug } = useParams();
   console.log("id :", id);
 
   async function fetchSubCategories() {
@@ -34,6 +34,7 @@ const page = () => {
         subCategory={subCategories}
         id={id}
         loading={loading}
+        slug={slug}
       />
     </div>
   );
