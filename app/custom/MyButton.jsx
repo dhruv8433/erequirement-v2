@@ -17,11 +17,29 @@ const MyPrimaryButton = ({ title, className, onClickFunction }) => {
   return (
     <PrimaryButtonStyle
       onClick={onClickFunction ? onClickFunction : null}
-      className={className}
+      className={`${className} rounded-md`}
     >
       {title}
     </PrimaryButtonStyle>
   );
 };
 
-export { MyPrimaryButton };
+const BorderdButtonStyle = styled.button`
+  background-color: transparent;
+  border: 1px solid ${({ theme }) => theme.palette.button.default};
+`;
+
+const MyBorderdButton = ({ title, icon, className, onClickFunction }) => {
+  return (
+    <BorderdButtonStyle
+      onClick={onClickFunction ? onClickFunction : null}
+      className={`${className} rounded-md flex items-center justify-center gap-2`}
+    >
+      {icon && <span>{icon}</span>}
+      {title}
+    </BorderdButtonStyle>
+  );
+};
+
+
+export { MyPrimaryButton, MyBorderdButton };
