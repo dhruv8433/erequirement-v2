@@ -17,6 +17,12 @@ const lightTheme = createTheme({
       primary: "#0000000",
       secondary: "#343a40",
     },
+    button: {
+      default: "#ff9a00",
+    },
+    icon: {
+      default: "#ff9a00",
+    },
   },
 });
 
@@ -36,6 +42,12 @@ const darkTheme = createTheme({
     text: {
       primary: "#ffffff",
       secondary: "#dee2e6",
+    },
+    button: {
+      default: "#ff9a00",
+    },
+    icon: {
+      default: "#ff9a00",
     },
   },
 });
