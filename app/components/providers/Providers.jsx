@@ -1,4 +1,4 @@
-import { ProviderSkeletons } from "@/app/common/CustomSkeleton";
+import { ProviderSkeletons } from "@/app/custom/CustomSkeleton";
 import Provider from "@/app/common/Provider";
 import { Grid } from "@mui/material";
 import React from "react";
