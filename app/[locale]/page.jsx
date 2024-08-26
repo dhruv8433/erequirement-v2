@@ -1,5 +1,6 @@
 "use client";
 
+import { WebName } from "../config/config";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Slider from "../components/home/Slider";
@@ -11,7 +12,6 @@ import TopServices from "../components/home/TopServices";
 import TopProviders from "../components/home/TopProviders";
 import Testimonials from "../components/home/Testomonials";
 import { setHomeScreenData } from "../reducer/homeScreenReducers";
-import { WebName } from "../config/config";
 
 export default function Home() {
   const [data, setData] = useState([]);

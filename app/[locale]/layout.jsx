@@ -3,7 +3,7 @@
 import "./globals.css";
 import "../scss/style.scss";
 import { Inter } from "next/font/google";
-import MyContainer from "../common/MyContainer";
+import MyContainer from "../custom/MyContainer";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { ProviderStore } from "../store/StoreProvider";
