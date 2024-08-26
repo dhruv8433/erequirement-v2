@@ -2,12 +2,13 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Menu, SettingsOutlined } from "@mui/icons-material";
-import { Box, Drawer, IconButton } from "@mui/material";
 import { WebName } from "@/app/config/config";
 import MenuDrawer from "@/app/drawer/MenuDrawer";
+import { Menu, SettingsOutlined } from "@mui/icons-material";
+import { Box, Drawer, IconButton } from "@mui/material";
+import { MyPrimaryButton } from "@/app/custom/MyButton";
 
-const ResponsiveNav = ({ locale, setSettingOpen }) => {
+const ResponsiveNav = ({ locale, setSettingOpen, setModel }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -24,8 +25,12 @@ const ResponsiveNav = ({ locale, setSettingOpen }) => {
             <h1 className="my-text text-xl font-bold ">{WebName}</h1>
           </Link>
         </div>
-        <div className="">
-          <h1>Login</h1>
+        <div className="flex items-center">
+          <MyPrimaryButton
+            title={"Login"}
+            className={"px-3 py-1"}
+            onClickFunction={() => setModel(true)}
+          />
           <IconButton
             className="hover:animate-spin"
             onClick={() => setSettingOpen(true)}

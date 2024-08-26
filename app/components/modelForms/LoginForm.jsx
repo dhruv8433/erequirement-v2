@@ -38,7 +38,7 @@ const LoginForm = ({ setSignupForm }) => {
   };
 
   return (
-    <div className="px-6 py-4  rounded-lg shadow-md">
+    <div className="py-4 rounded-lg">
       {/* Header */}
       <div className="text-center my-3">
         <MyPrimaryText
@@ -92,7 +92,7 @@ const LoginForm = ({ setSignupForm }) => {
 
         <MyPrimaryButton
           title={"Login"}
-          className={"w-full p-2 mb-6 bg-blue-600 text-white rounded-md"}
+          className={"w-full p-2 mb-6 rounded-md"}
           type="submit"
         />
       </form>
@@ -105,16 +105,12 @@ const LoginForm = ({ setSignupForm }) => {
         <MyBorderdButton
           title={"Google"}
           icon={<Google />}
-          className={
-            "w-full p-2 border border-gray-300 rounded-md text-gray-600"
-          }
+          className={"w-full p-2"}
         />
         <MyBorderdButton
           title={"Phone"}
           icon={<Phone />}
-          className={
-            "w-full p-2 border border-gray-300 rounded-md text-gray-600"
-          }
+          className={"w-full p-2"}
         />
       </div>
     </div>

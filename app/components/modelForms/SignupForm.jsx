@@ -66,7 +66,7 @@ const SignupForm = ({ setSignupForm }) => {
   };
 
   return (
-    <div className="pr-4">
+    <div className="">
       {/* Header */}
       <div className="text-center my-3">
         <MyPrimaryText
