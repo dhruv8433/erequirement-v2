@@ -6,10 +6,10 @@ import React, { useState } from "react";
 import MyModal from "@/app/custom/MyModal";
 import { Box, Drawer } from "@mui/material";
 import ResponsiveNav from "./ResponsiveNav";
-import MyContainer from "@/app/custom/MyContainer";
-import { MyCardBox, MySecondaryBox } from "@/app/custom/MyBox";
-import SettingDrawer from "@/app/drawer/SettingDrawer";
 import AuthModal from "@/app/model/AuthModal";
+import MyContainer from "@/app/custom/MyContainer";
+import SettingDrawer from "@/app/drawer/SettingDrawer";
+import { MyCardBox, MySecondaryBox } from "@/app/custom/MyBox";
 
 const Navbar = () => {
   const locale = useLocale();
@@ -52,7 +52,7 @@ const Navbar = () => {
             paddingRight={{xs : "10px", md: "10px"}}
             className=" h-[600px] rounded-2xl overflow-hidden"
           >
-            <AuthModal setModel={setModel} />
+            <AuthModal setModal={setModel} />
           </MyCardBox>
         </MyModal>
       </MySecondaryBox>

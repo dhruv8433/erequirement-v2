@@ -5,11 +5,15 @@ import Link from "next/link";
 import { WebName } from "@/app/config/config";
 import MenuDrawer from "@/app/drawer/MenuDrawer";
 import { Menu, SettingsOutlined } from "@mui/icons-material";
-import { Box, Drawer, IconButton } from "@mui/material";
+import { Avatar, Box, Drawer, IconButton } from "@mui/material";
 import { MyPrimaryButton } from "@/app/custom/MyButton";
+import { useSelector } from "react-redux";
 
 const ResponsiveNav = ({ locale, setSettingOpen, setModel }) => {
   const [open, setOpen] = useState(false);
+
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const userData = useSelector((state) => state.auth.user.user);
 
   return (
     <div className="w-full">
@@ -26,11 +30,18 @@ const ResponsiveNav = ({ locale, setSettingOpen, setModel }) => {
           </Link>
         </div>
         <div className="flex items-center">
-          <MyPrimaryButton
-            title={"Login"}
-            className={"px-3 py-1"}
-            onClickFunction={() => setModel(true)}
-          />
+          {isAuthenticated ? (
+            <>
+              <Avatar src={userData.avatar || ""} sx={{ height: 30, width: 30 }} />
+              {/* <h1>{userData.fullname}</h1> */}
+            </>
+          ) : (
+            <MyPrimaryButton
+              title={"Login"}
+              className={"px-3 py-1"}
+              onClickFunction={() => setModel(true)}
+            />
+          )}
           <IconButton
             className="hover:animate-spin"
             onClick={() => setSettingOpen(true)}
