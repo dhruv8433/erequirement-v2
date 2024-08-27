@@ -71,7 +71,7 @@ const SignupForm = ({ setSignupForm }) => {
       <div className="text-center my-3">
         <MyPrimaryText
           title={"Get Started"}
-          className={"text-2xl font-semibold my-1"}
+          className={"text-2xl font-semibold my-1"}  
         />
         <div className="flex text-center justify-center gap-1">
           <MyPrimaryText title={"Already have an account?"} className={""} />
@@ -79,7 +79,7 @@ const SignupForm = ({ setSignupForm }) => {
             onClick={() => setSignupForm(false)}
             className="hover:cursor-pointer"
           >
-            <MyHeading title={"Login"} className={""} />
+            <MyHeading title={"Login"} className={"font-semibold"} />
           </span>
         </div>
       </div>

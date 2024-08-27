@@ -8,8 +8,10 @@ import { MyBorderdButton, MyPrimaryButton } from "@/app/custom/MyButton";
 import { Divider } from "@mui/material";
 import { LoginUser } from "@/app/utils/LoginUser";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { login } from "@/app/reducer/authReducer";
 
-const LoginForm = ({ setSignupForm }) => {
+const LoginForm = ({ setSignupForm, setModal }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({
     email: "",
@@ -22,6 +24,8 @@ const LoginForm = ({ setSignupForm }) => {
     setLoginData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const dispatch = useDispatch();
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +34,10 @@ const LoginForm = ({ setSignupForm }) => {
       const resposne = await LoginUser(loginData);
       console.log("Login success", resposne);
       toast.success("Login successful");
+      // store user data in redux
+      dispatch(login({ user: resposne.data }));
+      // close modal
+      setModal(false);
     } catch (error) {
       console.log("login error", error);
       toast.error("Login error", error);
@@ -57,7 +65,7 @@ const LoginForm = ({ setSignupForm }) => {
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6 mb-4">
         <div>
           <MyPrimaryText title={"Email"} className={"text-sm"} />
           <MyInputBorderBottom

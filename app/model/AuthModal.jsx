@@ -11,7 +11,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import SignupForm from "../components/modelForms/SignupForm";
 import LoginForm from "../components/modelForms/LoginForm";
 
-const AuthModal = ({ setModal }) => {
+const AuthModal = ({ modal, setModal }) => {
   const banners = [
     { src: welcomeImg.src, alt: "welcome" },
     { src: customerImg.src, alt: "happy-customers" },
@@ -49,9 +49,12 @@ const AuthModal = ({ setModal }) => {
           <Grid item xs={12} md={6}>
             {/* open forms based on conditions */}
             {signupForm ? (
-              <SignupForm setSignupForm={setSignupForm} />
+              <SignupForm
+                setSignupForm={setSignupForm}
+                // setModal={()}
+              />
             ) : (
-              <LoginForm setSignupForm={setSignupForm} />
+              <LoginForm setSignupForm={setSignupForm} setModal={setModal} />
             )}
           </Grid>
         </Grid>
