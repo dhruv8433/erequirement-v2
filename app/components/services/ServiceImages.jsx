@@ -56,7 +56,7 @@ const OtherImage = ({
 
 const ServiceImages = ({ service, handleImageClick, selectedImage }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const userId = isAuthenticated ? useSelector((state) => state.auth.user.data.user._id) : null;
+  const userId = isAuthenticated ? useSelector((state) => state.auth.user.user._id) : null;
 
   console.log("service", service);
 
