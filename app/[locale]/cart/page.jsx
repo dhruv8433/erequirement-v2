@@ -17,7 +17,8 @@ const page = () => {
 
   const [cartData, setCartData] = useState([]);
   const [otherInfo, setOtherInfo] = useState([]);
-  const user = useSelector((state) => state.auth.user.data.user);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user =  isAuthenticated ? useSelector((state) => state.auth.user.user) : null;
 
   const [addressModal, setAddressModal] = useState(false);
 
