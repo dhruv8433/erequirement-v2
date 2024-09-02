@@ -3,49 +3,36 @@
 import React from "react";
 import Link from "next/link";
 import Routes from "@/app/Routes/Routes";
-import { Avatar, IconButton } from "@mui/material";
 import { WebName } from "@/app/config/config";
-import { SettingsOutlined } from "@mui/icons-material";
-import { MyPrimaryButton } from "@/app/custom/MyButton";
 import { useSelector } from "react-redux";
+import NavDrawers from "./NavDrawers";
 
 const LaptopNav = ({ locale, setSettingOpen, setModel }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const userData = useSelector((state) => state.auth.user.user);
+  let userData = useSelector((state) => state.auth.user.data.user);
 
   return (
     <div className="flex justify-between items-center">
+      {/* logo */}
       <div className="logo text-3xl hover:scale-100 duration-500 ease-in-out transition-transform transform">
         {/* Redirect based on selected locale */}
         <Link href={`/${locale}`}>
           <h1 className="my-text text-3xl font-bold ">{WebName}</h1>
         </Link>
       </div>
+      {/* web routes */}
       <div className="links flex gap-4">
         <Routes />
       </div>
-      <div className="user flex items-center gap-2">
-        {isAuthenticated ? (
-          <>
-            <Avatar
-              src={userData.avatar || ""}
-              sx={{ height: 30, width: 30 }}
-            />
-            <h1>{userData.fullname}</h1>
-          </>
-        ) : (
-          <MyPrimaryButton
-            title={"Login"}
-            className={"px-3 py-1"}
-            onClickFunction={() => setModel(true)}
-          />
-        )}
-        <IconButton
-          className="hover:animate-spin"
-          onClick={() => setSettingOpen(true)}
-        >
-          <SettingsOutlined aria-label="Settings" />
-        </IconButton>
+      {/* right side login, avatar, cart, settings... */}
+      <div>
+        <NavDrawers
+          isAuthenticated={isAuthenticated}
+          userData={userData}
+          setModel={setModel}
+          setSettingOpen={setSettingOpen}
+          isLaptopScreen={true}
+        />
       </div>
     </div>
   );
