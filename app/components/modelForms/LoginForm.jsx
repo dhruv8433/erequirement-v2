@@ -44,8 +44,6 @@ const LoginForm = ({ setSignupForm, setModal }) => {
       }
     } catch (error) {
       console.log("login error", error);
-      toast.error("Login error", error);
-      throw new Error(error);
     }
   };
 
