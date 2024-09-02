@@ -60,8 +60,6 @@ const SignupForm = ({ setSignupForm }) => {
       toast.success(response.message);
     } catch (error) {
       console.log("user signup error", error);
-      toast.error("user signup error", error);
-      throw error;
     }
   };
 
