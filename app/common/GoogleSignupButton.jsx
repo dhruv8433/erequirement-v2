@@ -2,13 +2,13 @@ import { signInWithPopup } from "firebase/auth";
 import React from "react";
 import { auth, provider } from "../firebase/firebase";
 import { MyBorderdButton } from "../custom/MyButton";
-import { Google } from "@mui/icons-material";
+import { Google, SavedSearch } from "@mui/icons-material";
 import { SignupWithGoogle } from "../utils/userService";
 import { useDispatch } from "react-redux";
 import { login } from "../reducer/authReducer";
 import toast from "react-hot-toast";
 
-const GoogleSignupButton = () => {
+const GoogleSignupButton = ({ SetModal }) => {
   const dispatch = useDispatch();
 
   const signInWithGoogle = async () => {
@@ -19,8 +19,10 @@ const GoogleSignupButton = () => {
       // You can now use the user object to store user info in your app
       const saveUserInfo = await SignupWithGoogle(user);
       console.log("User info saved", saveUserInfo);
-      dispatch(login({ user: saveUserInfo }));
-      toast.success("signup successful");
+      dispatch(login({ user: saveUserInfo.data }));
+      toast.success(saveUserInfo.message);
+      // close modal after google signup
+      SetModal(false);
     } catch (error) {
       console.error("Error signing in with Google: ", error);
     }

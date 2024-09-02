@@ -51,7 +51,7 @@ const AuthModal = ({ modal, setModal }) => {
             {signupForm ? (
               <SignupForm
                 setSignupForm={setSignupForm}
-                // setModal={()}
+                setModal={setModal}
               />
             ) : (
               <LoginForm setSignupForm={setSignupForm} setModal={setModal} />
