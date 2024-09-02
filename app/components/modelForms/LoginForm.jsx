@@ -12,7 +12,6 @@ import GoogleSignupButton from "@/app/common/GoogleSignupButton";
 import { Phone, Visibility, VisibilityOff } from "@mui/icons-material";
 import { MyBorderdButton, MyPrimaryButton } from "@/app/custom/MyButton";
 
-
 const LoginForm = ({ setSignupForm, setModal }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({
@@ -33,13 +32,16 @@ const LoginForm = ({ setSignupForm, setModal }) => {
     e.preventDefault();
     console.log("Login Data:", loginData);
     try {
-      const resposne = await LoginUser(loginData);
-      console.log("Login success", resposne);
+      const response = await LoginUser(loginData);
+      console.log("Login success", response);
       toast.success("Login successful");
-      // store user data in redux
-      dispatch(login({ user: resposne.data }));
-      // close modal
-      setModal(false);
+      if (response && response.data) {
+        dispatch(login({ user: response.data }));
+        toast.success("Login successful");
+        setModal(false);
+      } else {
+        throw new Error("Unexpected response format");
+      }
     } catch (error) {
       console.log("login error", error);
       toast.error("Login error", error);

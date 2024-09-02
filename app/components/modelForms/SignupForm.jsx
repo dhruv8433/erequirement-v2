@@ -57,7 +57,7 @@ const SignupForm = ({ setSignupForm }) => {
     try {
       const response = await SignupUser(signupData);
       console.log("user signup success", response);
-      toast.success("Signup successful");
+      toast.success(response.message);
     } catch (error) {
       console.log("user signup error", error);
       toast.error("user signup error", error);
