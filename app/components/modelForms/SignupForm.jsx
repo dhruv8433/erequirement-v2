@@ -1,17 +1,17 @@
 "use client";
 
+import toast from "react-hot-toast";
 import React, { useState } from "react";
 import { Divider, Grid } from "@mui/material";
 import { AttachFile } from "@mui/icons-material";
 import PhoneIcon from "@mui/icons-material/Phone";
-import GoogleIcon from "@mui/icons-material/Google";
+import { SignupUser } from "@/app/utils/userService";
 import Visibility from "@mui/icons-material/Visibility";
 import { MyInputBorderBottom } from "../../custom/MyInput";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { MyPrimaryText, MyHeading } from "../../custom/MyText";
+import GoogleSignupButton from "@/app/common/GoogleSignupButton";
 import { MyBorderdButton, MyPrimaryButton } from "../../custom/MyButton";
-import { SignupUser } from "@/app/utils/SignupUser";
-import toast from "react-hot-toast";
 
 // SignupForm Component
 const SignupForm = ({ setSignupForm }) => {
@@ -71,7 +71,7 @@ const SignupForm = ({ setSignupForm }) => {
       <div className="text-center my-3">
         <MyPrimaryText
           title={"Get Started"}
-          className={"text-2xl font-semibold my-1"}  
+          className={"text-2xl font-semibold my-1"}
         />
         <div className="flex text-center justify-center gap-1">
           <MyPrimaryText title={"Already have an account?"} className={""} />
@@ -173,11 +173,7 @@ const SignupForm = ({ setSignupForm }) => {
       <div className="mt-4">
         <Grid container spacing={3}>
           <Grid item xs={6} md={6}>
-            <MyBorderdButton
-              title={"Google"}
-              icon={<GoogleIcon />}
-              className={"w-full p-2"}
-            />
+            <GoogleSignupButton />
           </Grid>
           <Grid item xs={6} md={6}>
             <MyBorderdButton

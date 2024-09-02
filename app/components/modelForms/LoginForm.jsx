@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
-import { MyInputBorderBottom } from "@/app/custom/MyInput";
-import { MyHeading, MyPrimaryText } from "@/app/custom/MyText";
-import { Google, Phone, Visibility, VisibilityOff } from "@mui/icons-material";
-import { MyBorderdButton, MyPrimaryButton } from "@/app/custom/MyButton";
-import { Divider } from "@mui/material";
-import { LoginUser } from "@/app/utils/LoginUser";
 import toast from "react-hot-toast";
+import React, { useState } from "react";
+import { Divider } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { login } from "@/app/reducer/authReducer";
+import { LoginUser } from "@/app/utils/userService";
+import { MyInputBorderBottom } from "@/app/custom/MyInput";
+import { MyHeading, MyPrimaryText } from "@/app/custom/MyText";
+import GoogleSignupButton from "@/app/common/GoogleSignupButton";
+import { Phone, Visibility, VisibilityOff } from "@mui/icons-material";
+import { MyBorderdButton, MyPrimaryButton } from "@/app/custom/MyButton";
+
 
 const LoginForm = ({ setSignupForm, setModal }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -110,11 +112,7 @@ const LoginForm = ({ setSignupForm, setModal }) => {
 
       {/* Alternative Login Methods */}
       <div className="my-5 gap-4 flex flex-col">
-        <MyBorderdButton
-          title={"Google"}
-          icon={<Google />}
-          className={"w-full p-2"}
-        />
+        <GoogleSignupButton />
         <MyBorderdButton
           title={"Phone"}
           icon={<Phone />}
