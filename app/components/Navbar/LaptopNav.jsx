@@ -10,10 +10,11 @@ import NavDrawers from "./NavDrawers";
 const LaptopNav = ({ locale, setSettingOpen, setModel }) => {
   // Always call useSelector at the top level
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  // Conditional hook calls are avoided
-  const userData = isAuthenticated
-    ? useSelector((state) => state.auth.user.user)
-    : null;
+  // Always call useSelector at the top level
+  const user = useSelector((state) => state.auth.user.user);
+
+  // Conditionally set userData based on isAuthenticated
+  const userData = isAuthenticated ? user : null;
 
   return (
     <div className="flex justify-between items-center">
