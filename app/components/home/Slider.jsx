@@ -4,7 +4,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Advertisement from "@/app/common/Advertisement";
-import MySkeleton from "@/app/common/MySkeleton";
+import MySkeleton from "@/app/custom/MySkeleton";
 
 const Slider = ({ data, loading }) => {
   return (

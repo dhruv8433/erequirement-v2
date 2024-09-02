@@ -1,5 +1,5 @@
-import { MyPrimaryBox } from "@/app/common/MyBox";
-import MyBreadcrumb from "@/app/common/MyBreadcrumb";
+import { MyPrimaryBox } from "@/app/custom/MyBox";
+import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 import { Grid, Rating } from "@mui/material";
 import { useLocale } from "next-intl";
 import Link from "next/link";

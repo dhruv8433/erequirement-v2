@@ -1,18 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
 import Link from "next/link";
-import { Menu, SettingsOutlined } from "@mui/icons-material";
-import { Box, Drawer, IconButton } from "@mui/material";
+import NavDrawers from "./NavDrawers";
+import React, { useState } from "react";
+import { Menu } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 import { WebName } from "@/app/config/config";
+import { MyPrimaryBox } from "@/app/custom/MyBox";
 import MenuDrawer from "@/app/drawer/MenuDrawer";
+import { Drawer, IconButton } from "@mui/material";
 
-const ResponsiveNav = ({ locale, setSettingOpen }) => {
+const ResponsiveNav = ({ locale, setSettingOpen, setModel }) => {
   const [open, setOpen] = useState(false);
+
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const userData = useSelector((state) => state.auth.user?.user);
 
   return (
     <div className="w-full">
       <div className="flex items-center justify-between">
+        {/* logo */}
         <div className="logo text-3xl hover:scale-100 duration-500 ease-in-out transition-transform transform flex-item-center">
           {/* Open Drawer on Burger Menu click */}
           <IconButton onClick={() => setOpen(true)}>
@@ -24,22 +31,23 @@ const ResponsiveNav = ({ locale, setSettingOpen }) => {
             <h1 className="my-text text-xl font-bold ">{WebName}</h1>
           </Link>
         </div>
-        <div className="">
-          <h1>Login</h1>
-          <IconButton
-            className="hover:animate-spin"
-            onClick={() => setSettingOpen(true)}
-          >
-            <SettingsOutlined />
-          </IconButton>
+        {/* right side avatar, cart, settings... */}
+        <div className="flex items-center">
+          <NavDrawers
+            isAuthenticated={isAuthenticated}
+            userData={userData}
+            setModel={setModel}
+            setSettingOpen={setSettingOpen}
+            isLaptopScreen={false}
+          />
         </div>
       </div>
 
       {/* Routes Drawer */}
       <Drawer open={open} onClose={() => setOpen(false)}>
-        <Box width={250}>
+        <MyPrimaryBox width={250}>
           <MenuDrawer />
-        </Box>
+        </MyPrimaryBox>
       </Drawer>
     </div>
   );

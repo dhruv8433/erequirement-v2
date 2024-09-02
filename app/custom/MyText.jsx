@@ -1,4 +1,6 @@
-const { default: styled } = require("@emotion/styled");
+'use client'
+
+import styled from "@emotion/styled";
 
 const StyledTitle = styled.h1`
   color: ${({ theme }) => theme.palette.primary.main};

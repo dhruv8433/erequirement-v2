@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import CategoryCard from "@/app/common/CategoryCard";
-import { CategorySkeleton } from "@/app/common/CustomSkeleton";
+import { CategorySkeleton } from "@/app/custom/CustomSkeleton";
 
 const Categories = ({ categories, loading }) => {
   return (

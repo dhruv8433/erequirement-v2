@@ -2,7 +2,8 @@ import React from "react";
 import { setTheme } from "../reducer/ThemeReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { Divider, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { MyHeading } from "../common/MyText";
+import { MyHeading } from "../custom/MyText";
+import LocaleSwitcher from "../common/LocaleSwitcher";
 
 const SettingDrawer = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const SettingDrawer = () => {
 
   return (
     <div className="p-2">
-      <MyHeading title={"Settings"} className={"text-2xl my-2 font-semibold"}/>
+      <MyHeading title={"Settings"} className={"text-2xl my-2 font-semibold"} />
       <Divider />
       <div className="theme-buttons my-4">
         <ToggleButtonGroup
@@ -29,6 +30,10 @@ const SettingDrawer = () => {
           <ToggleButton value="light">Light Theme</ToggleButton>
           <ToggleButton value="dark">Dark Theme</ToggleButton>
         </ToggleButtonGroup>
+      </div>
+      <MyHeading title={"Language"} className={"my-2 font-semibold"} />
+      <div className="my-4">
+        <LocaleSwitcher />
       </div>
     </div>
   );
