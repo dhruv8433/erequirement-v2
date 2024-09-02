@@ -8,7 +8,14 @@ import {
 } from "@mui/material";
 import { Add, Remove, Delete } from "@mui/icons-material";
 
-const CartItem = ({ service, onRemove, onIncrement, onDecrement, qty }) => {
+const CartItem = ({
+  service,
+  onRemove,
+  onIncrement,
+  onDecrement,
+  qty,
+  isMiniCart,
+}) => {
   return (
     <TableBody>
       <TableRow>
@@ -17,34 +24,46 @@ const CartItem = ({ service, onRemove, onIncrement, onDecrement, qty }) => {
           <img
             src={service.serviceImg}
             alt={service.ServiceName}
-            className="max-h-[100px] max-w-[100px] w-full h-full object-cover rounded-lg"
+            className={`${
+              isMiniCart
+                ? "max-h-[50px] max-w-[50px]"
+                : "max-h-[100px] max-w-[100px]"
+            } w-full h-full object-cover rounded-lg`}
           />
         </TableCell>
 
         {/* Service Details */}
         <TableCell>
-          <h1 className="text-2xl font-semibold">{service.ServiceName}</h1>
-          <h1 className="text-xl">{service.ShortDesc}</h1>
+          <h1
+            className={`${isMiniCart ? "text-xl" : "text-2xl"} font-semibold`}
+          >
+            {service.ServiceName}
+          </h1>
+          <h1 className={`${isMiniCart ? "" : "text-xl"}`}>
+            {service.ShortDesc}
+          </h1>
         </TableCell>
 
         {/* Quantity Controls */}
-        <TableCell>
-          <div className="flex items-center border w-max rounded-md overflow-hidden">
-            <div className="primary-bg hover:bg-orange-500">
-              <IconButton onClick={() => onDecrement(service._id, qty - 1)}>
-                <Remove fontSize="small" />
-              </IconButton>
+        {!isMiniCart && (
+          <TableCell>
+            <div className="flex items-center border w-max rounded-md overflow-hidden">
+              <div className="primary-bg hover:bg-orange-500">
+                <IconButton onClick={() => onDecrement(service._id, qty - 1)}>
+                  <Remove fontSize="small" />
+                </IconButton>
+              </div>
+              <Typography variant="body1" style={{ margin: "0 10px" }}>
+                {qty}
+              </Typography>
+              <div className="primary-bg hover:bg-orange-500">
+                <IconButton onClick={() => onIncrement(service._id, qty + 1)}>
+                  <Add fontSize="small" />
+                </IconButton>
+              </div>
             </div>
-            <Typography variant="body1" style={{ margin: "0 10px" }}>
-              {qty}
-            </Typography>
-            <div className="primary-bg hover:bg-orange-500">
-              <IconButton onClick={() => onIncrement(service._id, qty + 1)}>
-                <Add fontSize="small" />
-              </IconButton>
-            </div>
-          </div>
-        </TableCell>
+          </TableCell>
+        )}
 
         {/* Price */}
         <TableCell align="right">
@@ -52,11 +71,13 @@ const CartItem = ({ service, onRemove, onIncrement, onDecrement, qty }) => {
         </TableCell>
 
         {/* Actions */}
-        <TableCell align="right">
-          <IconButton onClick={() => onRemove(service._id)}>
-            <Delete className="text-red-500" />
-          </IconButton>
-        </TableCell>
+        {!isMiniCart && (
+          <TableCell align="right">
+            <IconButton onClick={() => onRemove(service._id)}>
+              <Delete className="text-red-500" />
+            </IconButton>
+          </TableCell>
+        )}
       </TableRow>
     </TableBody>
   );

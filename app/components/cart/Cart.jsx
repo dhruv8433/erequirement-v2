@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import CartTable from "./CartTable";
+import Address from "./Address";
 import {
   Stepper,
   Step,
   StepLabel,
   Button,
   Typography,
-  Box,
+  Grid,
 } from "@mui/material";
-import { MyCardBox, MyPrimaryBox, MySecondaryBox } from "@/app/custom/MyBox";
-
-const steps = ["Review Cart", "Enter Address", "Payment"];
+import { steps } from "@/app/config/config";
+import toast from "react-hot-toast";
 
 const Cart = ({
   cartData,
@@ -18,19 +18,28 @@ const Cart = ({
   onIncrement,
   onDecrement,
   otherCartInfo,
+  addressModal,
+  setAddressModal,
 }) => {
   const [activeStep, setActiveStep] = useState(0);
+  const [selectedAddress, setSelectedAddress] = useState("");
+
+  const handleAddressChange = (event) => {
+    setSelectedAddress(event.target.value);
+    console.log("Selected Address:", selectedAddress);
+  };
 
   const handleNext = () => {
+    if (activeStep === 1 && selectedAddress == "") {
+      toast.error("please select address or add new address before payment");
+      console.log("Please select address before payment");
+      return;
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
   };
 
   return (
@@ -43,7 +52,8 @@ const Cart = ({
         ))}
       </Stepper>
 
-      <MyCardBox className="rounded-2xl">
+      <div className="rounded-2xl my-10">
+        {/* Step 1: Review Cart */}
         {activeStep === 0 && (
           <CartTable
             cartData={cartData}
@@ -53,20 +63,40 @@ const Cart = ({
             totalPrice={otherCartInfo.totalPrice}
           />
         )}
+        {/* Step 2: Address Form */}
         {activeStep === 1 && (
-          <div>
-            {/* Step 2: Address Form */}
-            <h1>Address Form Goes Here</h1>
-          </div>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={7}>
+              <Address
+                selectedAddress={selectedAddress}
+                setSelectedAddress={setSelectedAddress}
+                handleAddressChange={handleAddressChange}
+                addressModal={addressModal}
+                setAddressModal={setAddressModal}
+              />
+            </Grid>
+            {/* right side we display mini cart */}
+            <Grid item xs={12} md={5}>
+              <CartTable
+                cartData={cartData}
+                onRemove={onRemove}
+                onIncrement={onIncrement}
+                onDecrement={onDecrement}
+                totalPrice={otherCartInfo.totalPrice}
+                isMiniCart={true}
+              />
+            </Grid>
+          </Grid>
         )}
+        {/* Step 3: Payment */}
         {activeStep === 2 && (
           <div>
-            {/* Step 3: Payment */}
             <h1>Payment Form Goes Here</h1>
           </div>
         )}
-      </MyCardBox>
+      </div>
 
+      {/* Action buttons to go to next and prev page of stepper */}
       <div className="flex flex-col justify-end text-end my-4">
         {activeStep === steps.length ? (
           <div>
