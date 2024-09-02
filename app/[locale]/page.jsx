@@ -6,27 +6,19 @@ import { useTranslations } from "next-intl";
 import Slider from "../components/home/Slider";
 import { getHomeScreen } from "../utils/HomeScreen";
 import Subscribe from "../components/home/Subscribe";
-import { useDispatch, useSelector } from "react-redux";
 import Categories from "../components/home/TopCategories";
 import TopServices from "../components/home/TopServices";
 import TopProviders from "../components/home/TopProviders";
 import Testimonials from "../components/home/Testomonials";
-import { setHomeScreenData } from "../reducer/homeScreenReducers";
 
 export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
   const t = useTranslations("home");
-
-  const homeScreen = useSelector((state) => state.homeScreen?.data || []);
-
-  console.log("home screen from redux", homeScreen.length);
 
   async function getHomeScreenData() {
     try {
       const response = await getHomeScreen();
-      dispatch(setHomeScreenData(response)); // Dispatching action to store data in Redux
       setData(response); // Local state update
     } catch (error) {
       console.log("error: " + error);
@@ -35,17 +27,8 @@ export default function Home() {
     }
   }
 
-  function DecideSendRequestOrNot() {
-    if (homeScreen.length === 0) {
-      getHomeScreenData();
-    } else {
-      setData(homeScreen);
-      setLoading(false); // Set loading to false if data is already in Redux
-    }
-  }
-
   useEffect(() => {
-    DecideSendRequestOrNot();
+    getHomeScreenData();
   }, []);
 
   document.title = `Home | ${WebName}`;
