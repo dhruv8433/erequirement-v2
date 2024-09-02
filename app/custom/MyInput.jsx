@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyInput = ({ type, placeholder, className, onChange, icon }) => {
+const MyInput = ({ type, placeholder, className, onChange, icon, nameF }) => {
   return (
     <div className={`flex items-center border w-full p-2 ${className}`}>
       {icon && <span className="mr-2">{icon}</span>}
@@ -9,6 +9,21 @@ const MyInput = ({ type, placeholder, className, onChange, icon }) => {
         placeholder={placeholder}
         className={`flex-grow outline-none bg-transparent`}
         onChange={onChange ? onChange : null}
+        name={name}
+      />
+    </div>
+  );
+};
+
+const MyTextArea = ({ placeholder, className, onChange, icon, cols }) => {
+  return (
+    <div className={`flex items-center border w-full p-2 ${className}`}>
+      {icon && <span className="mr-2">{icon}</span>}
+      <textarea
+        placeholder={placeholder}
+        className={`flex-grow outline-none bg-transparent`}
+        onChange={onChange ? onChange : null}
+        cols={cols}
       />
     </div>
   );
@@ -39,4 +54,4 @@ const MyInputBorderBottom = ({
   );
 };
 
-export { MyInput, MyInputBorderBottom };
+export { MyInput, MyInputBorderBottom, MyTextArea };

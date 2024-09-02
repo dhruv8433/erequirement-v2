@@ -26,20 +26,27 @@ const MyPrimaryButton = ({ title, className, onClickFunction }) => {
 
 const BorderdButtonStyle = styled.button`
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.palette.button.default};
+  border: 1px ${({ dashed }) => (dashed ? "dashed" : "solid")}
+    ${({ theme }) => theme.palette.button.default};
 `;
 
-const MyBorderdButton = ({ title, icon, className, onClickFunction }) => {
+const MyBorderdButton = ({
+  title,
+  icon,
+  className,
+  onClickFunction,
+  dashed,
+}) => {
   return (
     <BorderdButtonStyle
       onClick={onClickFunction ? onClickFunction : null}
       className={`${className} rounded-md flex items-center justify-center gap-2`}
+      dashed={dashed}
     >
       {icon && <span>{icon}</span>}
       {title}
     </BorderdButtonStyle>
   );
 };
-
 
 export { MyPrimaryButton, MyBorderdButton };
