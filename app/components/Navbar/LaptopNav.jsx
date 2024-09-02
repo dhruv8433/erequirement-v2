@@ -9,7 +9,11 @@ import NavDrawers from "./NavDrawers";
 
 const LaptopNav = ({ locale, setSettingOpen, setModel }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  let userData = useSelector((state) => state.auth.user.data.user);
+  let userData = null;
+
+  if (isAuthenticated) {
+    userData = useSelector((state) => state.auth.user.data.user);
+  }
 
   return (
     <div className="flex justify-between items-center">
