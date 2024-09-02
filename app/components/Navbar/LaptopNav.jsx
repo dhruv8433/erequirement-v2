@@ -8,12 +8,12 @@ import { useSelector } from "react-redux";
 import NavDrawers from "./NavDrawers";
 
 const LaptopNav = ({ locale, setSettingOpen, setModel }) => {
+  // Always call useSelector at the top level
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  let userData = null;
-
-  if (isAuthenticated) {
-    userData = useSelector((state) => state.auth.user.data.user);
-  }
+  // Conditional hook calls are avoided
+  const userData = isAuthenticated
+    ? useSelector((state) => state.auth.user.user)
+    : null;
 
   return (
     <div className="flex justify-between items-center">
