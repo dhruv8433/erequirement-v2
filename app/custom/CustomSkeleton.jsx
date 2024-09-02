@@ -25,7 +25,7 @@ export const CategorySkeleton = () => {
     <div className="border-2 border-gray-700 p-3 m-3 rounded-2xl text-center w-[20%]">
       <Skeleton
         variant="rectangular"
-        width="100%"
+        width={210}
         height={120}
         className="rounded-2xl"
       />
