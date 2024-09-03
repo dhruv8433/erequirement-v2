@@ -1,3 +1,4 @@
+import { useCart } from "@/app/hooks/useCart";
 import { AddToCart } from "@/app/utils/CartService";
 import { Box } from "@mui/material";
 import React from "react";
@@ -56,19 +57,13 @@ const OtherImage = ({
 
 const ServiceImages = ({ service, handleImageClick, selectedImage }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const userId = isAuthenticated ? useSelector((state) => state.auth.user.user._id) : null;
+  const userId = isAuthenticated
+    ? useSelector((state) => state.auth.user.user._id)
+    : null;
 
   console.log("service", service);
 
-  async function AddItemsToCart() {
-    try {
-      const response = await AddToCart(userId, service._id);
-      console.log("success", response);
-      toast.success(response.message);
-    } catch (err) {
-      console.log("Error", err);
-    }
-  }
+  const { AddServiceToCart } = useCart(userId);
 
   return (
     <div>
@@ -100,7 +95,7 @@ const ServiceImages = ({ service, handleImageClick, selectedImage }) => {
       <div className="buttons">
         <button
           className="primary-bg text-white px-6 py-2 rounded-lg hover:bg-orange-500 w-full mt-4 self-start"
-          onClick={() => AddItemsToCart()}
+          onClick={() => AddServiceToCart(service._id)}
         >
           Add to Cart
         </button>

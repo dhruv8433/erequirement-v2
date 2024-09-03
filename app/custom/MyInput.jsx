@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyInput = ({ type, placeholder, className, onChange, icon, nameF }) => {
+const MyInput = ({ type, placeholder, className, onChange, icon, name }) => {
   return (
     <div className={`flex items-center border w-full p-2 ${className}`}>
       {icon && <span className="mr-2">{icon}</span>}
@@ -15,7 +15,7 @@ const MyInput = ({ type, placeholder, className, onChange, icon, nameF }) => {
   );
 };
 
-const MyTextArea = ({ placeholder, className, onChange, icon, cols }) => {
+const MyTextArea = ({ placeholder, className, onChange, icon, cols, name }) => {
   return (
     <div className={`flex items-center border w-full p-2 ${className}`}>
       {icon && <span className="mr-2">{icon}</span>}
@@ -24,6 +24,7 @@ const MyTextArea = ({ placeholder, className, onChange, icon, cols }) => {
         className={`flex-grow outline-none bg-transparent`}
         onChange={onChange ? onChange : null}
         cols={cols}
+        name={name}
       />
     </div>
   );
