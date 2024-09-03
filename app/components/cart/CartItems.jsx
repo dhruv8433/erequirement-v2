@@ -53,9 +53,9 @@ const CartItem = ({
                   <Remove fontSize="small" />
                 </IconButton>
               </div>
-              <Typography variant="body1" style={{ margin: "0 10px" }}>
+              <h1 className="mx-3">
                 {qty}
-              </Typography>
+              </h1>
               <div className="primary-bg hover:bg-orange-500">
                 <IconButton onClick={() => onIncrement(service._id, qty + 1)}>
                   <Add fontSize="small" />
