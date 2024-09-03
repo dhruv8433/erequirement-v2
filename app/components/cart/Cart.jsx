@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CartTable from "./CartTable";
 import Address from "./Address";
 import {
@@ -11,23 +11,11 @@ import {
 } from "@mui/material";
 import { steps } from "@/app/config/config";
 import toast from "react-hot-toast";
+import { useCart } from "@/app/hooks/useCart";
 
-const Cart = ({
-  cartData,
-  onRemove,
-  onIncrement,
-  onDecrement,
-  otherCartInfo,
-  addressModal,
-  setAddressModal,
-}) => {
+const Cart = ({ user, setAddressModal }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [selectedAddress, setSelectedAddress] = useState("");
-
-  const handleAddressChange = (event) => {
-    setSelectedAddress(event.target.value);
-    console.log("Selected Address:", selectedAddress);
-  };
 
   const handleNext = () => {
     if (activeStep === 1 && selectedAddress == "") {
@@ -41,6 +29,15 @@ const Cart = ({
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
+  // Utilize custom hooks for cart and addresses
+  const {
+    cartData,
+    otherInfo,
+    handleRemove,
+    handleUpdateQuantity,
+    reloadCart,
+  } = useCart(user?._id);
 
   return (
     <div>
@@ -57,10 +54,10 @@ const Cart = ({
         {activeStep === 0 && (
           <CartTable
             cartData={cartData}
-            onRemove={onRemove}
-            onIncrement={onIncrement}
-            onDecrement={onDecrement}
-            totalPrice={otherCartInfo.totalPrice}
+            onRemove={handleRemove}
+            onIncrement={handleUpdateQuantity}
+            onDecrement={handleUpdateQuantity}
+            totalPrice={otherInfo?.data?.totalPrice}
           />
         )}
         {/* Step 2: Address Form */}
@@ -68,10 +65,9 @@ const Cart = ({
           <Grid container spacing={2}>
             <Grid item xs={12} md={7}>
               <Address
+                user={user}
                 selectedAddress={selectedAddress}
                 setSelectedAddress={setSelectedAddress}
-                handleAddressChange={handleAddressChange}
-                addressModal={addressModal}
                 setAddressModal={setAddressModal}
               />
             </Grid>
@@ -79,10 +75,10 @@ const Cart = ({
             <Grid item xs={12} md={5}>
               <CartTable
                 cartData={cartData}
-                onRemove={onRemove}
-                onIncrement={onIncrement}
-                onDecrement={onDecrement}
-                totalPrice={otherCartInfo.totalPrice}
+                onRemove={handleRemove}
+                onIncrement={handleUpdateQuantity}
+                onDecrement={handleUpdateQuantity}
+                totalPrice={otherInfo?.data?.totalPrice}
                 isMiniCart={true}
               />
             </Grid>

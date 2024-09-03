@@ -14,7 +14,7 @@ import GoogleSignupButton from "@/app/common/GoogleSignupButton";
 import { MyBorderdButton, MyPrimaryButton } from "../../custom/MyButton";
 
 // SignupForm Component
-const SignupForm = ({ setSignupForm }) => {
+const SignupForm = ({ setSignupForm, setModal }) => {
   // State to manage the visibility of the password
   const [showPassword, setShowPassword] = useState(false);
 
@@ -171,7 +171,7 @@ const SignupForm = ({ setSignupForm }) => {
       <div className="mt-4">
         <Grid container spacing={3}>
           <Grid item xs={6} md={6}>
-            <GoogleSignupButton />
+            <GoogleSignupButton SetModal={setModal} />
           </Grid>
           <Grid item xs={6} md={6}>
             <MyBorderdButton

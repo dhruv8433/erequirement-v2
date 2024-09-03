@@ -12,7 +12,6 @@ const NavDrawers = ({
   setSettingOpen,
   isLaptopScreen,
 }) => {
-  console.log("userData from", userData);
   const locale = useLocale();
 
   return (

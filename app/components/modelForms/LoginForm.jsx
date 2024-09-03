@@ -115,7 +115,7 @@ const LoginForm = ({ setSignupForm, setModal }) => {
 
       {/* Alternative Login Methods */}
       <div className="my-5 gap-4 flex flex-col">
-        <GoogleSignupButton />
+        <GoogleSignupButton SetModal={setModal} />
         <MyBorderdButton
           title={"Phone"}
           icon={<Phone />}
