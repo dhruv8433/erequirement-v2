@@ -5,11 +5,14 @@ import MyIconButton from "../custom/MyIconButton";
 import { CloseRounded } from "@mui/icons-material";
 import { MyPrimaryButton } from "../custom/MyButton";
 import { MyInput, MyTextArea } from "../custom/MyInput";
+import { useAddresses } from "../hooks/useAddresses";
 
-const AddressModal = ({ setAddressModal }) => {
+const AddressModal = ({ setAddressModal, user }) => {
+  const { addresses, addAddress, reloadAddresses } = useAddresses(user?._id);
+
   // State to hold form data
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     addressLine1: "",
     addressLine2: "",
     city: "",
@@ -28,13 +31,11 @@ const AddressModal = ({ setAddressModal }) => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Process form data
-    console.log(formData);
-
-    // You can also add validation here or send data to your backend
-    setAddressModal(false); // Close the modal after submission
+  const handleFormSubmit = async (e) => {
+    e.preventDefault(); // Prevent form submission and page reload
+    addAddress(formData); // Call the submit handler with form data
+    setAddressModal(false);
+    console.log("from modal adddress now", addresses);
   };
 
   return (
@@ -47,13 +48,13 @@ const AddressModal = ({ setAddressModal }) => {
       </div>
       <Divider />
       <div className="my-2 ">
-        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-2" onSubmit={handleFormSubmit}>
           <div>
             <label>Name:</label>
             <MyInput
               type={"text"}
               placeholder={"Enter Your Full Name"}
-              name="name"
+              name="fullName"
               onChange={handleChange}
             />
           </div>
@@ -117,7 +118,7 @@ const AddressModal = ({ setAddressModal }) => {
           <MyPrimaryButton
             title={"Save Address"}
             className={"w-full my-3 p-2"}
-            type="submit" // Add type="submit" to trigger form submission
+            type="submit"
           />
         </form>
       </div>
