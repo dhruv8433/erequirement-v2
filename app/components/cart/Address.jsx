@@ -23,6 +23,8 @@ const Address = ({
     setAddresses,
   } = useAddresses(user?._id);
 
+  console.log("custom msg", addresses);
+
   // Handle address selection change using index
   const handleAddressChange = (event) => {
     const selectedIndex = parseInt(event.target.value, 10);
@@ -37,10 +39,6 @@ const Address = ({
       console.error("Invalid address selection");
     }
   };
-
-  useEffect(() => {
-    const response = reloadAddresses();
-  }, []);
 
   return (
     <div className="rounded-2xl overflow-hidden">
