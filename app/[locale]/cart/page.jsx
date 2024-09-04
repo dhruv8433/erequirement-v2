@@ -9,7 +9,6 @@ import MyModal from "@/app/custom/MyModal";
 import { MyCardBox } from "@/app/custom/MyBox";
 import AddressModal from "@/app/model/AddressModal";
 
-
 const Page = () => {
   const locale = useLocale();
 
@@ -21,9 +20,15 @@ const Page = () => {
     ? useSelector((state) => state.auth.user.user)
     : null;
 
-
   // State to control the visibility of the address modal
   const [addressModal, setAddressModal] = useState(false);
+  const [initialData, setInitialData] = useState(null);
+
+  async function openAddressModal(addressData = null) {
+    setInitialData(addressData);
+    console.log("address recived", addressData);
+    setAddressModal(true);
+  }
 
   return (
     <div>
@@ -37,7 +42,7 @@ const Page = () => {
       />
 
       {/* Cart Component with Steppers */}
-      <Cart user={user} setAddressModal={setAddressModal}/>
+      <Cart user={user} setAddressModal={openAddressModal} />
 
       {/* Address Modal */}
       <MyModal open={addressModal} setOpen={setAddressModal}>
@@ -45,6 +50,7 @@ const Page = () => {
           <AddressModal
             setAddressModal={setAddressModal}
             user={user}
+            address={initialData}
           />
         </MyCardBox>
       </MyModal>
