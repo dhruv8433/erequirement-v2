@@ -2,27 +2,11 @@
 
 import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 import Categories from "@/app/components/categories/Categories";
-import { getCategories } from "@/app/utils/GetCategories";
-import React, { useEffect, useState } from "react";
+import { useCategories } from "@/app/hooks/useCategories";
 
 const page = () => {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  async function fetchCategories() {
-    try {
-      const response = await getCategories();
-      console.log(response);
-      setCategories(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.log("Error in fetching categories", error);
-    }
-  }
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  // fetch categories data from custom hook
+  const { categories, loading } = useCategories();
 
   return (
     <div className="my-4">
