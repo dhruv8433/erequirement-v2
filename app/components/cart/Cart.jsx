@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CartTable from "./CartTable";
 import Address from "./Address";
 import {
@@ -30,14 +30,10 @@ const Cart = ({ user, setAddressModal }) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  // Utilize custom hooks for cart and addresses
-  const {
-    cartData,
-    otherInfo,
-    handleRemove,
-    handleUpdateQuantity,
-    reloadCart,
-  } = useCart(user?._id);
+  // Utilize custom hooks for cart and addresses whihc take user id for check
+  const { cartData, otherInfo, handleRemove, handleUpdateQuantity } = useCart(
+    user?._id
+  );
 
   return (
     <div>
@@ -57,7 +53,7 @@ const Cart = ({ user, setAddressModal }) => {
             onRemove={handleRemove}
             onIncrement={handleUpdateQuantity}
             onDecrement={handleUpdateQuantity}
-            totalPrice={otherInfo?.data?.totalPrice}
+            totalPrice={otherInfo?.totalPrice}
           />
         )}
         {/* Step 2: Address Form */}
@@ -78,7 +74,7 @@ const Cart = ({ user, setAddressModal }) => {
                 onRemove={handleRemove}
                 onIncrement={handleUpdateQuantity}
                 onDecrement={handleUpdateQuantity}
-                totalPrice={otherInfo?.data?.totalPrice}
+                totalPrice={otherInfo?.totalPrice}
                 isMiniCart={true}
               />
             </Grid>
