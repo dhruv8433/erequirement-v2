@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import {
   getAddresses,
@@ -7,84 +7,96 @@ import {
   updateAddress,
   setPrimaryAddress,
 } from "@/app/utils/AddressService";
+import { useDispatch, useSelector } from "react-redux";
+import { removeAddressFromState, setAddresses } from "../reducer/addressReducer";
 
 /**
  * Custom hook to manage addresses state and actions.
  * @param {string} userId - The ID of the user.
  * @returns {Object} - Addresses data and action functions.
  */
-export function useAddresses(userId) {
-  const [addresses, setAddresses] = useState([]);
 
+export function useAddresses(userId) {
+  const dispatch = useDispatch();
+
+  // Get addresses from Redux state
+  const userAddresses = useSelector((state) => state.address.addresses);
+
+  // Load addresses from server and update Redux state
   const loadAddresses = async () => {
     try {
       const data = await getAddresses(userId);
-      console.log("Fetched addresses:", data.data); // Verify the fetched data
-      setAddresses(data.data); // Update state with the fetched data
+      dispatch(setAddresses(data.data));
+      console.log("Fetched addresses:", data.data);
     } catch (error) {
       toast.error("Failed to load addresses.");
     }
   };
 
+  // Load addresses when userId changes
   useEffect(() => {
     if (userId) {
       loadAddresses();
     }
-  }, [userId]); // Add userId as a dependency to reload addresses when userId changes
+  }, [userId]);
 
-  useEffect(() => {
-    console.log("Updated addresses after deletion:", addresses);
-  }, [addresses]); // Log whenever addresses are updated
-
+  // Add new address
   const addAddress = async (formData) => {
     try {
       const response = await addNewAddress(userId, formData);
       console.log("Add address response:", response);
       toast.success(response.message || "Address added successfully.");
-      const data = await getAddresses(userId);
-      setAddresses(data.data);
-      console.log("useAddress", data.data);
+      await loadAddresses(); // Reload addresses after adding
     } catch (error) {
       toast.error("Failed to add address.");
     }
   };
 
+  // Delete address
   const deleteAddress = async (addressId) => {
     try {
+      // Optimistically remove the address from the Redux state
+      dispatch(removeAddressFromState(addressId));
+
+      // Make API call to remove the address from the backend
       const response = await removeAddress(userId, addressId);
       toast.success(response.message || "Address removed successfully.");
-      await loadAddresses(); // Refresh addresses
+
+      // Optionally reload addresses to ensure consistency
+      await loadAddresses();
     } catch (error) {
       toast.error("Failed to remove address.");
     }
   };
 
+  // Update address
   const updateUserAddress = async (addressId, address) => {
     try {
       const response = await updateAddress(userId, addressId, address);
       toast.success(response.message || "Address updated successfully.");
-      await loadAddresses(); // Refresh addresses
+      await loadAddresses(); // Reload addresses after updating
     } catch (error) {
       toast.error("Failed to update address.");
     }
   };
 
-  const setUserPrimaryAaddress = async (addressId) => {
+  // Set primary address
+  const setUserPrimaryAddress = async (addressId) => {
     try {
       const response = await setPrimaryAddress(userId, addressId);
       toast.success(response.message || "Primary address set successfully.");
+      await loadAddresses(); // Reload addresses after setting primary
     } catch (error) {
-      toast.error("Failed to set address.");
+      toast.error("Failed to set primary address.");
     }
   };
 
   return {
-    addresses,
+    addresses: userAddresses,
     addAddress,
     deleteAddress,
     reloadAddresses: loadAddresses,
     updateUserAddress,
-    setUserPrimaryAaddress,
-    setAddresses,
+    setUserPrimaryAddress,
   };
 }

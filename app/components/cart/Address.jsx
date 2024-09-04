@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Add } from "@mui/icons-material";
 import { MyCardBox } from "@/app/custom/MyBox";
 import AddressSelection from "./AddressSelection";
@@ -13,15 +13,7 @@ const Address = ({
   setSelectedAddress,
   setAddressModal,
 }) => {
-  const {
-    addresses,
-    loading: addressesLoading,
-    deleteAddress,
-    reloadAddresses,
-    updateUserAddress,
-    setUserPrimaryAaddress,
-    setAddresses,
-  } = useAddresses(user?._id);
+  const { addresses, setUserPrimaryAddress } = useAddresses(user?._id);
 
   // Handle address selection change using index
   const handleAddressChange = (event) => {
@@ -30,17 +22,11 @@ const Address = ({
 
     const selectedAddressObject = addresses[selectedIndex];
     if (selectedAddressObject && selectedAddressObject._id) {
-      setUserPrimaryAaddress(selectedAddressObject._id);
-      console.log("Selected Address ID:", selectedAddressObject._id);
-      console.log("Selected Address:", selectedAddressObject);
+      setUserPrimaryAddress(selectedAddressObject._id);
     } else {
       console.error("Invalid address selection");
     }
   };
-
-  useEffect(() => {
-    const response = reloadAddresses();
-  }, []);
 
   return (
     <div className="rounded-2xl overflow-hidden">
@@ -50,16 +36,16 @@ const Address = ({
           className={"border-dashed w-full p-10 my-address-btn"}
           icon={<Add />}
           dashed={true}
-          onClickFunction={() => setAddressModal(true)} // Ensure you define `setAddressModal`
+          onClickFunction={() => setAddressModal()} // Ensure you define `setAddressModal`
         />
         <div className="my-4">
           <AddressSelection
+            user={user}
             selectedAddress={selectedAddress}
             setSelectedAddress={setSelectedAddress}
             handleAddressChange={handleAddressChange}
             addresses={addresses}
-            removeAddress={deleteAddress}
-            EditAddressModalOpen={() => setAddressModal(true)}
+            EditAddressModalOpen={setAddressModal}
           />
         </div>
       </MyCardBox>

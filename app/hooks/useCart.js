@@ -6,6 +6,8 @@ import {
   removeItemFromCart,
   updateQuantityInCart,
 } from "@/app/utils/CartService";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../reducer/cartReducer";
 
 /**
  * Custom hook to manage cart state and actions.
@@ -14,14 +16,14 @@ import {
  */
 
 export function useCart(userId) {
-  const [cartData, setCartData] = useState([]);
-  const [otherInfo, setOtherInfo] = useState([]);
+  const cartData = useSelector((state) => state.cart.cart.service);
+  const otherInfo = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
 
   const loadCart = async () => {
     try {
       const data = await fetchCartData(userId);
-      setCartData(data.data.service);
-      setOtherInfo(data);
+      dispatch(setCart(data.data));
     } catch (error) {
       const errorMessage =
         error.response?.data?.errors || "Failed to load cart data.";
@@ -72,6 +74,7 @@ export function useCart(userId) {
       const response = await addToCart(userId, serviceId);
       if (response.success) {
         toast.success(response.message || "Item removed successfully.");
+        loadCart();
       } else {
         toast.error(response.errors || "Failed to remove item.");
       }
