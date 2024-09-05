@@ -72,4 +72,9 @@ export const SwiperBreakPoints = {
 
 export const myPrimaryColor = "#ff9a00";
 
-export const steps = ["Review Cart", "Enter Address", "Payment"];
+export const steps = [
+  "Review Cart",
+  "Select Date and Time",
+  "Enter Address",
+  "Payment",
+];
