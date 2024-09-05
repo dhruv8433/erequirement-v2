@@ -4,12 +4,12 @@
  */
 
 import { useEffect, useState } from "react";
-import { getProviders } from "../utils/GetProviders";
-import { getSingleService } from "../utils/GetServices";
+import { getProviders, getSignleProvider } from "../utils/GetProviders";
 
 export function useProviders(providerId) {
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [singleProvider, setSingleProvider] = useState({});
 
   async function fetchProviders() {
     try {
@@ -23,8 +23,9 @@ export function useProviders(providerId) {
 
   async function fetchSingleProvider() {
     try {
-      const response = await getSingleService(providerId);
+      const response = await getSignleProvider(providerId);
       console.log("Single Provider", response.data);
+      setSingleProvider(response.data);
     } catch (error) {
       console.log("Error in fetching single provider", error);
     }
@@ -38,5 +39,7 @@ export function useProviders(providerId) {
   return {
     providers,
     loading,
+    fetchSingleProvider,
+    singleProvider,
   };
 }
