@@ -16,13 +16,4 @@ async function getSchedule(cartId) {
   return response.data;
 }
 
-async function updateSchedule(scheduleData, cartId) {
-  const response = await httpAxios.put(`/schedule/${cartId}`, {
-    date: scheduleData.date,
-    time: scheduleData.time,
-  });
-
-  return response.data;
-}
-
-export { CreateSchedule, getSchedule, updateSchedule };
+export { CreateSchedule, getSchedule };

@@ -24,7 +24,7 @@ const Cart = ({ user, setAddressModal }) => {
 
   const cartId = cartData[0]._id; // Assuming the cart item has the cart ID
 
-  const { createSchedule, updateScheduleData } = useSchedule(cartId); // Access the custom hook for schedule
+  const { createSchedule, updateScheduleData, schedule } = useSchedule(cartId); // Access the custom hook for schedule
 
   const handleNext = async () => {
     // Validation for step 1 (date & time selection)
@@ -38,18 +38,11 @@ const Cart = ({ user, setAddressModal }) => {
 
     // Call create schedule when the user completes step 1
     if (activeStep === 1) {
-      if (!selectedDateTimeSlot) {
-        try {
-          await createSchedule(selectedDateTimeSlot);
-        } catch (error) {
-          console.error("Error creating schedule:", error);
-          return; // Stop proceeding if schedule creation fails
-        }
-      }
       try {
-        await updateScheduleData(selectedDateTimeSlot);
+        await createSchedule(selectedDateTimeSlot);
       } catch (error) {
-        console.error("Error updating schedule:", error);
+        console.error("Error creating schedule:", error);
+        return; // Stop proceeding if schedule creation fails
       }
     }
 

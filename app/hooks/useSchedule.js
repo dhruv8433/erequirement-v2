@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   CreateSchedule,
   getSchedule,
-  updateSchedule,
 } from "@/app/utils/ScheduleService";
 import toast from "react-hot-toast";
 
@@ -45,20 +44,7 @@ export const useSchedule = (cartId) => {
     }
   };
 
-  // Update an existing schedule
-  const updateScheduleData = async (scheduleData) => {
-    try {
-      setLoading(true);
-      const response = await updateSchedule(scheduleData, cartId);
-      setSchedule(response);
-      toast.success("Schedule updated successfully!");
-    } catch (err) {
-      setError(err.message);
-      toast.error("Failed to update schedule.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // TODO - create delete schdule when user cancle order we call that
 
   return {
     schedule,
@@ -66,6 +52,5 @@ export const useSchedule = (cartId) => {
     error,
     createSchedule,
     fetchSchedule,
-    updateScheduleData,
   };
 };
