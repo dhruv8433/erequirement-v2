@@ -18,6 +18,11 @@ const MyCardBox = styled(Box)(({ theme }) => ({
   background: theme.palette.background.card,
 }));
 
+// Secondary Box For Navigation and Footer
+const MyServiceCard = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.serviceCard,
+}));
+
 // hover card box
 const MyHoverCardBox = styled(Box)(({ theme }) => ({
   background: theme.palette.background.card,
@@ -26,4 +31,4 @@ const MyHoverCardBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-export { MyPrimaryBox, MySecondaryBox, MyCardBox, MyHoverCardBox };
+export { MyPrimaryBox, MySecondaryBox, MyCardBox, MyHoverCardBox, MyServiceCard };

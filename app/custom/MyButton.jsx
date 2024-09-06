@@ -17,7 +17,7 @@ const MyPrimaryButton = ({ title, className, onClickFunction }) => {
   return (
     <PrimaryButtonStyle
       onClick={onClickFunction ? onClickFunction : null}
-      className={`${className} rounded-md`}
+      className={`${className}`}
     >
       {title}
     </PrimaryButtonStyle>

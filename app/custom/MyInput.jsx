@@ -1,6 +1,44 @@
+import styled from "@emotion/styled";
 import React from "react";
 
-const MyInput = ({ type, placeholder, className, onChange, icon, name, value }) => {
+const Coloredinput = styled.input`
+  background-color: ${({ theme }) => theme.palette.input.background};
+`;
+
+const MyColoredInput = ({
+  type,
+  placeholder,
+  className,
+  onChange,
+  icon,
+  name,
+  value,
+  inputClass,
+}) => {
+  return (
+    <div className={`flex items-center w-full ${className}`}>
+      {icon && <span className="mr-2">{icon}</span>}
+      <Coloredinput
+        type={type}
+        placeholder={placeholder}
+        className={`flex-grow outline-none bg-transparent ${inputClass}`}
+        onChange={onChange ? onChange : null}
+        name={name}
+        value={value}
+      />
+    </div>
+  );
+};
+
+const MyInput = ({
+  type,
+  placeholder,
+  className,
+  onChange,
+  icon,
+  name,
+  value,
+}) => {
   return (
     <div className={`flex items-center border w-full p-2 ${className}`}>
       {icon && <span className="mr-2">{icon}</span>}
@@ -16,7 +54,15 @@ const MyInput = ({ type, placeholder, className, onChange, icon, name, value }) 
   );
 };
 
-const MyTextArea = ({ placeholder, className, onChange, icon, cols, name, value }) => {
+const MyTextArea = ({
+  placeholder,
+  className,
+  onChange,
+  icon,
+  cols,
+  name,
+  value,
+}) => {
   return (
     <div className={`flex items-center border w-full p-2 ${className}`}>
       {icon && <span className="mr-2">{icon}</span>}
@@ -57,4 +103,4 @@ const MyInputBorderBottom = ({
   );
 };
 
-export { MyInput, MyInputBorderBottom, MyTextArea };
+export { MyInput, MyInputBorderBottom, MyTextArea, MyColoredInput };
