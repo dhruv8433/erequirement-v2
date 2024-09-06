@@ -11,6 +11,7 @@ import MyContainer from "@/app/custom/MyContainer";
 import SettingDrawer from "@/app/drawer/SettingDrawer";
 import { MyCardBox, MyPrimaryBox, MySecondaryBox } from "@/app/custom/MyBox";
 
+
 const Navbar = () => {
   const locale = useLocale();
   const [settingOpen, setSettingOpen] = useState(false);
@@ -18,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <MySecondaryBox className="nav py-6">
+      <MySecondaryBox className="nav py-4">
         {/* navigation based on screen size */}
         <MyContainer maxWidth="xl">
           {/* Only visible in large screens */}
@@ -45,9 +46,9 @@ const Navbar = () => {
           open={settingOpen}
           onClose={() => setSettingOpen(false)}
         >
-          <MyPrimaryBox width={350}>
+          <MyCardBox className="h-full" width={350}>
             <SettingDrawer />
-          </MyPrimaryBox>
+          </MyCardBox>
         </Drawer>
 
         {/* signup login model here */}

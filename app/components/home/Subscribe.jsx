@@ -11,11 +11,12 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { MyPrimaryText, MySecondaryText, MyHeading } from "@/app/custom/MyText";
 import { MySecondaryBox } from "@/app/custom/MyBox";
+import { MyInput } from "@/app/custom/MyInput";
 
 const Subscribe = ({ t }) => {
   return (
     <div className="p-6">
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         {/* Left Side: Mobile Phone Image */}
         <Grid item xs={12} md={4}>
           <div className="flex justify-center md:justify-start">
@@ -39,11 +40,11 @@ const Subscribe = ({ t }) => {
             <MySecondaryText title={t("subscribe_subtitle")} className="mb-6" />
 
             {/* Subscription Form */}
-            <div className="flex mb-8">
-              <input
+            <div className="flex mb-8 ">
+              <MyInput
                 type="email"
                 placeholder="Enter your email"
-                className="p-3 rounded-l-lg border border-gray-300 flex-grow"
+                className="p-3 rounded-l-lg border border-gray-300 flex-grow w-auto max-w-[800px]"
               />
               <MyPrimaryButton
                 className="p-3 primary-bg text-white font-semibold rounded-r-lg hover:bg-orange-600 transition duration-300"

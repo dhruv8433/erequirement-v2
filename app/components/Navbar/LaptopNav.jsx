@@ -3,9 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import Routes from "@/app/Routes/Routes";
-import { WebName } from "@/app/config/config";
 import { useSelector } from "react-redux";
 import NavDrawers from "./NavDrawers";
+import Logo from "@/app/assets/logo.png";
 
 const LaptopNav = ({ locale, setSettingOpen, setModel }) => {
   // Always call useSelector at the top level
@@ -21,8 +21,8 @@ const LaptopNav = ({ locale, setSettingOpen, setModel }) => {
       {/* logo */}
       <div className="logo text-3xl hover:scale-100 duration-500 ease-in-out transition-transform transform">
         {/* Redirect based on selected locale */}
-        <Link href={`/${locale}`}>
-          <h1 className="my-text text-3xl font-bold ">{WebName}</h1>
+        <Link href={`/${locale}`} className="flex items-center gap-1">
+          <img src={Logo.src} alt="" className="h-10 w-auto" />
         </Link>
       </div>
       {/* web routes */}

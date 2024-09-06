@@ -1,4 +1,4 @@
-import { MyPrimaryBox } from "@/app/custom/MyBox";
+import { MyCardBox, MyServiceCard } from "@/app/custom/MyBox";
 import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 import { Grid, Rating } from "@mui/material";
 import { useLocale } from "next-intl";
@@ -18,16 +18,16 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
             title={provider.title}
             breadcrumbs={[
               { title: "Home", link: "/" },
-              { title: "Top Providers", link: "./" },
-              { title: provider.title, link: "/providers" },
+              { title: "Top Providers", link: "../" },
+              { title: provider.title, link: "" },
             ]}
           />
 
           {/* Providers */}
           <Grid container>
             <Grid item xs={12} md={4}>
-              <MyPrimaryBox className="m-2 rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
-                <div className="card">
+              <MyCardBox className="m-2 rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
+                <div>
                   {/* banner image */}
                   {/* add other images here too */}
                   <div className="banner h-[300px] w-full overflow-hidden">
@@ -58,11 +58,11 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
                     </p>
                   </div>
                 </div>
-              </MyPrimaryBox>
+              </MyCardBox>
             </Grid>
             <Grid item xs={12} md={8}>
-              <div className="provider-card border mx-1 rounded-2xl m-4 p-2">
-                <div className="border p-4 rounded-2xl flex justify-between items-center m-2">
+              <MyCardBox className="provider-card mx-1 rounded-2xl m-2 mb-4 p-2">
+                <div className="border p-4 rounded-2xl flex justify-between items-center m-2 primary-bg">
                   <h1>Services</h1>
                   <h1>About</h1>
                   <h1>Promo Code</h1>
@@ -75,8 +75,10 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
                     ) : (
                       services.map((service, index) => (
                         <Grid item xs={12} md={6} key={index}>
-                          <Link href={`/${locale}/services/${service.serviceID}/${service.Slug}`}>
-                            <div className="border m-2 flex rounded-2xl overflow-hidden">
+                          <Link
+                            href={`/${locale}/services/${service.serviceID}/${service.Slug}`}
+                          >
+                            <MyServiceCard className="border m-2 flex rounded-2xl overflow-hidden">
                               <div className="serviceImg h-[200px] w-[200px] flex-shrink-0">
                                 <img
                                   src={service.serviceImg}
@@ -105,14 +107,14 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
                                   </button>
                                 </div>
                               </div>
-                            </div>
+                            </MyServiceCard>
                           </Link>
                         </Grid>
                       ))
                     )}
                   </Grid>
                 </div>
-              </div>
+              </MyCardBox>
             </Grid>
           </Grid>
         </div>

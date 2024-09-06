@@ -8,14 +8,14 @@ const TopProviders = ({ data, loading }) => {
   return (
     <div className="my-4">
       <MyHeading title={"Top Providers"} className={"text-2xl my-2 font-semibold"}/>
-      <Grid container>
+      <Grid container spacing={2}>
         {loading
           ? Array.from({ length: 4 }).map((_, index) => (
               <Grid item key={index} xs={12} sm={6} md={3}>
                 <ProviderSkeletons />
               </Grid>
             ))
-          : data.slice(0, 4).map((provider) => (
+          : data && data.slice(0, 4).map((provider) => (
               <Grid item key={provider.id} xs={12} sm={6} md={3}>
                 <Provider provider={provider} key={provider.id} />
               </Grid>

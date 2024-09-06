@@ -12,6 +12,7 @@ const lightTheme = createTheme({
       primary: "#ffffff",
       card: "#f8f9fa", // light white
       cardhover: "#f8edeb",
+      serviceCard: "#000000", // light white
     },
     text: {
       primary: "#0000000",
@@ -22,6 +23,10 @@ const lightTheme = createTheme({
     },
     icon: {
       default: "#ff9a00",
+    },
+    input: {
+      default: "#000000",
+      background: "#ffffff",
     },
   },
 });
@@ -38,6 +43,7 @@ const darkTheme = createTheme({
       primary: "#000000",
       card: "#1a1a1a", // light black
       cardhover: "#0d0906;",
+      serviceCard: "#1a1a1a", // light
     },
     text: {
       primary: "#ffffff",
@@ -48,6 +54,10 @@ const darkTheme = createTheme({
     },
     icon: {
       default: "#ff9a00",
+    },
+    input: {
+      default: "#ffffff",
+      background: "#000000",
     },
   },
 });

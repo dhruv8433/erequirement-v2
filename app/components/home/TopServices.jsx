@@ -22,7 +22,7 @@ const TopServices = ({ data, loading }) => {
           {loading ? (
             <MySkeleton variant={"rectangular"} height={200} width={200} />
           ) : (
-            data.slice(0, 6).map((service, index) => (
+            data && data.slice(0, 6).map((service, index) => (
               <Grid key={service.id || index} item xs={12} sm={6} md={2}>
                 <Link
                   href={`${locale}/services/${service.serviceID}/${service.Slug}`}
