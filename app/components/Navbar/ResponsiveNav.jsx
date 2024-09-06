@@ -9,6 +9,7 @@ import { WebName } from "@/app/config/config";
 import { MyPrimaryBox } from "@/app/custom/MyBox";
 import MenuDrawer from "@/app/drawer/MenuDrawer";
 import { Drawer, IconButton } from "@mui/material";
+import Logo from "@/app/assets/logo.png";
 
 const ResponsiveNav = ({ locale, setSettingOpen, setModel }) => {
   const [open, setOpen] = useState(false);
@@ -28,7 +29,7 @@ const ResponsiveNav = ({ locale, setSettingOpen, setModel }) => {
 
           {/* redirect based on selected locale */}
           <Link href={`/${locale}`}>
-            <h1 className="my-text text-xl font-bold ">{WebName}</h1>
+            <img src={Logo.src} alt="" className="h-10 w-auto" />
           </Link>
         </div>
         {/* right side avatar, cart, settings... */}
