@@ -16,7 +16,7 @@ const MyColoredInput = ({
   inputClass,
 }) => {
   return (
-    <div className={`flex items-center w-full ${className}`}>
+    <div className={`flex items-center ${className}`}>
       {icon && <span className="mr-2">{icon}</span>}
       <Coloredinput
         type={type}
