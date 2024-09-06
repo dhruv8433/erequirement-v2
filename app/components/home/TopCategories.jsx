@@ -10,7 +10,6 @@ import { Navigation } from "swiper/modules";
 import { SwiperSlide } from "swiper/react";
 import CategoryCard from "@/app/common/CategoryCard";
 import { CategorySkeleton } from "@/app/custom/CustomSkeleton";
-import { MyHeading } from "@/app/custom/MyText";
 import { MyBreakPointSwiper } from "@/app/custom/MySwiper";
 
 const Categories = ({ data, loading }) => {
@@ -34,7 +33,7 @@ const Categories = ({ data, loading }) => {
             modules={[Navigation]}
             navigation={true}
           >
-            {data.map((category, index) => (
+            {data && data.map((category, index) => (
               <SwiperSlide key={category.slug || index}>
                 {/* reusable component call */}
                 <Link
