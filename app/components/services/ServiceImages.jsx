@@ -1,9 +1,8 @@
-import { useCart } from "@/app/hooks/useCart";
-import { AddToCart } from "@/app/utils/CartService";
-import { Box } from "@mui/material";
 import React from "react";
-import toast from "react-hot-toast";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useCart } from "@/app/hooks/useCart";
+import { MyBorderdButton, MyPrimaryButton } from "@/app/custom/MyButton";
 
 const OtherImage = ({
   xs,
@@ -93,15 +92,16 @@ const ServiceImages = ({ service, handleImageClick, selectedImage }) => {
       />
 
       <div className="buttons">
-        <button
+        <MyPrimaryButton
           className="primary-bg text-white px-6 py-2 rounded-lg hover:bg-orange-500 w-full mt-4 self-start"
-          onClick={() => AddServiceToCart(service._id)}
-        >
-          Add to Cart
-        </button>
-        <button className="border border-gray-400 px-6 py-2 rounded-lg w-full mt-4 self-start">
-          Share
-        </button>
+          onClickFunction={() => AddServiceToCart(service._id)}
+          title={"Add to Cart"}
+        />
+
+        <MyBorderdButton
+          className="border px-6 py-2 rounded-lg w-full mt-4 self-start"
+          title={"Share"}
+        />
       </div>
     </div>
   );

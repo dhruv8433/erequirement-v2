@@ -1,9 +1,10 @@
+import { MyCardBox } from "@/app/custom/MyBox";
 import React from "react";
 
 const ServiceFaqs = ({ service }) => {
   return (
     <div>
-      <div className="border border-gray-400 p-4 rounded-2xl mb-4">
+      <MyCardBox className="border border-gray-400 p-4 rounded-2xl mb-4">
         <h2 className="text-xl font-bold mb-2 primary-text">
           FAQs
         </h2>
@@ -15,8 +16,8 @@ const ServiceFaqs = ({ service }) => {
             <p>A. {faq.answer}</p>
           </div>
         ))}
-      </div>
-      <div className="border border-gray-400 p-4 rounded-2xl">
+      </MyCardBox>
+      <MyCardBox className="border border-gray-400 p-4 rounded-2xl">
         <h2 className="text-xl font-bold mb-2 primary-text">
           Tags
         </h2>
@@ -30,7 +31,7 @@ const ServiceFaqs = ({ service }) => {
             </span>
           ))}
         </div>
-      </div>
+      </MyCardBox>
     </div>
   );
 };
