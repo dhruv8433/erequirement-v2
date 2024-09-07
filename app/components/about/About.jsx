@@ -13,7 +13,7 @@ const About = () => {
           {/* intro */}
           <MySecondaryBox className="intro text-start rounded-2xl p-4">
             <h1 className="text-xl primary-text">How it Started?</h1>
-            <h1 className="text-6xl text-wrap mt-4">
+            <h1 className="text-6xl text-wrap mt-4 font-semibold">
               All Your Requirements in One Place
             </h1>
             <div className="other mt-16">
@@ -66,14 +66,14 @@ const About = () => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <MyCardBox className="card border p-2 rounded-2xl">
-                    <h1 className="font-semibold text-4xl">10</h1>
-                    <h1>Project Finished</h1>
+                    <h1 className="font-semibold text-4xl">20+</h1>
+                    <h1>Service Providers</h1>
                   </MyCardBox>
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <MyCardBox className="card border p-2 rounded-2xl">
-                    <h1 className="font-semibold text-4xl">450+</h1>
-                    <h1>Project Reviews</h1>
+                    <h1 className="font-semibold text-4xl">100+</h1>
+                    <h1>Services</h1>
                   </MyCardBox>
                 </Grid>
                 <Grid item xs={12} md={6}>
