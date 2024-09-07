@@ -11,7 +11,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { MyPrimaryText, MySecondaryText, MyHeading } from "@/app/custom/MyText";
 import { MySecondaryBox } from "@/app/custom/MyBox";
-import { MyInput } from "@/app/custom/MyInput";
+import { MyColoredInput, MyInput } from "@/app/custom/MyInput";
 
 const Subscribe = ({ t }) => {
   return (
@@ -41,10 +41,11 @@ const Subscribe = ({ t }) => {
 
             {/* Subscription Form */}
             <div className="flex mb-8 ">
-              <MyInput
+              <MyColoredInput
                 type="email"
                 placeholder="Enter your email"
-                className="p-3 rounded-l-lg border border-gray-300 flex-grow w-auto max-w-[800px]"
+                inputClass={"p-3 rounded-l-lg"}
+                className="rounded-l-lg border flex-grow w-auto max-w-[800px] overflow-hidden"
               />
               <MyPrimaryButton
                 className="p-3 primary-bg text-white font-semibold rounded-r-lg hover:bg-orange-600 transition duration-300"

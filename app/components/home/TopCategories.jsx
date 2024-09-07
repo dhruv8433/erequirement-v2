@@ -33,7 +33,7 @@ const Categories = ({ data, loading }) => {
             modules={[Navigation]}
             navigation={true}
           >
-            {data && data.map((category, index) => (
+            {data.map((category, index) => (
               <SwiperSlide key={category.slug || index}>
                 {/* reusable component call */}
                 <Link

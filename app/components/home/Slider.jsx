@@ -1,7 +1,7 @@
 import "swiper/css";
 import React, { useState } from "react";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Advertisement from "@/app/common/Advertisement";
 import MySkeleton from "@/app/custom/MySkeleton";
@@ -20,15 +20,15 @@ const Slider = ({ data, loading }) => {
       ) : (
         <Swiper
           navigation={true}
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
+          autoplay={true}
           className="mySwiper rounded-2xl"
         >
-          {data &&
-            data.map((slide) => (
-              <SwiperSlide key={slide.id}>
-                <Advertisement ads={slide} />
-              </SwiperSlide>
-            ))}
+          {data.map((slide) => (
+            <SwiperSlide key={slide.id}>
+              <Advertisement ads={slide} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       )}
       <div className="relative flex items-center z-10 justify-center bottom-5">
