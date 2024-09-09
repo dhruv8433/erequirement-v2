@@ -42,7 +42,6 @@ const Address = ({
           <AddressSelection
             user={user}
             selectedAddress={selectedAddress}
-            setSelectedAddress={setSelectedAddress}
             handleAddressChange={handleAddressChange}
             addresses={addresses}
             EditAddressModalOpen={setAddressModal}
