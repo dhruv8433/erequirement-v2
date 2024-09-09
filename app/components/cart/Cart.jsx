@@ -8,6 +8,7 @@ import Address from "./Address";
 import CartTable from "./CartTable";
 import { steps } from "@/app/config/config";
 import { useSchedule } from "@/app/hooks/useSchedule"; // Custom hook
+import PaypalButton from "@/app/common/PaypalButton";
 
 const Cart = ({ user, setAddressModal }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -24,7 +25,7 @@ const Cart = ({ user, setAddressModal }) => {
 
   const cartId = cartData[0]._id; // Assuming the cart item has the cart ID
 
-  const { createSchedule, updateScheduleData, schedule } = useSchedule(cartId); // Access the custom hook for schedule
+  const { createSchedule } = useSchedule(cartId); // Access the custom hook for schedule
 
   const handleNext = async () => {
     // Validation for step 1 (date & time selection)
@@ -47,7 +48,8 @@ const Cart = ({ user, setAddressModal }) => {
     }
 
     // Validation for step 2 (address selection)
-    if (activeStep === 2 && !selectedAddress) {
+    if (activeStep === 2 && selectedAddress === "") {
+      console.log("selected Address", selectedAddress);
       toast.error("Please select or add a new address before payment.");
       return;
     }
@@ -105,9 +107,9 @@ const Cart = ({ user, setAddressModal }) => {
         )}
 
         {activeStep === 3 && (
-          <div>
-            <h1>Payment Form Goes Here</h1>
-          </div>
+          <MiniCartLayout selectedDateTimeSlot={selectedDateTimeSlot}>
+            <PaypalButton />
+          </MiniCartLayout>
         )}
       </div>
 

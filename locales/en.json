@@ -13,5 +13,8 @@
         "price": "Affordable pricing",
         "quick": "Quick and reliable service",
         "subscribe_button": "Subscribe"
+    },
+    "about": {
+        "about": "About us"
     }
 }
