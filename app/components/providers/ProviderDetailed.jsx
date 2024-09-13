@@ -1,5 +1,9 @@
+"use client";
+
 import { MyCardBox, MyServiceCard } from "@/app/custom/MyBox";
 import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
+import MyIconButton from "@/app/custom/MyIconButton";
+import { Visibility } from "@mui/icons-material";
 import { Grid, Rating } from "@mui/material";
 import { useLocale } from "next-intl";
 import Link from "next/link";
@@ -7,6 +11,7 @@ import React from "react";
 
 const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
   const locale = useLocale();
+
   return (
     <div>
       {loading ? (
@@ -29,7 +34,6 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
               <MyCardBox className="m-2 rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
                 <div>
                   {/* banner image */}
-                  {/* add other images here too */}
                   <div className="banner h-[300px] w-full overflow-hidden">
                     <img
                       src={provider.banner_image}
@@ -41,7 +45,7 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
                   <div className="logo h-[100px] flex justify-center relative -top-10">
                     <img
                       src={provider.logo_image}
-                      className={`h-[100px] -mb-5 rounded-full border-4 bg-white w-[100px] p-4 object-cover scale-100`}
+                      className="h-[100px] -mb-5 rounded-full border-4 bg-white w-[100px] p-4 object-cover scale-100"
                       alt={provider.title}
                     />
                   </div>
@@ -74,35 +78,43 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
                       <div>Loading...</div>
                     ) : (
                       services.map((service, index) => (
-                        <Grid item xs={12} md={6} key={index}>
+                        <Grid item xs={12} sm={6} md={4} key={index}>
                           <Link
                             href={`/${locale}/services/${service.serviceID}/${service.Slug}`}
                           >
-                            <MyServiceCard className="border m-2 flex rounded-2xl overflow-hidden">
-                              <div className="serviceImg h-[200px] w-[200px] flex-shrink-0">
+                            <MyServiceCard className="border m-2 rounded-2xl overflow-hidden max-h-[450px] h-full relative hover:shadow-lg transition-shadow duration-300 flex flex-col">
+                              {/* Service Image */}
+                              <div className="serviceImg h-[200px] w-full flex-shrink-0">
                                 <img
                                   src={service.serviceImg}
-                                  className="h-full w-full object-cover rounded-l-2xl"
+                                  className="h-full w-full object-cover rounded-t-2xl"
                                   alt={service.ServiceName}
                                 />
                               </div>
+
+                              {/* Card Content */}
                               <div className="p-4 flex-1 flex flex-col justify-between">
                                 <div>
-                                  <h1 className="text-2xl font-semibold">
+                                  <h1 className="text-lg font-semibold truncate">
                                     {service.ServiceName}
                                   </h1>
-                                  <p className="text-sm text-gray-600">
+
+                                  {/* Short Description (Limited to 1 Line) */}
+                                  <p className="text-sm text-gray-600 truncate">
                                     {service.ShortDesc}
                                   </p>
                                 </div>
+
+                                {/* Rating and Add to Cart */}
                                 <div className="flex justify-between items-center mt-4">
                                   <Rating
                                     name={`rating-${index}`}
                                     value={service.AvgRatings}
                                     precision={0.5}
                                     readOnly
+                                    size="small"
                                   />
-                                  <button className="primary-bg text-white p-1 rounded-lg ">
+                                  <button className="primary-bg text-white px-3 py-1 rounded-lg hover:bg-orange-600 transition-colors">
                                     Add to Cart
                                   </button>
                                 </div>
