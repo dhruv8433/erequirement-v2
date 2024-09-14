@@ -9,6 +9,7 @@ import CartTable from "./CartTable";
 import { steps } from "@/app/config/config";
 import { useSchedule } from "@/app/hooks/useSchedule"; // Custom hook
 import PaypalButton from "@/app/common/PaypalButton";
+import StripeButton from "@/app/common/StriperButton";
 
 const Cart = ({ user, setAddressModal }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -23,11 +24,17 @@ const Cart = ({ user, setAddressModal }) => {
     user?._id
   );
 
-  const cartId = cartData[0]._id; // Assuming the cart item has the cart ID
+  const cartId = cartData[0]?._id; // Assuming the cart item has the cart ID
 
   const { createSchedule } = useSchedule(cartId); // Access the custom hook for schedule
 
   const handleNext = async () => {
+    // for cart validation
+    if (activeStep === 0 && cartData.length === 0) {
+      toast.error("Please add items to the cart before proceeding.");
+      return;
+    }
+
     // Validation for step 1 (date & time selection)
     if (
       activeStep === 1 &&
@@ -109,6 +116,7 @@ const Cart = ({ user, setAddressModal }) => {
         {activeStep === 3 && (
           <MiniCartLayout selectedDateTimeSlot={selectedDateTimeSlot}>
             <PaypalButton />
+            <StripeButton />
           </MiniCartLayout>
         )}
       </div>
