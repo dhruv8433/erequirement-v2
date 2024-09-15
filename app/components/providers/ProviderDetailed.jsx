@@ -14,6 +14,7 @@ const ProviderDetailed = ({ provider, loading, services, serviceLoading }) => {
 
   return (
     <div>
+      {/* skeleton */}
       {loading ? (
         <div>Loading...</div>
       ) : (
