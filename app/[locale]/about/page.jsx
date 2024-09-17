@@ -9,10 +9,11 @@ const page = () => {
     <div>
       <MyBreadcrumb
         breadcrumbs={[
-          { title: "home", link: "/" },
+          { title: "Home", link: "/" },
           { title: "About", link: "" },
         ]}
         title={t("about")}
+        activeIndex={1}
       />
       <AboutUs />
     </div>

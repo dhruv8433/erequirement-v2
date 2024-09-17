@@ -10,6 +10,7 @@ export function useProviders(providerId) {
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [singleProvider, setSingleProvider] = useState({});
+  const [singleProviderLoading, setSingleProviderLoading] = useState(true);
 
   async function fetchProviders() {
     try {
@@ -26,6 +27,7 @@ export function useProviders(providerId) {
       const response = await getSignleProvider(providerId);
       console.log("Single Provider", response.data);
       setSingleProvider(response.data);
+      setSingleProviderLoading(false);
     } catch (error) {
       console.log("Error in fetching single provider", error);
     }
@@ -36,10 +38,14 @@ export function useProviders(providerId) {
     fetchProviders();
   }, []);
 
+  useEffect(() => {
+    fetchSingleProvider(providerId);
+  }, []);
+
   return {
     providers,
     loading,
-    fetchSingleProvider,
     singleProvider,
+    singleProviderLoading,
   };
 }

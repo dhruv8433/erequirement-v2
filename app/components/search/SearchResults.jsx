@@ -3,8 +3,12 @@ import Provider from "@/app/common/Provider"; // Assuming ProviderCard exists fo
 import ServiceCard from "@/app/common/ServiceCard";
 import { MyHeading } from "@/app/custom/MyText";
 import { useSearch } from "@/app/hooks/useSearch";
-import { CategorySkeleton } from "@/app/custom/CustomSkeleton";
+import {
+  BreadCrumbSkeleton,
+  CategorySkeleton,
+} from "@/app/custom/CustomSkeleton";
 import { Divider, Grid } from "@mui/material";
+import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 
 const SearchResults = ({ query }) => {
   const { searchResult, loading } = useSearch(query);
@@ -17,6 +21,20 @@ const SearchResults = ({ query }) => {
 
   return (
     <div>
+      {loading ? (
+        <BreadCrumbSkeleton />
+      ) : (
+        <MyBreadcrumb
+          title={`Search result for ${query}`}
+          breadcrumbs={[
+            { title: "home", link: "/" },
+            { title: "query", link: "#" },
+            { title: query, link: "" },
+          ]}
+          activeIndex={2}
+        />
+      )}
+
       <div className="my-8">
         <MyHeading
           title={"Services"}

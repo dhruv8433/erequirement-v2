@@ -1,63 +1,80 @@
 "use client";
 
-import Provider from "@/app/common/Provider";
-import { ProviderSkeletons } from "@/app/custom/CustomSkeleton";
-import { getProviders } from "@/app/utils/GetProviders";
-import { getSingleSubCategory } from "@/app/utils/GetSubCategories";
+import React from "react";
 import { Grid } from "@mui/material";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import Provider from "@/app/common/Provider";
+import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
+import { useProviders } from "@/app/hooks/useProviders";
+import { useSubCategorys } from "@/app/hooks/useSubCategory";
+import {
+  BreadCrumbSkeleton,
+  ProviderSkeletons,
+} from "@/app/custom/CustomSkeleton";
+import { useCategories } from "@/app/hooks/useCategories";
+import { useLocale } from "next-intl";
 
 const Page = () => {
-  const [providers, setProviders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [serviceProviders, setServiceProviders] = useState([]);
+  const { subId, id } = useParams();
+  const { singleSubCategory, loadingSingleCategory } = useSubCategorys(
+    "",
+    subId
+  );
+  const { providers, loading } = useProviders();
+  const { categories } = useCategories();
 
-  const { subId } = useParams();
+  // Ensure that singleSubCategory is loaded and contains providers
+  const filteredProviders = providers.filter((provider) =>
+    singleSubCategory?.providers?.includes(provider.id)
+  );
 
-  // First, we fetch the single sub-category and based on that, we filter providers
-  async function fetchSubCategory() {
-    try {
-      const response = await getSingleSubCategory(subId);
-      console.log(response.data.providers);
-      setServiceProviders(response.data.providers);
-    } catch (error) {
-      console.log("Error in fetching subcategory", error);
-    }
-  }
+  // getting first object from array of categories -- filter out
+  const filterCategories = categories.filter(
+    (category) => category.id == id
+  )[0];
 
-  async function fetchProviders() {
-    try {
-      const response = await getProviders();
-      console.log("providers", response.data);
-      setProviders(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.log("Error in getting providers", error);
-    }
-  }
-
-  useEffect(() => {
-    fetchSubCategory();
-    fetchProviders();
-  }, []);
+  const locale = useLocale();
 
   return (
     <div className="my-4">
-      <Grid container>
-        {loading
+      {/* breadcrumb for better user understanding */}
+      {loading ? (
+        <BreadCrumbSkeleton />
+      ) : (
+        <MyBreadcrumb
+          title={singleSubCategory.ServiceName}
+          breadcrumbs={[
+            { title: "Home", link: "/" },
+            {
+              title: "category",
+              link: `/${locale}/Categories`,
+            },
+            {
+              title: filterCategories.name,
+              link: `/${locale}/categories/${filterCategories.id}/${filterCategories.slug}`,
+            },
+            {
+              title: singleSubCategory.ServiceName,
+              link: "",
+            },
+          ]}
+          activeIndex={3}
+        />
+      )}
+
+      {/* loading and provider related to particular service */}
+      <Grid container spacing={2}>
+        {loading || loadingSingleCategory
           ? Array.from({ length: 4 }).map((_, index) => (
               <Grid item key={index} xs={12} md={3}>
                 <ProviderSkeletons key={index} />
               </Grid>
             ))
-          : providers.map((provider) =>
-              serviceProviders.includes(provider.id) ? (
-                <Grid item key={provider.id} xs={12} md={3}>
-                  <Provider key={provider.id} provider={provider} />
-                </Grid>
-              ) : null
-            )}
+          : filteredProviders.map((provider) => (
+              <Grid item key={provider.id} xs={12} md={3}>
+                <Provider key={provider.id} provider={provider} />
+              </Grid>
+            ))}
       </Grid>
     </div>
   );

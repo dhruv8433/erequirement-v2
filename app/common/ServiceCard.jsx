@@ -1,8 +1,6 @@
 import React from "react";
-import { useLocale } from "next-intl";
 
 const ServiceCard = ({ service }) => {
-  const locale = useLocale();
   return (
     <div className="service-card border-2 rounded-2xl overflow-hidden relative group hover:cursor-pointer">
       {/* Container for the image and overlay */}

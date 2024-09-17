@@ -11,6 +11,7 @@ const page = () => {
           { title: "Home", link: "/" },
           { title: "Contact", link: "" },
         ]}
+        activeIndex={1}
       />
       <Contact />
     </div>
