@@ -43,7 +43,7 @@ const darkTheme = createTheme({
       primary: "#000000",
       card: "#1a1a1a", // light black
       cardhover: "#0d0906;",
-      serviceCard: "#001524", // light
+      serviceCard: "#ffcd9c17", // light
     },
     text: {
       primary: "#ffffff",
