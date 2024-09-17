@@ -16,7 +16,7 @@ const page = () => {
           { title: "Categories", link: "/categories" },
         ]}
         title="Categories"
-        activeIndex={0}
+        activeIndex={1}
       />
       <Categories categories={categories} loading={loading} />
     </div>

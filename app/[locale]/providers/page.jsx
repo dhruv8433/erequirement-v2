@@ -19,7 +19,7 @@ const page = () => {
           { title: "Home", link: "/" },
           { title: "Providers", link: `/${locale}/providers` },
         ]}
-        activeIndex={0}
+        activeIndex={1}
       />
       <Providers providers={providers} loading={loading} />
     </div>

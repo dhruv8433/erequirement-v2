@@ -39,6 +39,7 @@ const Page = () => {
           { title: "Home", link: `/` },
           { title: "Cart", link: `/${locale}/cart` },
         ]}
+        activeIndex={1}
       />
 
       {/* Cart Component with Steppers */}
