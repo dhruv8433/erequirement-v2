@@ -28,7 +28,7 @@ async function addNewAddress(userId, address) {
 // Remove a user's address
 async function removeAddress(userId, addressId) {
   try {
-    const response = await httpAxios.delete(`/address/${addressId}`);
+    const response = await httpAxios.delete(`/address/${userId}/${addressId}`);
     return response.data;
   } catch (error) {
     console.error("Error removing address:", error);
@@ -39,7 +39,7 @@ async function removeAddress(userId, addressId) {
 // Update a user's address
 async function updateAddress(userId, addressId, address) {
   try {
-    const response = await httpAxios.put(`/address/${addressId}`, {
+    const response = await httpAxios.put(`/address/${userId}/${addressId}`, {
       ...address,
     });
     return response.data;
@@ -52,10 +52,9 @@ async function updateAddress(userId, addressId, address) {
 // Set a primary address for delivery
 async function setPrimaryAddress(userId, addressId) {
   try {
-    const response = await httpAxios.post(`/address/primary`, {
-      userId: userId,
-      addressId: addressId,
-    });
+    const response = await httpAxios.post(
+      `/address/${userId}/${addressId}/primary`
+    );
     return response.data;
   } catch (error) {
     console.error("Error setting primary address:", error);

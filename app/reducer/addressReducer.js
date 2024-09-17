@@ -13,7 +13,7 @@ const addressesSlice = createSlice({
       state.addresses = action.payload;
     },
     removeAddressFromState: (state, action) => {
-      state.addresses = state.addresses.filter(
+      state.addresses = state.addresses.addresses.filter(
         (address) => address._id !== action.payload
       );
     },
