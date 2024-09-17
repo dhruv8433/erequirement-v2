@@ -1,6 +1,12 @@
 import { Divider, Grid, Rating, Skeleton } from "@mui/material";
-import { MyCardBox } from "./MyBox";
+import { MyCardBox, MyServiceCard } from "./MyBox";
 import { ChevronRight } from "@mui/icons-material";
+import {
+  AccessTime,
+  CollectionsOutlined,
+  InfoOutlined,
+  LocationOnOutlined,
+} from "@mui/icons-material";
 
 // Provider Skeletons
 export const ProviderSkeletons = () => {
@@ -277,5 +283,140 @@ export const ProviderServiceSkeleton = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+// about provider skeleton
+export const AboutProviderSkeleton = () => {
+  return (
+    <MyCardBox className="about-provider p-4 rounded-2xl">
+      <div className="provider-details">
+        {/* Skeleton for Heading */}
+        <Skeleton variant="text" width="50%" height={30} animation="wave" />
+        <Divider />
+
+        {/* Skeleton for Location and Time Slot info */}
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <MyServiceCard
+              height={{ xs: "auto", md: "200px" }}
+              className="p-4 rounded-2xl my-4"
+            >
+              <div className="flex items-center gap-2">
+                <LocationOnOutlined fontSize="small" />{" "}
+                <Skeleton
+                  variant="text"
+                  width="30%"
+                  height={20}
+                  animation="wave"
+                />
+              </div>
+              <Skeleton
+                variant="text"
+                width="80%"
+                height={20}
+                animation="wave"
+              />
+              <Skeleton
+                variant="text"
+                width="80%"
+                height={20}
+                animation="wave"
+              />
+              <Skeleton
+                variant="text"
+                width="80%"
+                height={20}
+                animation="wave"
+              />
+              <Skeleton
+                variant="text"
+                width="80%"
+                height={20}
+                animation="wave"
+              />
+              <Skeleton
+                variant="text"
+                width="80%"
+                height={20}
+                animation="wave"
+              />
+            </MyServiceCard>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <MyServiceCard className="p-4 rounded-2xl my-4 h-[200px]">
+              <div className="flex items-center gap-2 mb-2">
+                <AccessTime fontSize="small" />{" "}
+                <Skeleton
+                  variant="text"
+                  width="30%"
+                  height={20}
+                  animation="wave"
+                />
+              </div>
+              <Skeleton
+                variant="rectangular"
+                width="80%"
+                height={60}
+                animation="wave"
+              />
+            </MyServiceCard>
+          </Grid>
+        </Grid>
+
+        {/* Skeleton for Description */}
+        <div className="border rounded-2xl p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <InfoOutlined fontSize="small" />{" "}
+            <Skeleton variant="text" width="30%" height={20} animation="wave" />
+          </div>
+          <Skeleton
+            variant="rectangular"
+            width="100%"
+            height={60}
+            animation="wave"
+          />
+        </div>
+
+        {/* Skeleton for Social Media Links */}
+        <div className="border my-4 rounded-2xl p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <InfoOutlined fontSize="small" />{" "}
+            <Skeleton variant="text" width="40%" height={20} animation="wave" />
+          </div>
+          <Skeleton variant="text" width="80%" height={20} animation="wave" />
+          <Skeleton variant="text" width="80%" height={20} animation="wave" />
+          <Skeleton variant="text" width="80%" height={20} animation="wave" />
+        </div>
+      </div>
+
+      {/* Skeleton for Image Gallery */}
+      <MyServiceCard className="image-gallery p-4 rounded-2xl">
+        <div className="flex items-center gap-2 mb-3">
+          <CollectionsOutlined fontSize="small" />{" "}
+          <Skeleton variant="text" width="40%" height={20} animation="wave" />
+        </div>
+        <Grid container spacing={2}>
+          {[...Array(6)].map((_, index) => (
+            <Grid
+              key={index}
+              item
+              xs={12}
+              sm={6}
+              md={2}
+              className="flex items-center justify-center"
+            >
+              <Skeleton
+                variant="rectangular"
+                width={160}
+                height={160}
+                animation="wave"
+                className="rounded-2xl"
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </MyServiceCard>
+    </MyCardBox>
   );
 };
