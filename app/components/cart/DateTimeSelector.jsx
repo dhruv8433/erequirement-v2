@@ -1,7 +1,7 @@
 import { MyCardBox } from "@/app/custom/MyBox";
 import { MyHeading } from "@/app/custom/MyText";
 import { useProviders } from "@/app/hooks/useProviders";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
@@ -14,13 +14,7 @@ const DateTimeSelector = ({
   selectedDateTimeSlot,
   setSelectedDateTimeSlot,
 }) => {
-  const { fetchSingleProvider, singleProvider } = useProviders(
-    cartItem.ProviderId
-  );
-
-  useEffect(() => {
-    fetchSingleProvider();
-  }, []);
+  const { singleProvider } = useProviders(cartItem.ProviderId);
 
   // Function to disable dates outside the `advance_booking_days` and dates before today
   const shouldDisableDate = (date) => {
@@ -65,7 +59,11 @@ const DateTimeSelector = ({
                 className="custom-calendar"
                 shouldDisableDate={shouldDisableDate}
                 onChange={handleDateChange}
-                value={selectedDateTimeSlot?.date ? dayjs(selectedDateTimeSlot.date) : null} // Set selected date if available
+                value={
+                  selectedDateTimeSlot?.date
+                    ? dayjs(selectedDateTimeSlot.date)
+                    : null
+                } // Set selected date if available
               />
             </LocalizationProvider>
           </div>

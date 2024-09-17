@@ -27,7 +27,7 @@ export function useCart(userId) {
     } catch (error) {
       const errorMessage =
         error.response?.data?.errors || "Failed to load cart data.";
-      toast.error(errorMessage);
+      console.log("Error", errorMessage);
     }
   };
 

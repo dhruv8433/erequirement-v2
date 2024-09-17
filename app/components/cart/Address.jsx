@@ -14,13 +14,14 @@ const Address = ({
   setAddressModal,
 }) => {
   const { addresses, setUserPrimaryAddress } = useAddresses(user?._id);
+  console.log("addresses", addresses);
 
   // Handle address selection change using index
   const handleAddressChange = (event) => {
     const selectedIndex = parseInt(event.target.value, 10);
     setSelectedAddress(selectedIndex);
 
-    const selectedAddressObject = addresses[selectedIndex];
+    const selectedAddressObject = addresses.addresses[selectedIndex];
     if (selectedAddressObject && selectedAddressObject._id) {
       setUserPrimaryAddress(selectedAddressObject._id);
     } else {
@@ -43,7 +44,7 @@ const Address = ({
             user={user}
             selectedAddress={selectedAddress}
             handleAddressChange={handleAddressChange}
-            addresses={addresses}
+            addresses={addresses.addresses}
             EditAddressModalOpen={setAddressModal}
           />
         </div>

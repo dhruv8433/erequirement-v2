@@ -17,16 +17,17 @@ const AddressSelection = ({
           onChange={handleAddressChange}
           className="w-full"
         >
-          {addresses.map((address, index) => (
-            <Grid item xs={12} md={6} key={address._id}>
-              <AddressCheckBox
-                address={address}
-                index={index}
-                user={user}
-                EditAddressModalOpen={EditAddressModalOpen}
-              />
-            </Grid>
-          ))}
+          {addresses &&
+            addresses.map((address, index) => (
+              <Grid item xs={12} md={6} key={address._id}>
+                <AddressCheckBox
+                  address={address}
+                  index={index}
+                  user={user}
+                  EditAddressModalOpen={EditAddressModalOpen}
+                />
+              </Grid>
+            ))}
         </RadioGroup>
       </Grid>
     </FormControl>
