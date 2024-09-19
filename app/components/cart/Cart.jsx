@@ -24,8 +24,10 @@ const Cart = ({ user, setAddressModal }) => {
   });
 
   // Fetch cart data and schedule
-  const { cartData, otherInfo, handleRemove, handleUpdateQuantity } = useCart(user?._id);
-  const cartId = cartData[0]?._id; // Assuming the cart item has the cart ID
+  const { cartData, otherInfo, handleRemove, handleUpdateQuantity } = useCart(
+    user?._id
+  );
+  const cartId = cartData && cartData[0]?._id; // Assuming the cart item has the cart ID
   const { createSchedule, schedule } = useSchedule(cartId);
 
   // Initialize selected date and time if a schedule already exists
@@ -40,13 +42,16 @@ const Cart = ({ user, setAddressModal }) => {
 
   const handleNext = async () => {
     // Step 0 validation: Check if cart is empty
-    if (activeStep === 0 && cartData.length === 0) {
+    if (activeStep === 0 && (!cartData || cartData.length === 0)) {
       toast.error("Please add items to the cart before proceeding.");
       return;
     }
 
     // Step 1 validation: Ensure date & time are selected
-    if (activeStep === 1 && (!selectedDateTimeSlot.date || !selectedDateTimeSlot.time)) {
+    if (
+      activeStep === 1 &&
+      (!selectedDateTimeSlot.date || !selectedDateTimeSlot.time)
+    ) {
       toast.error("Please select date and time before proceeding.");
       return;
     }
@@ -71,7 +76,8 @@ const Cart = ({ user, setAddressModal }) => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const handleBack = () =>
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   return (
     <div>

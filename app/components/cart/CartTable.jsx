@@ -27,7 +27,7 @@ const CartTable = ({
 
   return (
     <MyCardBox className="rounded-2xl">
-      {cartData.length > 0 ? (
+      {cartData && cartData.length > 0 ? (
         <div className="border p-3 rounded-2xl border-dashed">
           <TableContainer>
             <Table>
