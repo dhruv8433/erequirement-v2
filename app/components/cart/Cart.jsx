@@ -88,10 +88,10 @@ const Cart = ({ user, setAddressModal }) => {
 
   const handlePayment = async () => {
     if (selectedPaymentMethod === "paypal") {
-      console.log("Paying with PayPal");
+      // send other info because it directly have access of total amount
+      const response = await PaymentHandler("Paypal", otherInfo);
     } else if (selectedPaymentMethod === "stripe") {
       const response = await PaymentHandler("Stripe", cartData);
-      console.log("resposne", response);
     } else if (selectedPaymentMethod === "cod") {
       console.log("Cash on Delivery");
     }
