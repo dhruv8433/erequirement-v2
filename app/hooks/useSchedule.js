@@ -1,8 +1,5 @@
-import { useState } from "react";
-import {
-  CreateSchedule,
-  getSchedule,
-} from "@/app/utils/ScheduleService";
+import { useEffect, useState } from "react";
+import { CreateSchedule, getSchedule } from "@/app/utils/ScheduleService";
 import toast from "react-hot-toast";
 
 export const useSchedule = (cartId) => {
@@ -35,7 +32,7 @@ export const useSchedule = (cartId) => {
     try {
       setLoading(true);
       const response = await getSchedule(cartId);
-      setSchedule(response);
+      setSchedule(response.data);
     } catch (err) {
       setError(err.message);
       toast.error("Failed to fetch schedule.");
@@ -45,6 +42,9 @@ export const useSchedule = (cartId) => {
   };
 
   // TODO - create delete schdule when user cancle order we call that
+  useEffect(() => {
+    fetchSchedule();
+  }, []);
 
   return {
     schedule,

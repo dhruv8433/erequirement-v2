@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
+import Address from "./Address";
+import Payment from "./Payment";
 import toast from "react-hot-toast";
+import CartTable from "./CartTable";
+import React, { useState, useEffect } from "react";
+import { steps } from "@/app/config/config";
 import { useCart } from "@/app/hooks/useCart";
 import MiniCartLayout from "./MiniCartLayout";
 import DateTimeSelector from "./DateTimeSelector";
-import Address from "./Address";
-import CartTable from "./CartTable";
-import { steps } from "@/app/config/config";
 import { useSchedule } from "@/app/hooks/useSchedule"; // Custom hook
-import PaypalButton from "@/app/common/PaypalButton";
-import StripeButton from "@/app/common/StriperButton";
+import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
+import dayjs from "dayjs"; // Importing dayjs for date/time formatting
+
+// Helper function for formatting dates and times using dayjs
+const formatDate = (date) => dayjs(date).format("YYYY-MM-DD"); // Format as needed
+const formatTime = (time) => time; // Keep time as is or adjust formatting if necessary
 
 const Cart = ({ user, setAddressModal }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -19,44 +23,47 @@ const Cart = ({ user, setAddressModal }) => {
     date: null,
   });
 
-  // Utilize custom hooks for cart and schedules
-  const { cartData, otherInfo, handleRemove, handleUpdateQuantity } = useCart(
-    user?._id
-  );
-
+  // Fetch cart data and schedule
+  const { cartData, otherInfo, handleRemove, handleUpdateQuantity } = useCart(user?._id);
   const cartId = cartData[0]?._id; // Assuming the cart item has the cart ID
+  const { createSchedule, schedule } = useSchedule(cartId);
 
-  const { createSchedule } = useSchedule(cartId); // Access the custom hook for schedule
+  // Initialize selected date and time if a schedule already exists
+  useEffect(() => {
+    if (schedule) {
+      setSelectedDateTimeSlot({
+        time: formatTime(schedule.time),
+        date: formatDate(schedule.date),
+      });
+    }
+  }, [schedule]);
 
   const handleNext = async () => {
-    // for cart validation
+    // Step 0 validation: Check if cart is empty
     if (activeStep === 0 && cartData.length === 0) {
       toast.error("Please add items to the cart before proceeding.");
       return;
     }
 
-    // Validation for step 1 (date & time selection)
-    if (
-      activeStep === 1 &&
-      (!selectedDateTimeSlot.date || !selectedDateTimeSlot.time)
-    ) {
+    // Step 1 validation: Ensure date & time are selected
+    if (activeStep === 1 && (!selectedDateTimeSlot.date || !selectedDateTimeSlot.time)) {
       toast.error("Please select date and time before proceeding.");
       return;
     }
 
-    // Call create schedule when the user completes step 1
+    // Create a schedule when completing Step 1
     if (activeStep === 1) {
       try {
         await createSchedule(selectedDateTimeSlot);
       } catch (error) {
         console.error("Error creating schedule:", error);
-        return; // Stop proceeding if schedule creation fails
+        toast.error("Failed to create schedule. Please try again.");
+        return;
       }
     }
 
-    // Validation for step 2 (address selection)
+    // Step 2 validation: Ensure an address is selected
     if (activeStep === 2 && selectedAddress === "") {
-      console.log("selected Address", selectedAddress);
       toast.error("Please select or add a new address before payment.");
       return;
     }
@@ -64,21 +71,20 @@ const Cart = ({ user, setAddressModal }) => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   return (
     <div>
       <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
+        {steps.map((label, index) => (
+          <Step key={index}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
 
       <div className="rounded-2xl my-10">
+        {/* Step 0: Cart Table */}
         {activeStep === 0 && (
           <CartTable
             cartData={cartData}
@@ -89,6 +95,7 @@ const Cart = ({ user, setAddressModal }) => {
           />
         )}
 
+        {/* Step 1: Date and Time Selector */}
         {activeStep === 1 && (
           <MiniCartLayout selectedDateTimeSlot={selectedDateTimeSlot}>
             <DateTimeSelector
@@ -99,6 +106,7 @@ const Cart = ({ user, setAddressModal }) => {
           </MiniCartLayout>
         )}
 
+        {/* Step 2: Address Selection */}
         {activeStep === 2 && (
           <MiniCartLayout
             user={user}
@@ -113,10 +121,10 @@ const Cart = ({ user, setAddressModal }) => {
           </MiniCartLayout>
         )}
 
+        {/* Step 3: Payment */}
         {activeStep === 3 && (
           <MiniCartLayout selectedDateTimeSlot={selectedDateTimeSlot}>
-            <PaypalButton />
-            <StripeButton />
+            <Payment />
           </MiniCartLayout>
         )}
       </div>
@@ -130,7 +138,7 @@ const Cart = ({ user, setAddressModal }) => {
               Back
             </Button>
             <Button variant="contained" onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              {activeStep === steps.length - 1 ? "Place Order" : "Next"}
             </Button>
           </div>
         )}
