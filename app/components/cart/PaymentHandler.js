@@ -39,6 +39,7 @@ export async function PaymentHandler(paymentType, cartData) {
 
       // Load the Stripe script and create a Stripe instance
       const Stripe = await loadStripeScript();
+      console.log("stripe test", process.env.NEXT_PUBLIC_STRIPE_KEY);
       const stripe = Stripe(process.env.NEXT_PUBLIC_STRIPE_KEY); // Initialize Stripe with public key
 
       // Redirect the user to the Stripe checkout page
