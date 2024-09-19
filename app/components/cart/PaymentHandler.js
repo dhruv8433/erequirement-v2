@@ -88,9 +88,7 @@ export async function PaymentHandler(paymentType, cartData) {
 
       // Check if the environment is sandbox or live
       const paypalEnvironment =
-        process.env.NEXT_PUBLIC_PAYPAL_ENV === "sandbox"
-          ? "https://www.sandbox.paypal.com/checkoutnow?token="
-          : "https://www.paypal.com/checkoutnow?token=";
+        "https://www.sandbox.paypal.com/checkoutnow?token=";
 
       // Redirect the user to PayPal for the payment
       const approvalUrl = `${paypalEnvironment}${orderId}`;
