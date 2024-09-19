@@ -1,4 +1,8 @@
-import { CreateStripeCheckoutSession } from "@/app/utils/createOrder";
+import {
+  createPaypalOrder,
+  CreateStripeCheckoutSession,
+} from "@/app/utils/createOrder";
+import axios from "axios";
 
 // Function to dynamically load the Stripe script
 const loadStripeScript = () => {
@@ -28,9 +32,33 @@ const loadStripeScript = () => {
   });
 };
 
+// Function to dynamically load the PayPal script
+const loadPayPalScript = () => {
+  return new Promise((resolve, reject) => {
+    if (window.paypal) {
+      resolve(window.paypal);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = `https://www.paypal.com/sdk/js?client-id=${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`;
+    script.onload = () => {
+      if (window.paypal) {
+        resolve(window.paypal);
+      } else {
+        reject(new Error("PayPal library failed to load."));
+      }
+    };
+    script.onerror = () => reject(new Error("Failed to load PayPal SDK."));
+    document.body.appendChild(script);
+  });
+};
+
 // Function to handle payment through Stripe
 export async function PaymentHandler(paymentType, cartData) {
+  // if payment method is stripe
   if (paymentType === "Stripe") {
+    console.log("Initiating Stripe...");
     // Check if the payment type is Stripe
     try {
       // Extract session ID from the response
@@ -47,5 +75,32 @@ export async function PaymentHandler(paymentType, cartData) {
       // Log any errors encountered during the payment process
       console.error("Error handling payment:", error);
     }
+  }
+
+  // if payment method is paypal
+  if (paymentType === "Paypal") {
+    try {
+      console.log("Initializing PayPal...");
+
+      // Create PayPal order by calling the backend API
+      const response = await createPaypalOrder(cartData);
+      const orderId = response;
+
+      // Check if the environment is sandbox or live
+      const paypalEnvironment =
+        process.env.NEXT_PUBLIC_PAYPAL_ENV === "sandbox"
+          ? "https://www.sandbox.paypal.com/checkoutnow?token="
+          : "https://www.paypal.com/checkoutnow?token=";
+
+      // Redirect the user to PayPal for the payment
+      const approvalUrl = `${paypalEnvironment}${orderId}`;
+      window.location.href = approvalUrl;
+    } catch (error) {
+      console.error("Error handling PayPal payment:", error);
+    }
+  }
+
+  // if payment method is cod
+  if (paymentType === "Cod") {
   }
 }
