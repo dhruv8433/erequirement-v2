@@ -42,4 +42,20 @@ const onPaypalApprove = async (data, actions) => {
     );
   }
 };
-export { createOrder, onPaypalApprove };
+
+const CreateStripeCheckoutSession = async (cartData) => {
+  try {
+    // Send a POST request to create a Stripe checkout session
+    const response = await httpAxios.post(
+      `/payment/stripe/create-checkout-session`,
+      {
+        cartData, // Include cart data in the request body
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error creating Stripe checkout session:", error);
+  }
+};
+export { createOrder, onPaypalApprove, CreateStripeCheckoutSession };

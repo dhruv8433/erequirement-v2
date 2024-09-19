@@ -10,6 +10,7 @@ import DateTimeSelector from "./DateTimeSelector";
 import { useSchedule } from "@/app/hooks/useSchedule"; // Custom hook
 import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
 import dayjs from "dayjs"; // Importing dayjs for date/time formatting
+import { PaymentHandler } from "./PaymentHandler";
 
 // Helper function for formatting dates and times using dayjs
 const formatDate = (date) => dayjs(date).format("YYYY-MM-DD"); // Format as needed
@@ -79,6 +80,23 @@ const Cart = ({ user, setAddressModal }) => {
   const handleBack = () =>
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("paypal");
+
+  const handlePaymentChange = (event) => {
+    setSelectedPaymentMethod(event.target.value);
+  };
+
+  const handlePayment = async () => {
+    if (selectedPaymentMethod === "paypal") {
+      console.log("Paying with PayPal");
+    } else if (selectedPaymentMethod === "stripe") {
+      const response = await PaymentHandler("Stripe", cartData);
+      console.log("resposne", response);
+    } else if (selectedPaymentMethod === "cod") {
+      console.log("Cash on Delivery");
+    }
+  };
+
   return (
     <div>
       <Stepper activeStep={activeStep} alternativeLabel>
@@ -130,7 +148,10 @@ const Cart = ({ user, setAddressModal }) => {
         {/* Step 3: Payment */}
         {activeStep === 3 && (
           <MiniCartLayout selectedDateTimeSlot={selectedDateTimeSlot}>
-            <Payment />
+            <Payment
+              handlePaymentChange={handlePaymentChange}
+              selectedPaymentMethod={selectedPaymentMethod}
+            />
           </MiniCartLayout>
         )}
       </div>
@@ -143,7 +164,12 @@ const Cart = ({ user, setAddressModal }) => {
             <Button disabled={activeStep === 0} onClick={handleBack}>
               Back
             </Button>
-            <Button variant="contained" onClick={handleNext}>
+            <Button
+              variant="contained"
+              onClick={
+                activeStep === steps.length - 1 ? handlePayment : handleNext
+              }
+            >
               {activeStep === steps.length - 1 ? "Place Order" : "Next"}
             </Button>
           </div>

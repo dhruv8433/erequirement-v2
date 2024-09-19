@@ -9,22 +9,7 @@ import {
 import { MyPrimaryText } from "@/app/custom/MyText";
 import { MyCardBox } from "@/app/custom/MyBox";
 
-const Payment = () => {
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("paypal");
-
-  const handlePaymentChange = (event) => {
-    setSelectedPaymentMethod(event.target.value);
-  };
-
-  const handlePayment = () => {
-    if (selectedPaymentMethod === "paypal") {
-      console.log("Paying with PayPal");
-    } else if (selectedPaymentMethod === "stripe") {
-      console.log("Paying with Stripe");
-    } else if (selectedPaymentMethod === "cod") {
-      console.log("Cash on Delivery");
-    }
-  };
+const Payment = ({selectedPaymentMethod, handlePaymentChange}) => {
 
   return (
     <MyCardBox className="p-6 rounded-xl space-y-4 min-w-max">
