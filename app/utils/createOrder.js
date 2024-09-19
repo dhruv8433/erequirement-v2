@@ -1,12 +1,16 @@
 import toast from "react-hot-toast";
 import { httpAxios } from "../httpAxios";
 
-const createOrder = async (paymentMethod) => {
+const createPaypalOrder = async (cartData) => {
   try {
     // Make a request to your backend to create an order
-    const response = await httpAxios.post(`/payment/order`, {
-      paymentMethod: paymentMethod,
-    });
+    const response = await httpAxios.post(
+      `payment/paypal/create-paypal-order`,
+      {
+        paymentMethod: "paypal",
+        cartData: cartData,
+      }
+    );
     // it returns one paypal id which we use for approve order
     const orderData = await response.data;
 
@@ -49,6 +53,7 @@ const CreateStripeCheckoutSession = async (cartData) => {
     const response = await httpAxios.post(
       `/payment/stripe/create-checkout-session`,
       {
+        paymentMethod: "stripe",
         cartData, // Include cart data in the request body
       }
     );
@@ -58,4 +63,4 @@ const CreateStripeCheckoutSession = async (cartData) => {
     console.error("Error creating Stripe checkout session:", error);
   }
 };
-export { createOrder, onPaypalApprove, CreateStripeCheckoutSession };
+export { createPaypalOrder, onPaypalApprove, CreateStripeCheckoutSession };
