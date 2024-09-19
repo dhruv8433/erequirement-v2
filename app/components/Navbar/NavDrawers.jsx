@@ -25,7 +25,7 @@ const NavDrawers = ({
       ) : (
         <MyPrimaryButton
           title={"Login"}
-          className={"px-3 py-1"}
+          className={"px-3 py-1 rounded-md"}
           onClickFunction={() => setModel(true)}
         />
       )}
