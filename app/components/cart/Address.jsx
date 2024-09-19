@@ -1,6 +1,4 @@
-"use client";
-
-import React from "react";
+import React, { useEffect } from "react";
 import { Add } from "@mui/icons-material";
 import { MyCardBox } from "@/app/custom/MyBox";
 import AddressSelection from "./AddressSelection";
@@ -14,7 +12,18 @@ const Address = ({
   setAddressModal,
 }) => {
   const { addresses, setUserPrimaryAddress } = useAddresses(user?._id);
-  console.log("addresses", addresses);
+
+  // Automatically select the primary address (if available) when addresses are fetched
+  useEffect(() => {
+    if (addresses && addresses.addresses) {
+      const primaryAddressIndex = addresses.addresses.findIndex(
+        (address) => address.isPrimary
+      );
+      if (primaryAddressIndex !== -1) {
+        setSelectedAddress(primaryAddressIndex); // Set the primary address as selected
+      }
+    }
+  }, [addresses, setSelectedAddress]);
 
   // Handle address selection change using index
   const handleAddressChange = (event) => {
@@ -23,7 +32,7 @@ const Address = ({
 
     const selectedAddressObject = addresses.addresses[selectedIndex];
     if (selectedAddressObject && selectedAddressObject._id) {
-      setUserPrimaryAddress(selectedAddressObject._id);
+      setUserPrimaryAddress(selectedAddressObject._id); // Set as primary if user chooses it
     } else {
       console.error("Invalid address selection");
     }

@@ -11,15 +11,17 @@ const AddressSelection = ({
 }) => {
   return (
     <FormControl component="fieldset" className="w-full my-4">
-      <Grid container>
-        <RadioGroup
-          value={selectedAddress.toString()} // Ensure the value matches the selected index
-          onChange={handleAddressChange}
-          className="w-full"
-        >
+      <RadioGroup
+        value={selectedAddress.toString()} // Ensure the value matches the selected index
+        onChange={handleAddressChange}
+        className="w-full"
+      >
+        <Grid container>
           {addresses &&
             addresses.map((address, index) => (
               <Grid item xs={12} md={6} key={address._id}>
+                {" "}
+                {/* Changed xs and md */}
                 <AddressCheckBox
                   address={address}
                   index={index}
@@ -28,8 +30,8 @@ const AddressSelection = ({
                 />
               </Grid>
             ))}
-        </RadioGroup>
-      </Grid>
+        </Grid>
+      </RadioGroup>
     </FormControl>
   );
 };
