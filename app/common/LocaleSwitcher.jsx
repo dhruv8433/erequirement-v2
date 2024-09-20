@@ -28,11 +28,14 @@ export default function LocaleSwitcher() {
     const nextLocale = e.target.value;
     console.log("Changing locale to:", nextLocale);
 
-    setLocale(nextLocale);
+    localStorage.setItem("locale", nextLocale);
+    setLocale(nextLocale); // This should trigger a re-render
 
-    // Replace the URL without reloading and update the locale
+    // Replace the URL to only include the selected locale
     router.replace(`/${nextLocale}`, undefined, { scroll: false });
-    router.refresh(); // Re-fetch locale-specific data
+
+    // Refresh to load new messages
+    router.refresh();
   };
 
   return (
