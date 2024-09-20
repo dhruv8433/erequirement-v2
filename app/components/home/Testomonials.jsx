@@ -17,7 +17,6 @@ const Testimonials = ({ testimonials, loading }) => {
         {loading ? (
           <h1>Loading..</h1>
         ) : (
-          testimonials &&
           testimonials.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
               <Testimonial key={testimonial.id} testimonial={testimonial} />

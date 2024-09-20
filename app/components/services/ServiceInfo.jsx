@@ -1,8 +1,10 @@
-import { MyCardBox, MySecondaryBox } from "@/app/custom/MyBox";
-import { Rating } from "@mui/material";
 import React from "react";
+import { Rating } from "@mui/material";
+import { MyCardBox, MySecondaryBox } from "@/app/custom/MyBox";
+import { useTranslations } from "next-intl";
 
 const ServiceInfo = ({ service }) => {
+  const t = useTranslations("service");
   return (
     <div>
       <MySecondaryBox className="mb-4 border border-gray-400 p-4 rounded-2xl">
@@ -14,30 +16,30 @@ const ServiceInfo = ({ service }) => {
       </MySecondaryBox>
       <MyCardBox className="border border-gray-400 p-4 rounded-2xl">
         <h1 className="text-2xl primary-text font-semibold my-2">
-          Provider Info :{" "}
+          {t("info")} :{" "}
         </h1>
         <p className="text-sm">
-          Provider: <strong>{service.ProviderName}</strong>
+          {t("provider")}: <strong>{service.ProviderName}</strong>
         </p>
         <p className="text-sm">
-          Duration: <strong>{service.Duration}</strong>
+          {t("duration")}: <strong>{service.Duration}</strong>
         </p>
         <p className="text-sm">
-          Members Required: <strong>{service.NoOfMembers}</strong>
+          {t("members")}: <strong>{service.NoOfMembers}</strong>
         </p>
         <p className="text-sm">
-          Available In Next Days: <strong>{service.AvailableInNextDays}</strong>
+          {t("available_in")}: <strong>{service.AvailableInNextDays}</strong>
         </p>
       </MyCardBox>
 
       <MyCardBox className=" my-4 border border-dashed border-gray-400 p-4 rounded-2xl">
         <div className="mb-4">
           <h2 className="text-2xl font-bold">
-            Price:{" "}
+            {t("price")}:{" "}
             <span className="primary-text">${service.DiscountedPrice}</span>
           </h2>
           <p className="text-sm line-through">
-            Actual Price: ${service.ActualPrice}
+            {t("actual_price")}: ${service.ActualPrice}
           </p>
         </div>
         <div className="flex items-center my-4">

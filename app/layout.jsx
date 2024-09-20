@@ -1,22 +1,28 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 
-// client side setup internationalization
-export default async function RootLayout({ children, params }) {
-  const locale = params?.locale || 'en';  // Default to 'en' if locale is not provided
-  
-  // Set the request locale to enable static rendering
+export default async function LocaleLayout({ children, params }) {
+  const locale = params.locale;
+  console.log("LocaleLayout params:", params); // Log params
+  console.log("Current locale in LocaleLayout:", locale); // Log the current locale
   unstable_setRequestLocale(locale);
-  
-  const messages = await getMessages(locale);
 
-  return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
-  );
+  try {
+    const messages = await getMessages(locale); // Temporarily hardcode to test
+
+    console.log("Messages for locale:", messages); // Log the fetched messages
+
+    return (
+      <html lang={locale}>
+        <body>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </body>
+      </html>
+    );
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    return <div>Error loading messages</div>;
+  }
 }

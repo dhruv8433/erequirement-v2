@@ -3,11 +3,14 @@ import CartTable from "./CartTable";
 import { Grid } from "@mui/material";
 import { useCart } from "@/app/hooks/useCart";
 import MiniCartDateTimeInfo from "./MiniCartDateTimeInfo";
+import { useTranslations } from "next-intl";
 
 const MiniCartLayout = ({ children, user, selectedDateTimeSlot }) => {
   const { cartData, otherInfo, handleRemove, handleUpdateQuantity } = useCart(
     user?._id
   );
+
+  const t = useTranslations("cart");
 
   return (
     <div>

@@ -8,6 +8,7 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { RadioGroup, Radio, FormControlLabel } from "@mui/material";
 import { Grid } from "@mui/material";
 import dayjs from "dayjs";
+import { useTranslations } from "next-intl";
 
 const DateTimeSelector = ({
   cartItem,
@@ -48,11 +49,12 @@ const DateTimeSelector = ({
     setSelectedDateTimeSlot((prev) => ({ ...prev, time: event.target.value }));
   };
 
+  const t = useTranslations("cart");
   return (
     <MyCardBox className="p-4 rounded-2xl overflow-hidden">
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <MyHeading title={"Available Dates"} className={"font-semibold"} />
+          <MyHeading title={t("available_date")} className={"font-semibold"} />
           <div className="calendar my-4">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateCalendar
@@ -69,10 +71,7 @@ const DateTimeSelector = ({
           </div>
         </Grid>
         <Grid item xs={12} md={6}>
-          <MyHeading
-            title={"Available Time slots"}
-            className={"font-semibold"}
-          />
+          <MyHeading title={t("available_time")} className={"font-semibold"} />
           <div className="flex my-8 flex-col">
             <RadioGroup
               className="space-y-5"

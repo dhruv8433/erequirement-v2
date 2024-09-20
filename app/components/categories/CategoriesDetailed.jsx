@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Grid } from "@mui/material";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import MySkeleton from "@/app/custom/MySkeleton";
 import NoResult from "@/app/assets/no-result.png";
 import ServiceCard from "@/app/common/ServiceCard";
@@ -9,6 +9,7 @@ import { MyPrimaryText } from "@/app/custom/MyText";
 
 const CategoriesDetailed = ({ subCategory, id, loading, slug, error }) => {
   const locale = useLocale();
+  const t = useTranslations("categories");
   return (
     <div className="my-4 min-h-[500px]">
       {error.statusCode !== 404 ? (
@@ -43,7 +44,7 @@ const CategoriesDetailed = ({ subCategory, id, loading, slug, error }) => {
       ) : (
         <div className="flex justify-center items-center flex-col my-10">
           <img src={NoResult.src} alt="" />
-          <MyPrimaryText title={"No result found"} className={"text-xl"} />
+          <MyPrimaryText title={t("no_result")} className={"text-xl"} />
         </div>
       )}
     </div>

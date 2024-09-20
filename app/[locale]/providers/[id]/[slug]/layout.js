@@ -7,7 +7,7 @@ import { useProviders } from "@/app/hooks/useProviders";
 import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 import { MyCardBox } from "@/app/custom/MyBox";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   BreadCrumbSkeleton,
   ProviderDetailedSkeleton,
@@ -20,6 +20,8 @@ const Layout = ({ children }) => {
   const locale = useLocale();
   const pathname = usePathname(); // Get the current path
 
+  const t = useTranslations("providers");
+
   return (
     <div>
       {singleProviderLoading ? (
@@ -28,8 +30,8 @@ const Layout = ({ children }) => {
         <MyBreadcrumb
           title={singleProvider.title}
           breadcrumbs={[
-            { title: "Home", link: `/${locale}` },
-            { title: "Top Providers", link: `/${locale}/providers` },
+            { title: t("home"), link: `/${locale}` },
+            { title: t("top_providers"), link: `/${locale}/providers` },
             { title: singleProvider.title, link: "" },
           ]}
           activeIndex={2}
@@ -79,7 +81,7 @@ const Layout = ({ children }) => {
         </Grid>
         <Grid item xs={12} md={8}>
           <div>
-            <div className="border p-4 rounded-2xl flex justify-between items-center m-2 primary-bg mb-4">
+            <div className="border p-4 rounded-2xl flex justify-between items-center primary-bg mb-4">
               {/* provider services */}
               <Link
                 href={`/${locale}/providers/${singleProvider.id}/${singleProvider.slug}`}
@@ -90,7 +92,7 @@ const Layout = ({ children }) => {
                     : "text-black"
                 }`}
               >
-                <h1>Services</h1>
+                <h1>{t("services")}</h1>
               </Link>
               {/* about provider */}
               <Link
@@ -102,7 +104,7 @@ const Layout = ({ children }) => {
                     : "text-black"
                 }`}
               >
-                <h1>About</h1>
+                <h1>{t("about")}</h1>
               </Link>
               {/* provider reviews */}
               <Link
@@ -114,11 +116,11 @@ const Layout = ({ children }) => {
                     : "text-black"
                 }`}
               >
-                <h1>Reviews</h1>
+                <h1>{t("reviews")}</h1>
               </Link>
             </div>
             {/* dynamic children come here */}
-            {children}
+            <div className="my-2">{children}</div>
           </div>
         </Grid>
       </Grid>

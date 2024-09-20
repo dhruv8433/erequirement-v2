@@ -12,7 +12,7 @@ import { MyCardBox } from "@/app/custom/MyBox";
 import EmptyCartImg from "@/app/assets/empty-cart.png";
 import { MyHeading } from "@/app/custom/MyText";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 // isMiniCart used for display right side cart in other steppers pages
 const CartTable = ({
@@ -24,6 +24,7 @@ const CartTable = ({
   isMiniCart,
 }) => {
   const locale = useLocale();
+  const t = useTranslations("cart");
 
   return (
     <MyCardBox className="rounded-2xl">
@@ -33,11 +34,13 @@ const CartTable = ({
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Service Image</TableCell>
-                  <TableCell>Service Details</TableCell>
-                  {!isMiniCart && <TableCell>Quantity</TableCell>}
-                  <TableCell align="right">Price</TableCell>
-                  {!isMiniCart && <TableCell align="right">Actions</TableCell>}
+                  <TableCell>{t("service_img")}</TableCell>
+                  <TableCell>{t("service_details")}</TableCell>
+                  {!isMiniCart && <TableCell>{t("quantity")}</TableCell>}
+                  <TableCell align="right">{t("price")}</TableCell>
+                  {!isMiniCart && (
+                    <TableCell align="right">{t("action")}</TableCell>
+                  )}
                 </TableRow>
               </TableHead>
               {cartData.map((item) => (
@@ -56,11 +59,11 @@ const CartTable = ({
           <Divider />
           <div className="flex my-4 flex-col justify-end text-end">
             <h1>
-              SubTotal: <span>${totalPrice ? totalPrice : 0}</span>
+              {t("subtotal")}: <span>${totalPrice ? totalPrice : 0}</span>
             </h1>
-            <h1>Tax: $0</h1>
+            <h1>{t("tax")}: $0</h1>
             <h1 className="text-xl">
-              Total:{" "}
+              {t("total")}:{" "}
               <span className="primary-text font-semibold">
                 ${totalPrice ? totalPrice : 0}
               </span>
@@ -70,12 +73,10 @@ const CartTable = ({
       ) : (
         <div className="flex w-full items-center flex-col justify-center min-h-[500px]">
           <img src={EmptyCartImg.src} alt="" className="h-40 w-40" />
-          <h1 className="text-center text-2xl my-2">No items in cart</h1>
-          <h1 className="my-2">
-            no worries !!, you can add services in you cart by simply click on
-          </h1>
+          <h1 className="text-center text-2xl my-2">{t("no_item")}</h1>
+          <h1 className="my-2">{t("no_item_msg")}</h1>
           <Link href={`/${locale}/providers`}>
-            <MyHeading title={"Browse Services"} />
+            <MyHeading title={t("browse")} />
           </Link>
         </div>
       )}

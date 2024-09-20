@@ -1,6 +1,7 @@
 // Import necessary icons and components from MUI and React
 import { Group, Star } from "@mui/icons-material"; // MUI icons for star and group
 import { Grid, LinearProgress, Typography } from "@mui/material"; // Grid layout and progress bar from MUI
+import { useTranslations } from "next-intl";
 import React from "react"; // Import React to define the component
 
 const ReviewAnalysis = ({ reviewAnalysis }) => {
@@ -9,6 +10,7 @@ const ReviewAnalysis = ({ reviewAnalysis }) => {
 
   // Extracting the star count data, with default values for each star if no data is available
   const starCounts = reviewAnalysis.starCounts || { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  const t = useTranslations("providers");
 
   return (
     <div className="">
@@ -22,7 +24,7 @@ const ReviewAnalysis = ({ reviewAnalysis }) => {
                 <Star /> {/* Star icon from MUI */}
               </div>
               <div>
-                <h1>Average Rating</h1>
+                <h1>{t("avg_rating")}</h1>
                 <h1 className="text-3xl font-semibold primary-text">
                   {/* Display average rating from reviewAnalysis */}
                   {reviewAnalysis.averageRating}
@@ -40,7 +42,7 @@ const ReviewAnalysis = ({ reviewAnalysis }) => {
                 <Group /> {/* Group icon from MUI */}
               </div>
               <div>
-                <h1>Total Reviews</h1>
+                <h1>{t("total_reviews")}</h1>
                 <h1 className="text-3xl font-semibold primary-text">
                   {/* Display total reviews from reviewAnalysis */}
                   {reviewAnalysis.totalReviews}
@@ -53,7 +55,7 @@ const ReviewAnalysis = ({ reviewAnalysis }) => {
 
       {/* Star Counts Section */}
       <div className="border p-4 rounded-2xl mt-4">
-        <h1 className="text-xl font-semibold primary-text">Star Counts</h1>
+        <h1 className="text-xl font-semibold primary-text">{t("star_count")}</h1>
         <div className="mt-4">
           {/* Loop through each star rating (from 5 stars to 1 star) */}
           {[5, 4, 3, 2, 1].map((star) => (

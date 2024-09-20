@@ -1,13 +1,13 @@
 import { MyCardBox } from "@/app/custom/MyBox";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 const ServiceFaqs = ({ service }) => {
+  const t = useTranslations("service");
   return (
     <div>
       <MyCardBox className="border border-gray-400 p-4 rounded-2xl mb-4">
-        <h2 className="text-xl font-bold mb-2 primary-text">
-          FAQs
-        </h2>
+        <h2 className="text-xl font-bold mb-2 primary-text">{t("faqs")}</h2>
         {service.Faqs.map((faq, index) => (
           <div key={index} className="mb-4">
             <h3 className="font-semibold">
@@ -18,9 +18,7 @@ const ServiceFaqs = ({ service }) => {
         ))}
       </MyCardBox>
       <MyCardBox className="border border-gray-400 p-4 rounded-2xl">
-        <h2 className="text-xl font-bold mb-2 primary-text">
-          Tags
-        </h2>
+        <h2 className="text-xl font-bold mb-2 primary-text">{t("tags")}</h2>
         <div className="flex flex-wrap space-x-2">
           {service.Tags.map((tag, index) => (
             <span

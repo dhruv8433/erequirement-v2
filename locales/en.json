@@ -12,9 +12,72 @@
         "high_skill": "Highly skilled professionals",
         "price": "Affordable pricing",
         "quick": "Quick and reliable service",
-        "subscribe_button": "Subscribe"
+        "subscribe_button": "Subscribe",
+        "top_providers": "Top Providers",
+        "top_services": "Top Services"
     },
     "about": {
+        "home": "Home",
         "about": "About us"
+    },
+    "categories": {
+        "home": "Home",
+        "categories": "Categories",
+        "no_result": "No result found"
+    },
+    "providers": {
+        "home": "Home",
+        "providers": "Providers",
+        "top_providers": "Top Providers",
+        "services": "Services",
+        "about": "About",
+        "reviews": "Reviews",
+        "location": "Location",
+        "time_slots": "Available Time Slots",
+        "description": "Description",
+        "social_links": "Social Media Links",
+        "image_gallery": "Image Gallery",
+        "avg_rating": "Average Rating",
+        "total_reviews": "Total Reviews",
+        "star_count": "Star Count",
+        "no_reviews": "No Reivews Found for this provider"
+    },
+    "contact": {
+        "home": "Home",
+        "contact": "Contact us"
+    },
+    "service": {
+        "info": "Provider Info",
+        "provider": "Provider",
+        "duration": "Duration",
+        "members": "Members Required",
+        "available_in": "Available In Next Days",
+        "price": "Price",
+        "actual_price": "Actual Price",
+        "faqs": "FAQs",
+        "tags": "Tags"
+    },
+    "cart": {
+        "service_img": "Service Image",
+        "service_details": "Service Details",
+        "quantity": "Quantity",
+        "price": "Price",
+        "action": "Action",
+        "subtotal": "Subtotal",
+        "tax": "Tax",
+        "total": "Total",
+        "no_item": "No items in cart",
+        "no_item_msg": "no worries !!, you can add services in you cart by simply click on",
+        "browse": "Browse Services",
+        "available_date": "Available Dates",
+        "available_time": "Available Time slots",
+        "date_time_info": "Selected Date and time info",
+        "selected_date": "Selected Date:",
+        "selected_time": "Selected Time Slot:",
+        "select_payment": "Select Payment Method : "
+    },
+    "search": {
+        "no_service": "No services found.",
+        "no_provider": "No providers found."
     }
 }

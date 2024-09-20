@@ -7,6 +7,7 @@ import { useSubCategorys } from "@/app/hooks/useSubCategory";
 import CategoriesDetailed from "@/app/components/categories/CategoriesDetailed";
 import { BreadCrumbSkeleton } from "@/app/custom/CustomSkeleton";
 import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
   // Fetch all categories
@@ -31,6 +32,8 @@ const Page = () => {
   const { CategoryService, loadingCatService, error } =
     useSubCategorys(categoryId);
 
+  const t = useTranslations("categories");
+
   return (
     <div>
       {loadingCatService ? (
@@ -39,7 +42,7 @@ const Page = () => {
         <MyBreadcrumb
           title={title}
           breadcrumbs={[
-            { title: "home", link: "/" },
+            { title: t("home"), link: "/" },
             { title: title, link: "" },
           ]}
           activeIndex={1}

@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Grid } from "@mui/material";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { MyHeading } from "@/app/custom/MyText";
 import MySkeleton from "@/app/custom/MySkeleton";
 import ServiceCard from "@/app/common/ServiceCard";
@@ -11,10 +11,12 @@ import ServiceCard from "@/app/common/ServiceCard";
 const TopServices = ({ data, loading }) => {
   console.log("Services", data);
   const locale = useLocale();
+
+  const t = useTranslations("home");
   return (
     <div>
       <MyHeading
-        title={"Top Services"}
+        title={t("top_services")}
         className={"text-2xl my-2 font-semibold"}
       />
       <div className="services">

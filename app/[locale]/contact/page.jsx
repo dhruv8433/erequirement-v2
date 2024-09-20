@@ -1,15 +1,17 @@
 import React from "react";
 import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 import Contact from "@/app/components/contact/Contact";
+import { useTranslations } from "next-intl";
 
 const page = () => {
+  const t = useTranslations("contact");
   return (
     <div>
       <MyBreadcrumb
-        title={"Contact Us"}
+        title={t("contact")}
         breadcrumbs={[
-          { title: "Home", link: "/" },
-          { title: "Contact", link: "" },
+          { title: t("home"), link: "/" },
+          { title: t("contact"), link: "" },
         ]}
         activeIndex={1}
       />

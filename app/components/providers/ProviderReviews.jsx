@@ -6,6 +6,7 @@ import { useReviews } from "@/app/hooks/useReviews";
 import { useProviders } from "@/app/hooks/useProviders";
 import { UserReviewsSkeleton } from "@/app/custom/CustomSkeleton";
 import NoReviewsFound from "@/app/assets/no-reviews.png";
+import { useTranslations } from "next-intl";
 
 const ProviderReviews = () => {
   const { id } = useParams();
@@ -15,6 +16,7 @@ const ProviderReviews = () => {
     useReviews(singleProvider._id);
 
   console.log("single reviews", singleProviderReviews);
+  const t = useTranslations("providers");
 
   return (
     <div className="my-2">
@@ -32,8 +34,8 @@ const ProviderReviews = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[320px]">
-          <img src={NoReviewsFound.src} alt="" className="object-fit mb-2"/>
-          <h1>No Reivews Found for this provider</h1>
+          <img src={NoReviewsFound.src} alt="" className="object-fit mb-2" />
+          <h1>{t("no_reviews")}</h1>
         </div>
       )}
     </div>
