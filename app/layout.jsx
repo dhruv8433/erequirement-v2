@@ -7,10 +7,10 @@ export function generateStaticParams() {
 }
 
 export default async function LocaleLayout({ children, params }) {
+  unstable_setRequestLocale(params.locale);
   // Fetch messages based on the locale passed in params
   const messages = await getMessages(params.locale);
 
-  unstable_setRequestLocale(params.locale);
 
   return (
     <html lang={params.locale}>
