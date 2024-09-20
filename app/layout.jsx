@@ -1,10 +1,19 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 
 export default async function RootLayout({ children, params }) {
-  const locale = params?.locale || "en"; // Default to 'en' if locale is not provided
+  const locale = params?.locale || "en";
+  console.log("Current Locale:", locale);
 
-  const messages = await getMessages(locale);
+  let messages;
+  try {
+    messages = await getMessages(locale);
+  } catch (error) {
+    console.error("Error loading messages:", error);
+    messages = await getMessages("en"); // Fallback to default messages
+  }
+
+  console.log("messages", messages);
 
   return (
     <html lang={locale}>
