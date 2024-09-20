@@ -1,4 +1,4 @@
-import { Divider, Grid, Rating, Skeleton } from "@mui/material";
+import { Avatar, Divider, Grid, Rating, Skeleton } from "@mui/material";
 import { MyCardBox, MyServiceCard } from "./MyBox";
 import { ChevronRight } from "@mui/icons-material";
 import {
@@ -418,5 +418,91 @@ export const AboutProviderSkeleton = () => {
         </Grid>
       </MyServiceCard>
     </MyCardBox>
+  );
+};
+
+export const UserReviewsSkeleton = () => {
+  return (
+    <div>
+      {/* Grid layout for Average Rating and Total Reviews */}
+      <Grid container spacing={3}>
+        {/* Average Rating Skeleton Card */}
+        <Grid item xs={12} md={6}>
+          <div className="border p-4 rounded-2xl">
+            <div className="flex gap-4 items-center">
+              <Skeleton variant="circular" width={40} height={40} />
+              <div>
+                <Skeleton width={120} height={24} />
+                <Skeleton width={60} height={40} />
+              </div>
+            </div>
+          </div>
+        </Grid>
+
+        {/* Total Reviews Skeleton Card */}
+        <Grid item xs={12} md={6}>
+          <div className="border p-4 rounded-2xl">
+            <div className="flex gap-4 items-center">
+              <Skeleton variant="circular" width={40} height={40} />
+              <div>
+                <Skeleton width={120} height={24} />
+                <Skeleton width={60} height={40} />
+              </div>
+            </div>
+          </div>
+        </Grid>
+      </Grid>
+
+      {/* Star Counts Skeleton Section */}
+      <div className="border p-4 rounded-2xl mt-4">
+        <Skeleton width={150} height={30} />
+        <div className="mt-4">
+          {[5, 4, 3, 2, 1].map((star) => (
+            <div key={star} className="flex items-center gap-4 mb-2">
+              <Skeleton width={60} height={24} />
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                height={10}
+                className="flex-1"
+              />
+              <Skeleton width={40} height={24} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        {/* Repeat this block for as many skeletons as needed */}
+        <div className="p-6 rounded-2xl">
+          {/* User Info Skeleton */}
+          <div className="flex items-center mb-4">
+            <Skeleton variant="circular">
+              <Avatar />
+            </Skeleton>
+            <div className="ml-4">
+              <Skeleton width={100} height={24} />
+              <Skeleton width={80} height={20} />
+            </div>
+          </div>
+
+          {/* Rating and Review Skeleton */}
+          <div className="mb-4">
+            <Skeleton variant="rectangular" width={100} height={28} />
+            <Skeleton variant="text" width="90%" height={20} />
+            <Skeleton variant="text" width="80%" height={20} />
+          </div>
+
+          {/* Review Media Skeleton (Display multiple image placeholders) */}
+          <div className="flex flex-wrap gap-2 my-4">
+            <Skeleton variant="rectangular" width={80} height={80} />
+            <Skeleton variant="rectangular" width={80} height={80} />
+            <Skeleton variant="rectangular" width={80} height={80} />
+          </div>
+
+          <Divider className="mt-6" />
+        </div>
+      </div>
+    </div>
   );
 };
