@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Link from "next/link";
 import { Icon } from "@mui/material";
 import { useLocale } from "next-intl";
@@ -13,18 +13,26 @@ const Routes = ({ isResponsive }) => {
 
   return (
     <>
-      {routes.map((link) => (
-        <Link
-          key={link.id}
-          href={hasLocaleInPath ? `${link.url}` : `/${locale}/${link.url}`}
-          className={`flex items-center ${
-            isResponsive && "hover:bg-gray-300 p-1 rounded-md"
-          }`}
-        >
-          {isResponsive && <Icon className="h-auto w-auto">{link.icon}</Icon>}
-          <h1 className="m-2">{link.name}</h1>
-        </Link>
-      ))}
+      {routes.map((link) => {
+        const isActive =
+          pathname ===
+          (hasLocaleInPath ? `${link.url}` : `/${locale}/${link.url}`);
+
+        return (
+          <Link
+            key={link.id}
+            href={hasLocaleInPath ? `${link.url}` : `/${locale}/${link.url}`}
+            className={`flex items-center ${
+              isResponsive && "hover:bg-gray-300 p-1 rounded-md"
+            }`}
+          >
+            {isResponsive && <Icon className="h-auto w-auto">{link.icon}</Icon>}
+            <h1 className={`m-2 ${isActive ? "text-orange-500" : ""}`}>
+              {link.name}
+            </h1>
+          </Link>
+        );
+      })}
     </>
   );
 };

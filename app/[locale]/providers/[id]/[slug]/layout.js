@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Grid } from "@mui/material";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation"; // import usePathname
 import { useProviders } from "@/app/hooks/useProviders";
 import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 import { MyCardBox } from "@/app/custom/MyBox";
@@ -13,13 +13,13 @@ import {
   ProviderDetailedSkeleton,
 } from "@/app/custom/CustomSkeleton";
 
-const layout = ({ children }) => {
+const Layout = ({ children }) => {
   const { id } = useParams();
   const { singleProvider, singleProviderLoading } = useProviders(id);
 
   const locale = useLocale();
+  const pathname = usePathname(); // Get the current path
 
-  console.log("layout", singleProvider);
   return (
     <div>
       {singleProviderLoading ? (
@@ -83,17 +83,39 @@ const layout = ({ children }) => {
               {/* provider services */}
               <Link
                 href={`/${locale}/providers/${singleProvider.id}/${singleProvider.slug}`}
+                className={`${
+                  pathname ===
+                  `/${locale}/providers/${singleProvider.id}/${singleProvider.slug}`
+                    ? "bg-white text-bold primary-text px-2 py-1 rounded-md" // active styles
+                    : "text-black"
+                }`}
               >
                 <h1>Services</h1>
               </Link>
               {/* about provider */}
               <Link
                 href={`/${locale}/providers/${singleProvider.id}/${singleProvider.slug}/about`}
+                className={`${
+                  pathname ===
+                  `/${locale}/providers/${singleProvider.id}/${singleProvider.slug}/about`
+                    ? "bg-white text-bold primary-text px-2 py-1 rounded-md" // active styles
+                    : "text-black"
+                }`}
               >
                 <h1>About</h1>
               </Link>
               {/* provider reviews */}
-              <h1>Reviews</h1>
+              <Link
+                href={`/${locale}/providers/${singleProvider.id}/${singleProvider.slug}/reviews`}
+                className={`${
+                  pathname ===
+                  `/${locale}/providers/${singleProvider.id}/${singleProvider.slug}/reviews`
+                    ? "bg-white text-bold primary-text px-2 py-1 rounded-md" // active styles
+                    : "text-black"
+                }`}
+              >
+                <h1>Reviews</h1>
+              </Link>
             </div>
             {/* dynamic children come here */}
             {children}
@@ -104,4 +126,4 @@ const layout = ({ children }) => {
   );
 };
 
-export default layout;
+export default Layout;
