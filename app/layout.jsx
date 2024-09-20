@@ -1,5 +1,10 @@
+import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function LocaleLayout({ children, params }) {
   // Fetch messages based on the locale passed in params
