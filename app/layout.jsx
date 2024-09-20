@@ -14,7 +14,7 @@ export default async function RootLayout({ children, params }) {
   }
 
   console.log("messages", messages);
-
+  unstable_setRequestLocale(locale);
   return (
     <html lang={locale}>
       <body>
