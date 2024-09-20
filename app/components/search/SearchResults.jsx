@@ -9,6 +9,7 @@ import {
 } from "@/app/custom/CustomSkeleton";
 import { Divider, Grid } from "@mui/material";
 import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
+import { useTranslations } from "next-intl";
 
 const SearchResults = ({ query }) => {
   const { searchResult, loading } = useSearch(query);
@@ -18,6 +19,8 @@ const SearchResults = ({ query }) => {
       console.log("Search initiated with query:", query);
     }
   }, [query]); // Triggered when query changes
+
+  const t = useTranslations("search");
 
   return (
     <div>
@@ -55,7 +58,7 @@ const SearchResults = ({ query }) => {
             ))}
           </Grid>
         ) : (
-          <p>No services found.</p> // Fallback when no services are found
+          <p>{t("no_service")}</p> // Fallback when no services are found
         )}
       </div>
 
@@ -81,7 +84,7 @@ const SearchResults = ({ query }) => {
             ))}
           </Grid>
         ) : (
-          <p>No providers found.</p> // Fallback when no providers are found
+          <p>{t("no_provider")}</p> // Fallback when no providers are found
         )}
       </div>
     </div>

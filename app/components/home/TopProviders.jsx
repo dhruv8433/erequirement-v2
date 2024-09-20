@@ -3,12 +3,14 @@ import { Grid } from "@mui/material";
 import Provider from "@/app/common/Provider";
 import { ProviderSkeletons } from "@/app/custom/CustomSkeleton";
 import { MyHeading } from "@/app/custom/MyText";
+import { useTranslations } from "next-intl";
 
 const TopProviders = ({ data, loading }) => {
+  const t = useTranslations('home');
   return (
     <div className="my-4">
       <MyHeading
-        title={"Top Providers"}
+        title={t('top_providers')}
         className={"text-2xl my-2 font-semibold"}
       />
       <Grid container spacing={2}>

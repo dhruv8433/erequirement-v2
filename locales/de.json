@@ -1,4 +1,83 @@
 {
-    "welcome": "Welcome",
-    "login": "Login"
+    "Index": {
+        "welcome": "Willkommen",
+        "login": "Anmelden"
+    },
+    "home": {
+        "title": "Alle Ihre Anforderungen an einem Ort",
+        "subscribe": "Entdecken Sie den ultimativen Komfort mit unserer servicebasierten Website, auf der alle haushaltsbezogenen Dienstleistungen an einem Ort zu finden sind. Egal, ob Sie Sanitär, Elektroarbeiten, Reinigung oder Renovierungsdienste benötigen, wir haben alles für Sie.",
+        "subscribe_subtitle": "Abonnieren Sie jetzt, um über die neuesten Dienstleistungen und Angebote auf dem Laufenden zu bleiben!",
+        "why_us": "Warum uns wählen?",
+        "wide_range": "Breites Dienstleistungsspektrum",
+        "high_skill": "Hochqualifizierte Fachkräfte",
+        "price": "Erschwingliche Preise",
+        "quick": "Schneller und zuverlässiger Service",
+        "subscribe_button": "Abonnieren",
+        "top_providers": "Top-Anbieter",
+        "top_services": "Top-Dienstleistungen"
+    },
+    "about": {
+        "home": "Startseite",
+        "about": "Über uns"
+    },
+    "categories": {
+        "home": "Startseite",
+        "categories": "Kategorien",
+        "no_result": "Kein Ergebnis gefunden"
+    },
+    "providers": {
+        "home": "Startseite",
+        "providers": "Anbieter",
+        "top_providers": "Top-Anbieter",
+        "services": "Dienstleistungen",
+        "about": "Über",
+        "reviews": "Bewertungen",
+        "location": "Standort",
+        "time_slots": "Verfügbare Zeitfenster",
+        "description": "Beschreibung",
+        "social_links": "Soziale Medien Links",
+        "image_gallery": "Bildergalerie",
+        "avg_rating": "Durchschnittliche Bewertung",
+        "total_reviews": "Gesamtbewertungen",
+        "star_count": "Sterneanzahl",
+        "no_reviews": "Keine Bewertungen für diesen Anbieter gefunden"
+    },
+    "contact": {
+        "home": "Startseite",
+        "contact": "Kontaktieren Sie uns"
+    },
+    "service": {
+        "info": "Anbieterinformationen",
+        "provider": "Anbieter",
+        "duration": "Dauer",
+        "members": "Benötigte Mitglieder",
+        "available_in": "Verfügbar in den nächsten Tagen",
+        "price": "Preis",
+        "actual_price": "Tatsächlicher Preis",
+        "faqs": "Häufig gestellte Fragen",
+        "tags": "Tags"
+    },
+    "cart": {
+        "service_img": "Dienstleistungsbild",
+        "service_details": "Dienstleistungsdetails",
+        "quantity": "Menge",
+        "price": "Preis",
+        "action": "Aktion",
+        "subtotal": "Zwischensumme",
+        "tax": "Steuer",
+        "total": "Gesamtsumme",
+        "no_item": "Keine Artikel im Warenkorb",
+        "no_item_msg": "Keine Sorge!!, Sie können Dienste Ihrem Warenkorb hinzufügen, indem Sie einfach auf klicken",
+        "browse": "Dienstleistungen durchsuchen",
+        "available_date": "Verfügbare Daten",
+        "available_time": "Verfügbare Zeitfenster",
+        "date_time_info": "Ausgewählte Datums- und Zeitinformationen",
+        "selected_date": "Ausgewähltes Datum:",
+        "selected_time": "Ausgewähltes Zeitfenster:",
+        "select_payment": "Zahlungsmethode auswählen:"
+    },
+    "search": {
+        "no_service": "Keine Dienstleistungen gefunden.",
+        "no_provider": "Keine Anbieter gefunden."
+    }
 }

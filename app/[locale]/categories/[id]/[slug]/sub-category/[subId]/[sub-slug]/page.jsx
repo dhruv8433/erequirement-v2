@@ -12,7 +12,7 @@ import {
   ProviderSkeletons,
 } from "@/app/custom/CustomSkeleton";
 import { useCategories } from "@/app/hooks/useCategories";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const Page = () => {
   const { subId, id } = useParams();
@@ -34,6 +34,7 @@ const Page = () => {
   )[0];
 
   const locale = useLocale();
+  const t = useTranslations("categories");
 
   return (
     <div className="my-4">
@@ -44,9 +45,9 @@ const Page = () => {
         <MyBreadcrumb
           title={singleSubCategory.ServiceName}
           breadcrumbs={[
-            { title: "Home", link: "/" },
+            { title: t("home"), link: "/" },
             {
-              title: "category",
+              title: t("categories"),
               link: `/${locale}/Categories`,
             },
             {

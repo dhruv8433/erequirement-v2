@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Radio,
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel,
 } from "@mui/material";
-import { MyPrimaryText } from "@/app/custom/MyText";
+import { useTranslations } from "next-intl";
 import { MyCardBox } from "@/app/custom/MyBox";
+import { MyPrimaryText } from "@/app/custom/MyText";
 
-const Payment = ({selectedPaymentMethod, handlePaymentChange}) => {
-
+const Payment = ({ selectedPaymentMethod, handlePaymentChange }) => {
+  const t = useTranslations("cart");
   return (
     <MyCardBox className="p-6 rounded-xl space-y-4 min-w-max">
-      <MyPrimaryText title={"Select Payment Method : "} />
+      <MyPrimaryText title={t("select_payment")} />
       <FormControl component="fieldset" className="w-full flex flex-col">
         <RadioGroup
           aria-label="payment-method"

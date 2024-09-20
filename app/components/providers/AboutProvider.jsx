@@ -13,12 +13,14 @@ import {
   LocationOnOutlined,
 } from "@mui/icons-material";
 import { AboutProviderSkeleton } from "@/app/custom/CustomSkeleton";
+import { useTranslations } from "next-intl";
 
 const AboutProvider = () => {
   const { id } = useParams();
 
   // fetching single provider for about
   const { singleProvider, singleProviderLoading } = useProviders(id);
+  const t = useTranslations("providers");
 
   return (
     <>
@@ -28,7 +30,7 @@ const AboutProvider = () => {
         <MyCardBox className="about-provider p-4 rounded-2xl">
           <div className="provider-details">
             <MyHeading
-              title={"About " + singleProvider?.title}
+              title={t("about") + " " + singleProvider?.title}
               className="text-2xl my-2"
             />
             <Divider />
@@ -43,7 +45,7 @@ const AboutProvider = () => {
                   <div className="flex items-center gap-2">
                     <LocationOnOutlined fontSize="small" />{" "}
                     <MyHeading
-                      title={"Location"}
+                      title={t("location")}
                       className={"text-lg font-semibold"}
                     />
                   </div>
@@ -72,7 +74,7 @@ const AboutProvider = () => {
                   <div className="flex items-center gap-2 mb-2">
                     <AccessTime fontSize="small" />{" "}
                     <MyHeading
-                      title={"Time Slots"}
+                      title={t("time_slots")}
                       className={"text-lg font-semibold"}
                     />
                   </div>
@@ -89,7 +91,7 @@ const AboutProvider = () => {
               <div className="flex items-center gap-2 mb-3">
                 <InfoOutlined fontSize="small" />{" "}
                 <MyHeading
-                  title={"Description"}
+                  title={t("description")}
                   className={"text-lg font-semibold"}
                 />
               </div>
@@ -102,7 +104,7 @@ const AboutProvider = () => {
               <div className="flex items-center gap-2 mb-3">
                 <InfoOutlined fontSize="small" />{" "}
                 <MyHeading
-                  title={"Social Media Links"}
+                  title={t("social_links")}
                   className={"text-lg font-semibold"}
                 />
               </div>
@@ -142,7 +144,7 @@ const AboutProvider = () => {
             <div className="flex items-center gap-2 mb-3">
               <CollectionsOutlined fontSize="small" />{" "}
               <MyHeading
-                title={"Image Gallery"}
+                title={t("image_gallery")}
                 className={"text-lg font-semibold"}
               />
             </div>
