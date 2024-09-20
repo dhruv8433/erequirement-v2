@@ -79,7 +79,7 @@ const Layout = ({ children }) => {
         </Grid>
         <Grid item xs={12} md={8}>
           <div>
-            <div className="border p-4 rounded-2xl flex justify-between items-center m-2 primary-bg mb-4">
+            <div className="border p-4 rounded-2xl flex justify-between items-center primary-bg mb-4">
               {/* provider services */}
               <Link
                 href={`/${locale}/providers/${singleProvider.id}/${singleProvider.slug}`}
@@ -118,7 +118,7 @@ const Layout = ({ children }) => {
               </Link>
             </div>
             {/* dynamic children come here */}
-            {children}
+            <div className="my-2">{children}</div>
           </div>
         </Grid>
       </Grid>
