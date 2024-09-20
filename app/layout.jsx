@@ -1,24 +1,28 @@
-import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-
 export default async function LocaleLayout({ children, params }) {
-  unstable_setRequestLocale(params.locale);
-  // Fetch messages based on the locale passed in params
-  const messages = await getMessages(params.locale);
+  const locale = params.locale;
+  console.log("LocaleLayout params:", params); // Log params
+  console.log("Current locale in LocaleLayout:", locale); // Log the current locale
+  unstable_setRequestLocale(locale);
 
+  try {
+    const messages = await getMessages(locale); // Temporarily hardcode to test
 
-  return (
-    <html lang={params.locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
-  );
+    console.log("Messages for locale:", messages); // Log the fetched messages
+
+    return (
+      <html lang={locale}>
+        <body>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </body>
+      </html>
+    );
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    return <div>Error loading messages</div>;
+  }
 }
