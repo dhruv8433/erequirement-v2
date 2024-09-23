@@ -11,6 +11,9 @@ import { useSchedule } from "@/app/hooks/useSchedule"; // Custom hook
 import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
 import dayjs from "dayjs"; // Importing dayjs for date/time formatting
 import { PaymentHandler } from "./PaymentHandler";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { clearCart } from "@/app/reducer/cartReducer";
 
 // Helper function for formatting dates and times using dayjs
 const formatDate = (date) => dayjs(date).format("YYYY-MM-DD"); // Format as needed
@@ -86,6 +89,9 @@ const Cart = ({ user, setAddressModal }) => {
     setSelectedPaymentMethod(event.target.value);
   };
 
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const handlePayment = async () => {
     if (selectedPaymentMethod === "paypal") {
       // send other info because it directly have access of total amount
@@ -93,7 +99,11 @@ const Cart = ({ user, setAddressModal }) => {
     } else if (selectedPaymentMethod === "stripe") {
       const response = await PaymentHandler("Stripe", cartData);
     } else if (selectedPaymentMethod === "cod") {
-      console.log("Cash on Delivery");
+      const response = await PaymentHandler("cod", otherInfo, user?._id);
+      // remove from redux
+      dispatch(clearCart());
+      // after place order go back to home
+      router.push("/");
     }
   };
 
