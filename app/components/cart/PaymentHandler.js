@@ -1,8 +1,11 @@
+import { clearCart } from "@/app/reducer/cartReducer";
 import {
+  CashOnDelivary,
   createPaypalOrder,
   CreateStripeCheckoutSession,
 } from "@/app/utils/createOrder";
-import axios from "axios";
+import { PlaceOrder } from "@/app/utils/OrderService";
+import toast from "react-hot-toast";
 
 // Function to dynamically load the Stripe script
 const loadStripeScript = () => {
@@ -55,7 +58,8 @@ const loadPayPalScript = () => {
 };
 
 // Function to handle payment through Stripe
-export async function PaymentHandler(paymentType, cartData) {
+export const PaymentHandler = async (paymentType, cartData, userId) => {
+
   // if payment method is stripe
   if (paymentType === "Stripe") {
     console.log("Initiating Stripe...");
@@ -99,6 +103,15 @@ export async function PaymentHandler(paymentType, cartData) {
   }
 
   // if payment method is cod
-  if (paymentType === "Cod") {
+  if (paymentType === "cod") {
+    try {
+      // call directly place order api with cartId, userId and payment method
+      console.log("userID", userId);
+      const response = await PlaceOrder(cartData._id, userId, "cod");
+      toast.success(response.message);
+      console.log("COD response:", response);
+    } catch (error) {
+      console.log("Error handling COD payment:", error);
+    }
   }
-}
+};
