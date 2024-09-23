@@ -16,7 +16,7 @@ import { setCart } from "../reducer/cartReducer";
  */
 
 export function useCart(userId) {
-  const cartData = useSelector((state) => state.cart.cart.service);
+  const cartData = useSelector((state) => state?.cart?.cart?.service);
   const otherInfo = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
 
