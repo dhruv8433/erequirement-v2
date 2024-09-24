@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MyCardBox, MyPrimaryBox, MyServiceCard } from "@/app/custom/MyBox";
+import { MyCardBox, MyHoverCardBox, MyPrimaryBox, MyServiceCard } from "@/app/custom/MyBox";
 import { Avatar, Icon } from "@mui/material";
 import { useSelector } from "react-redux";
 import { ProfileLinks } from "@/app/config/config";
@@ -15,7 +15,7 @@ const ProfileNavigation = () => {
   const locale = useLocale();
   return (
     <MyCardBox className="border rounded-2xl overflow-hidden">
-      <div className="p-5 primary-bg">
+      <div className="p-5 primary-bg py-10">
         {/* user avatar and info */}
         <div className="flex items-center gap-5">
           <Avatar className="profile-avatar" src={user ? user.avatar : ""} />
@@ -31,10 +31,10 @@ const ProfileNavigation = () => {
       <div className="links">
         {ProfileLinks.map((link) => (
           <Link href={`/${locale}/profile/${link.link}`}>
-            <div className="flex items-center gap-3 p-5 hover:bg-orange-300">
+            <MyHoverCardBox className="flex items-center gap-3 p-5 ">
               <Icon>{link.icon}</Icon>
               <h1>{t(`${link.name}`)}</h1>
-            </div>
+            </MyHoverCardBox>
           </Link>
         ))}
       </div>

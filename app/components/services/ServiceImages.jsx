@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useCart } from "@/app/hooks/useCart";
 import { MyBorderdButton, MyPrimaryButton } from "@/app/custom/MyButton";
+import { useWishlist } from "@/app/hooks/useWishlist";
 
 const OtherImage = ({
   xs,
@@ -63,6 +64,7 @@ const ServiceImages = ({ service, handleImageClick, selectedImage }) => {
   console.log("service", service);
 
   const { AddServiceToCart } = useCart(userId);
+  const { handleAddWishlist } = useWishlist(service._id);
 
   return (
     <div>
@@ -100,7 +102,8 @@ const ServiceImages = ({ service, handleImageClick, selectedImage }) => {
 
         <MyBorderdButton
           className="border px-6 py-2 rounded-lg w-full mt-4 self-start"
-          title={"Share"}
+          title={"Add to Wishlist"}
+          onClickFunction={() => handleAddWishlist()}
         />
       </div>
     </div>

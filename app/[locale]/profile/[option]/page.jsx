@@ -9,6 +9,9 @@ import { Modal } from "@mui/material";
 import AddressModal from "@/app/model/AddressModal";
 import { MyCardBox } from "@/app/custom/MyBox";
 import MyModal from "@/app/custom/MyModal";
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
+import WishLists from "@/app/components/profile/WishLists";
 
 const page = () => {
   const { option } = useParams();
@@ -23,12 +26,14 @@ const page = () => {
     setAddressModal(true);
   }
 
-  //   address opertaions
+  const router = useRouter();
+  const locale = useLocale();
 
-  if (option === "orders") {
+  if (option === "" || option === "orders") {
+    // user orders page
     return <Orders userId={userData._id} />;
-  }
-  if (option === "addresses") {
+  } else if (option === "addresses") {
+    // address management
     return (
       <>
         <Address
@@ -52,6 +57,11 @@ const page = () => {
         </MyModal>
       </>
     );
+  } else if (option === "wishlists") {
+    // whishlist services
+    return <WishLists />;
+  } else {
+    router.replace(`/${locale}/profile`);
   }
 };
 
