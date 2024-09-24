@@ -8,7 +8,10 @@ import {
   setPrimaryAddress,
 } from "@/app/utils/AddressService";
 import { useDispatch, useSelector } from "react-redux";
-import { removeAddressFromState, setAddresses } from "../reducer/addressReducer";
+import {
+  removeAddressFromState,
+  setAddresses,
+} from "../reducer/addressReducer";
 
 /**
  * Custom hook to manage addresses state and actions.
@@ -16,11 +19,12 @@ import { removeAddressFromState, setAddresses } from "../reducer/addressReducer"
  * @returns {Object} - Addresses data and action functions.
  */
 
-export function useAddresses(userId) {
+export function useAddresses() {
   const dispatch = useDispatch();
 
   // Get addresses from Redux state
   const userAddresses = useSelector((state) => state.address.addresses);
+  const userId = useSelector((state) => state.auth.user.user._id);
 
   // Load addresses from server and update Redux state
   const loadAddresses = async () => {
@@ -54,6 +58,7 @@ export function useAddresses(userId) {
 
   // Delete address
   const deleteAddress = async (addressId) => {
+    console.log("address", addressId, "userId", userId);
     try {
       // Optimistically remove the address from the Redux state
       dispatch(removeAddressFromState(addressId));
