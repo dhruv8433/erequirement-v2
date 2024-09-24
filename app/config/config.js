@@ -99,8 +99,8 @@ export const ProfileLinks = [
   },
   {
     id: 3,
-    name: "favourites",
-    link: "favourites",
+    name: "wishlists",
+    link: "wishlists",
     icon: <FavoriteBorderOutlined />,
   },
   {
