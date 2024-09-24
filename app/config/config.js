@@ -9,6 +9,7 @@ import {
   LocalMallOutlined,
   LogoutOutlined,
   MiscellaneousServicesOutlined,
+  NotificationsOutlined,
   StarOutline,
 } from "@mui/icons-material";
 
@@ -110,13 +111,19 @@ export const ProfileLinks = [
     icon: <StarOutline />,
   },
   {
-    id: 4,
+    id: 5,
+    name: "notifications",
+    link: "notifications",
+    icon: <NotificationsOutlined />,
+  },
+  {
+    id: 6,
     name: "logout",
     link: "logout",
     icon: <LogoutOutlined />,
   },
   {
-    id: 5,
+    id: 7,
     name: "delete_account",
     link: "delete-account",
     icon: <DeleteOutline />,

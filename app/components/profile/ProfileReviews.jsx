@@ -19,7 +19,7 @@ const ProfileReviews = () => {
       ) : userReviews.length > 0 ? (
         userReviews.map((review) => <UserReviews reviews={review} />)
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-[560px]">
+        <div className="flex flex-col items-center justify-center min-h-[630px]">
           <img src={NoReviewsFound.src} alt="" className="object-fit mb-2" />
           <h1>{t("no_reviews")}</h1>
         </div>

@@ -86,7 +86,10 @@
         "wishlists": "Wishlists",
         "reviews": "Reviews",
         "logout": "Logout",
+        "notifications": "Notifications",
         "delete_account": "Delete Account",
-        "no_reviews": "You didn't provide review to any service or provider yet."
+        "no_reviews": "You didn't provide review to any service or provider yet.",
+        "explore_profile": "By simply clicking on right side profile links, you can explore your orders, addresses, wishlists, reviews, notifications and much more...",
+        "explore_now": "Explore Now"
     }
 }
