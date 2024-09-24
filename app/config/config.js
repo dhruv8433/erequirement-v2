@@ -1,11 +1,16 @@
 import {
+  BusinessOutlined,
   ContactPageOutlined,
+  DeleteOutline,
+  FavoriteBorderOutlined,
   HandymanOutlined,
   HomeOutlined,
   InfoOutlined,
+  LocalMallOutlined,
+  LogoutOutlined,
   MiscellaneousServicesOutlined,
+  StarOutline,
 } from "@mui/icons-material";
-import { useTranslations } from "next-intl";
 
 export const ApiUrl = "https://e-requirement-backend-v2.vercel.app/api/v2";
 export const BaseUrl = "https://e-requirement-backend-v2.vercel.app/";
@@ -77,4 +82,43 @@ export const steps = [
   "Select Date and Time",
   "Enter Address",
   "Payment",
+];
+
+export const ProfileLinks = [
+  {
+    id: 1,
+    name: "orders",
+    link: "orders",
+    icon: <LocalMallOutlined />,
+  },
+  {
+    id: 2,
+    name: "addresses",
+    link: "addresses",
+    icon: <BusinessOutlined />,
+  },
+  {
+    id: 3,
+    name: "favourites",
+    link: "favourites",
+    icon: <FavoriteBorderOutlined />,
+  },
+  {
+    id: 4,
+    name: "reviews",
+    link: "reviews",
+    icon: <StarOutline />,
+  },
+  {
+    id: 4,
+    name: "logout",
+    link: "logout",
+    icon: <LogoutOutlined />,
+  },
+  {
+    id: 5,
+    name: "delete_account",
+    link: "delete-account",
+    icon: <DeleteOutline />,
+  },
 ];

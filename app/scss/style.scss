@@ -119,3 +119,13 @@
 .css-dmmspl-MuiFormGroup-root {
     flex-direction: column !important;
 }
+
+.profile-avatar {
+    height: 100px !important;
+    width: 100px !important;
+}
+
+// remove padding top in profile for same layout lining
+.profile .css-mhc70k-MuiGrid-root > .MuiGrid-item {
+    padding-top: 0 !important;
+}

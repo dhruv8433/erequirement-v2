@@ -79,5 +79,13 @@
     "search": {
         "no_service": "No services found.",
         "no_provider": "No providers found."
+    },
+    "profile": {
+        "orders": "Orders",
+        "addresses": "Addresses",
+        "favourites": "Favourites",
+        "reviews": "Reviews",
+        "logout": "Logout",
+        "delete_account": "Delete Account"
     }
 }

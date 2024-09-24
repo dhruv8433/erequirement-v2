@@ -11,4 +11,9 @@ async function PlaceOrder(cartId, userId, orderType) {
   return response.data;
 }
 
-export { PlaceOrder };
+async function fetchOrders(userId) {
+  const response = await httpAxios.get(`/order/get-orders/${userId}`);
+  return response.data;
+}
+
+export { PlaceOrder, fetchOrders };
