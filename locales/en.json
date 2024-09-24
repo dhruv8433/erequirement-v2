@@ -83,7 +83,7 @@
     "profile": {
         "orders": "Orders",
         "addresses": "Addresses",
-        "favourites": "Favourites",
+        "wishlists": "Wishlists",
         "reviews": "Reviews",
         "logout": "Logout",
         "delete_account": "Delete Account"
