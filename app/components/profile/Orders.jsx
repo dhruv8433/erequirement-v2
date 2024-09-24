@@ -10,9 +10,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from "@mui/material";
 import { MyCardBox } from "@/app/custom/MyBox";
+import NoOrders from "@/app/assets/orders.png";
 
 const Orders = ({ userId }) => {
   const t = useTranslations("profile");
@@ -26,7 +26,7 @@ const Orders = ({ userId }) => {
       {/* orders */}
       {userOrdersLoading ? (
         <h1>loading...</h1>
-      ) : (
+      ) : userOrders ? (
         userOrders.map((order) => (
           <div key={order._id} className="border rounded-2xl my-3 p-4">
             {/* Order Details */}
@@ -96,6 +96,11 @@ const Orders = ({ userId }) => {
             </div>
           </div>
         ))
+      ) : (
+        <div>
+          <img src={NoOrders.src} className="h-48 w-48" alt="" />
+          <h1>{t("no_orders")}</h1>
+        </div>
       )}
     </MyCardBox>
   );

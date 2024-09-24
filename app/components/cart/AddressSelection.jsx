@@ -20,7 +20,7 @@ const AddressSelection = ({
         className="w-full"
       >
         <Grid container>
-          {addresses.length > 0 ? (
+          {addresses?.lenght > 0 ? (
             addresses.map((address, index) => (
               <Grid item xs={12} md={6} key={address._id}>
                 {" "}
