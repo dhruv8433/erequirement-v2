@@ -10,4 +10,13 @@ async function getParticularProviderReviews(id) {
   return response.data;
 }
 
-export { getProvidersReviews, getParticularProviderReviews };
+async function getParticularUserReviews(userId) {
+  const response = await httpAxios.get(`/review/user/${userId}`);
+  return response.data;
+}
+
+export {
+  getProvidersReviews,
+  getParticularProviderReviews,
+  getParticularUserReviews,
+};

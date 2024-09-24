@@ -6,8 +6,10 @@
 import { useEffect, useState } from "react";
 import {
   getParticularProviderReviews,
+  getParticularUserReviews,
   getProvidersReviews,
 } from "../utils/reviewServices";
+import { useSelector } from "react-redux";
 
 export function useReviews(providerId) {
   // all providers reviews
@@ -21,6 +23,12 @@ export function useReviews(providerId) {
 
   const [error, setError] = useState([]);
 
+  const userId = useSelector((state) => state.auth.user.user._id);
+  // get user's all reviews
+  const [userReviews, setUserReviews] = useState([]);
+  const [userReviewsLoading, setUserReviewsLoading] = useState(true);
+
+  // all providers reviews
   async function fetchReviews() {
     try {
       const response = await getProvidersReviews();
@@ -32,6 +40,7 @@ export function useReviews(providerId) {
     }
   }
 
+  // single provider reviews based on their id
   async function fetchSingleProviderReviews() {
     try {
       const response = await getParticularProviderReviews(providerId);
@@ -44,11 +53,27 @@ export function useReviews(providerId) {
     }
   }
 
+  // get particular user's reviews based on their id
+  async function fetchUserReviews() {
+    try {
+      const response = await getParticularUserReviews(userId);
+      setUserReviews(response.data);
+      setUserReviewsLoading(false);
+      return response.data;
+    } catch (error) {
+      console.log("Error in fetching user reviews", error);
+      setUserReviewsLoading(false);
+      setError(error?.response?.data);
+    }
+  }
+
   // fetch reviews when page loads
   useEffect(() => {
     fetchReviews();
+    fetchUserReviews();
   }, []);
 
+  // fetch single provider reviews when providerId changes
   useEffect(() => {
     if (providerId) {
       fetchSingleProviderReviews(providerId);
@@ -61,5 +86,7 @@ export function useReviews(providerId) {
     providersReviewLoading,
     singleProviderReviews,
     singleProviderReviewsLoading,
+    userReviews,
+    userReviewsLoading,
   };
 }
