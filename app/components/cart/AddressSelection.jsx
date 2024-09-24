@@ -1,6 +1,8 @@
 import React from "react";
-import { FormControl, RadioGroup, Grid } from "@mui/material";
 import AddressCheckBox from "./AddressCheckBox";
+import NoAddressImg from "@/app/assets/address.png";
+import { FormControl, RadioGroup, Grid } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 const AddressSelection = ({
   user,
@@ -9,6 +11,7 @@ const AddressSelection = ({
   addresses,
   EditAddressModalOpen,
 }) => {
+  const t = useTranslations("profile");
   return (
     <FormControl component="fieldset" className="w-full my-4">
       <RadioGroup
@@ -17,7 +20,7 @@ const AddressSelection = ({
         className="w-full"
       >
         <Grid container>
-          {addresses &&
+          {addresses?.lenght > 0 ? (
             addresses.map((address, index) => (
               <Grid item xs={12} md={6} key={address._id}>
                 {" "}
@@ -29,7 +32,13 @@ const AddressSelection = ({
                   EditAddressModalOpen={EditAddressModalOpen}
                 />
               </Grid>
-            ))}
+            ))
+          ) : (
+            <div className="w-full flex flex-col justify-center items-center text-center">
+              <img src={NoAddressImg.src} className="h-48 w-48" alt="" />
+              <h1>{t("no_address")}</h1>
+            </div>
+          )}
         </Grid>
       </RadioGroup>
     </FormControl>

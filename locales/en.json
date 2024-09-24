@@ -86,7 +86,13 @@
         "wishlists": "Wishlists",
         "reviews": "Reviews",
         "logout": "Logout",
+        "notifications": "Notifications",
         "delete_account": "Delete Account",
-        "no_reviews": "You didn't provide review to any service or provider yet."
+        "no_reviews": "You didn't provide review to any service or provider yet.",
+        "explore_profile": "By simply clicking on right side profile links, you can explore your orders, addresses, wishlists, reviews, notifications and much more...",
+        "explore_now": "Explore Now",
+        "no_wishlist": "No wishlists found. Don't worry you can add your wishlist by simply clicking on",
+        "no_address": "No address found. Please add your address by clicking on + Add Address button.",
+        "no_orders": "There is no orders found."
     }
 }

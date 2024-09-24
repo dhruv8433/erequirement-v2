@@ -53,6 +53,7 @@ export const useWishlist = (serviceId) => {
       setWishlistsLoading(false);
       dispatch(setWishlistsToRedux(response.data.services));
     } catch (error) {
+      setWishlistsLoading(false);
       console.log("error", error);
     }
   };
