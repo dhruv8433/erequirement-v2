@@ -421,6 +421,42 @@ export const AboutProviderSkeleton = () => {
   );
 };
 
+export const ReviewCardSkeleton = () => {
+  return (
+    <div className="space-y-4">
+      {/* Repeat this block for as many skeletons as needed */}
+      <div className="p-6 rounded-2xl">
+        {/* User Info Skeleton */}
+        <div className="flex items-center mb-4">
+          <Skeleton variant="circular">
+            <Avatar />
+          </Skeleton>
+          <div className="ml-4">
+            <Skeleton width={100} height={24} />
+            <Skeleton width={80} height={20} />
+          </div>
+        </div>
+
+        {/* Rating and Review Skeleton */}
+        <div className="mb-4">
+          <Skeleton variant="rectangular" width={100} height={28} />
+          <Skeleton variant="text" width="90%" height={20} />
+          <Skeleton variant="text" width="80%" height={20} />
+        </div>
+
+        {/* Review Media Skeleton (Display multiple image placeholders) */}
+        <div className="flex flex-wrap gap-2 my-4">
+          <Skeleton variant="rectangular" width={80} height={80} />
+          <Skeleton variant="rectangular" width={80} height={80} />
+          <Skeleton variant="rectangular" width={80} height={80} />
+        </div>
+
+        <Divider className="mt-6" />
+      </div>
+    </div>
+  );
+};
+
 export const UserReviewsSkeleton = () => {
   return (
     <div>
@@ -472,37 +508,7 @@ export const UserReviewsSkeleton = () => {
         </div>
       </div>
 
-      <div className="space-y-4">
-        {/* Repeat this block for as many skeletons as needed */}
-        <div className="p-6 rounded-2xl">
-          {/* User Info Skeleton */}
-          <div className="flex items-center mb-4">
-            <Skeleton variant="circular">
-              <Avatar />
-            </Skeleton>
-            <div className="ml-4">
-              <Skeleton width={100} height={24} />
-              <Skeleton width={80} height={20} />
-            </div>
-          </div>
-
-          {/* Rating and Review Skeleton */}
-          <div className="mb-4">
-            <Skeleton variant="rectangular" width={100} height={28} />
-            <Skeleton variant="text" width="90%" height={20} />
-            <Skeleton variant="text" width="80%" height={20} />
-          </div>
-
-          {/* Review Media Skeleton (Display multiple image placeholders) */}
-          <div className="flex flex-wrap gap-2 my-4">
-            <Skeleton variant="rectangular" width={80} height={80} />
-            <Skeleton variant="rectangular" width={80} height={80} />
-            <Skeleton variant="rectangular" width={80} height={80} />
-          </div>
-
-          <Divider className="mt-6" />
-        </div>
-      </div>
+      <ReviewCardSkeleton />
     </div>
   );
 };
