@@ -15,7 +15,7 @@ const WishLists = () => {
   const allWishLists = useSelector((state) => state.wishlist.wishlists);
 
   return (
-    <MyCardBox className="p-4 rounded-2xl">
+    <MyCardBox className="p-5 rounded-2xl">
       <ProfileHeading heading={t("wishlists")} />
 
       {/* services cards */}
