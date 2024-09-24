@@ -10,6 +10,7 @@ const Address = ({
   selectedAddress,
   setSelectedAddress,
   setAddressModal,
+  isProfilePage,
 }) => {
   const { addresses, setUserPrimaryAddress } = useAddresses(user?._id);
 
@@ -23,7 +24,7 @@ const Address = ({
         setSelectedAddress(primaryAddressIndex); // Set the primary address as selected
       }
     }
-  }, [addresses, setSelectedAddress]);
+  }, [addresses, setSelectedAddress, isProfilePage]);
 
   // Handle address selection change using index
   const handleAddressChange = (event) => {
