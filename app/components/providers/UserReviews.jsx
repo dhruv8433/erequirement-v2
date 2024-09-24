@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Star } from "@mui/icons-material";
-import { Avatar, Divider, Modal, Box, Rating } from "@mui/material";
+import React from "react";
+import { Avatar, Divider, Rating } from "@mui/material";
 
 const UserReviews = ({ reviews }) => {
   return (

@@ -86,6 +86,7 @@
         "wishlists": "Wishlists",
         "reviews": "Reviews",
         "logout": "Logout",
-        "delete_account": "Delete Account"
+        "delete_account": "Delete Account",
+        "no_reviews": "You didn't provide review to any service or provider yet."
     }
 }
