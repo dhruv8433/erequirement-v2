@@ -14,7 +14,7 @@ const AuthReducer = createSlice({
       state.isAuthenticated = true;
       state.user = action.payload.user;
     },
-    logout: (state) => {
+    logoutFromRedux: (state) => {
       state.isAuthenticated = false;
       state.user = {};
     },
@@ -24,6 +24,6 @@ const AuthReducer = createSlice({
   },
 });
 
-export const { login, logout, setLoading } = AuthReducer.actions;
+export const { login, logoutFromRedux, setLoading } = AuthReducer.actions;
 
 export default AuthReducer.reducer;
