@@ -98,6 +98,7 @@
         "logout_title": "Logout Confirmation",
         "logout_msg": "Are you sure you want to log out?",
         "logout_msg_detailed": " You’ve been doing great things!Logging out will pause your current session, but don’t worry, all your progress is saved. We’ll be here, ready for you to pick up right where you left off when you return.",
-        "stay": "Stay Logged In"
+        "stay": "Stay Logged In",
+        "delete_msg": "Are you certain you want to delete your account? This action is permanent and will erase all associated data, including your profile, preferences, and saved information. Please proceed with caution."
     }
 }

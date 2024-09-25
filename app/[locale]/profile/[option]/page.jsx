@@ -10,6 +10,7 @@ import WishLists from "@/app/components/profile/WishLists";
 import ProfileAddress from "@/app/components/profile/ProfileAddress";
 import ProfileReviews from "@/app/components/profile/ProfileReviews";
 import Notifications from "@/app/components/profile/Notifications";
+import DeleteAccount from "@/app/components/profile/DeleteAccount";
 
 const page = () => {
   const { option } = useParams();
@@ -52,6 +53,8 @@ const page = () => {
   } else if (option === "notifications") {
     // notifications
     return <Notifications />;
+  } else if (option === "delete-account") {
+    return <DeleteAccount />;
   } else {
     router.replace(`/${locale}/profile`);
   }

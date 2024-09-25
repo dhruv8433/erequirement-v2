@@ -18,10 +18,10 @@ const NavDrawers = ({
     <div className="user flex items-center gap-2">
       {/* user avatar and signup based on user state */}
       {isAuthenticated && userData ? (
-        <>
+        <Link href={`/${locale}/profile`} className="flex items-center gap-1">
           <Avatar src={"" || userData.avatar} sx={{ height: 30, width: 30 }} />
           {isLaptopScreen && <h1>{userData.fullname}</h1>}
-        </>
+        </Link>
       ) : (
         <MyPrimaryButton
           title={"Login"}

@@ -14,7 +14,7 @@ const LogoutModel = ({ setLogoutModel }) => {
       <h1 className="my-2">{t("logout_msg_detailed")}</h1>
 
       {/* action buttons */}
-      <div className="flex justify-end gap-2">
+      <div className="flex justify-end gap-2 my-5">
         <MyBorderdButton
           title={t("logout")}
           className={"px-2 py-1 rounded-md"}
