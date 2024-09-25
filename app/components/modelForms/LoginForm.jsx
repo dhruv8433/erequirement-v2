@@ -37,7 +37,6 @@ const LoginForm = ({ setSignupForm, setModal }) => {
         dispatch(login({ user: response.data }));
         toast.success("Login successful");
         setModal(false);
-        console.log("after toast");
       } else {
         throw new Error("Unexpected response format");
       }
