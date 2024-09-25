@@ -70,8 +70,8 @@ const ProfileNavigation = () => {
       {/* render logout model */}
       <MyModal open={logoutModel} setOpen={setLogoutModel}>
         <MyCardBox
-          width={{ xs: "120px", md: "400px" }}
-          height={{ xs: "200px", md: "260px" }}
+          width={{ xs: "300px", md: "400px" }}
+          height={{ xs: "350px", md: "280px" }}
           className="p-2 rounded-2xl"
         >
           <LogoutModel setLogoutModel={setLogoutModel} />
