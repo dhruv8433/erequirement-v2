@@ -1,7 +1,12 @@
 "use client";
 
 import React from "react";
-import { MyCardBox, MyHoverCardBox, MyPrimaryBox, MyServiceCard } from "@/app/custom/MyBox";
+import {
+  MyCardBox,
+  MyHoverCardBox,
+  MyPrimaryBox,
+  MyServiceCard,
+} from "@/app/custom/MyBox";
 import { Avatar, Icon } from "@mui/material";
 import { useSelector } from "react-redux";
 import { ProfileLinks } from "@/app/config/config";
@@ -32,7 +37,7 @@ const ProfileNavigation = () => {
         {ProfileLinks.map((link) => (
           <Link href={`/${locale}/profile/${link.link}`}>
             <MyHoverCardBox className="flex items-center gap-3 p-5 ">
-              <Icon>{link.icon}</Icon>
+              {link.icon}
               <h1>{t(`${link.name}`)}</h1>
             </MyHoverCardBox>
           </Link>

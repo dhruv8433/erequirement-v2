@@ -9,6 +9,7 @@ import Orders from "@/app/components/profile/Orders";
 import WishLists from "@/app/components/profile/WishLists";
 import ProfileAddress from "@/app/components/profile/ProfileAddress";
 import ProfileReviews from "@/app/components/profile/ProfileReviews";
+import Notifications from "@/app/components/profile/Notifications";
 
 const page = () => {
   const { option } = useParams();
@@ -48,6 +49,9 @@ const page = () => {
   } else if (option === "reviews") {
     // reviews
     return <ProfileReviews />;
+  } else if (option === "notifications") {
+    // notifications
+    return <Notifications />;
   } else {
     router.replace(`/${locale}/profile`);
   }
