@@ -94,6 +94,10 @@
         "no_wishlist": "No wishlists found. Don't worry you can add your wishlist by simply clicking on",
         "no_address": "No address found. Please add your address by clicking on + Add Address button.",
         "no_orders": "There is no orders found.",
-        "no_notification": "No notifications found. All cleaned up."
+        "no_notification": "No notifications found. All cleaned up.",
+        "logout_title": "Logout Confirmation",
+        "logout_msg": "Are you sure you want to log out?",
+        "logout_msg_detailed": " You’ve been doing great things!Logging out will pause your current session, but don’t worry, all your progress is saved. We’ll be here, ready for you to pick up right where you left off when you return.",
+        "stay": "Stay Logged In"
     }
 }

@@ -119,13 +119,13 @@ export const ProfileLinks = [
   {
     id: 6,
     name: "logout",
-    link: "logout",
+    link: "",
     icon: <LogoutOutlined />,
   },
   {
     id: 7,
     name: "delete_account",
     link: "delete-account",
-    icon: <DeleteOutline />,
+    icon: <DeleteOutline color="error" />,
   },
 ];

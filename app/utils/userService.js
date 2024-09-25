@@ -44,4 +44,9 @@ async function SignupWithGoogle(user) {
   return response.data;
 }
 
-export { LoginUser, SignupUser, SignupWithGoogle };
+async function LogoutUser() {
+  const response = await httpAxios.post("/user/logout");
+  return response.data;
+}
+
+export { LoginUser, SignupUser, SignupWithGoogle, LogoutUser };
