@@ -33,11 +33,8 @@ const LoginForm = ({ setSignupForm, setModal }) => {
     console.log("Login Data:", loginData);
     try {
       const response = await LoginUser(loginData);
-      console.log("Login success", response);
-      toast.success("Login successful");
       if (response && response.data) {
         dispatch(login({ user: response.data }));
-        console.log("before toast");
         toast.success("Login successful");
         setModal(false);
         console.log("after toast");
