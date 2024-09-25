@@ -1,9 +1,11 @@
-import { MyCardBox } from "@/app/custom/MyBox";
+import dayjs from "dayjs";
 import React from "react";
-import ProfileHeading from "./ProfileHeading";
 import { useTranslations } from "next-intl";
-import { useNotifications } from "@/app/hooks/useNotifications";
+import ProfileHeading from "./ProfileHeading";
+import { MyCardBox } from "@/app/custom/MyBox";
 import NoNotification from "@/app/assets/notification.png";
+import { NotificationsOutlined } from "@mui/icons-material";
+import { useNotifications } from "@/app/hooks/useNotifications";
 
 const Notifications = () => {
   const t = useTranslations("profile");
@@ -16,7 +18,20 @@ const Notifications = () => {
       {loading ? (
         <h1>loading...</h1>
       ) : notifications.length > 0 ? (
-        notifications.map((response) => <h1>hi</h1>)
+        notifications.map((notification) => (
+          <div className="p-4 border border-dashed rounded-md my-3">
+            <div className="flex items-center gap-4 w-full">
+              <NotificationsOutlined />
+              <div className="w-full">
+                <h1>{notification.notify}</h1>
+                <div className="flex justify-between">
+                  <h1>{dayjs(notification.timestamp).format("DD-MM-YYYY")}</h1>
+                  <h1>{dayjs(notification.timestamp).format("HH:mm")}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
       ) : (
         <div className="flex flex-col justify-center text-center items-center min-h-[550px]">
           <img src={NoNotification.src} className="h-48 w-48 flex" alt="" />
