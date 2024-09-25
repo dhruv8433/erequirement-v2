@@ -49,4 +49,13 @@ async function LogoutUser() {
   return response.data;
 }
 
-export { LoginUser, SignupUser, SignupWithGoogle, LogoutUser };
+async function DeleteAccount(userId) {
+  const response = await httpAxios.delete("/user/delete-account", {
+    data: {
+      userId: userId,
+    },
+  });
+  return response.data;
+}
+
+export { LoginUser, SignupUser, SignupWithGoogle, LogoutUser, DeleteAccount };

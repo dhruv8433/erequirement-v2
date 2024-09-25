@@ -49,4 +49,17 @@ const MyBorderdButton = ({
   );
 };
 
-export { MyPrimaryButton, MyBorderdButton };
+const MyButton = ({ title, icon, className, onClickFunction, dashed }) => {
+  return (
+    <button
+      onClick={onClickFunction ? onClickFunction : null}
+      className={`${className} rounded-md flex items-center justify-center gap-2`}
+      dashed={dashed}
+    >
+      {icon && <span>{icon}</span>}
+      {title}
+    </button>
+  );
+};
+
+export { MyPrimaryButton, MyBorderdButton, MyButton };
