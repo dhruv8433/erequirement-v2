@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Divider, Grid } from "@mui/material";
 import { AttachFile } from "@mui/icons-material";
 import PhoneIcon from "@mui/icons-material/Phone";
+import { errorMessages } from "@/app/config/config";
 import { SignupUser } from "@/app/utils/userService";
 import Visibility from "@mui/icons-material/Visibility";
 import { MyInputBorderBottom } from "../../custom/MyInput";
@@ -51,9 +52,15 @@ const SignupForm = ({ setSignupForm, setModal }) => {
       !signupData.password ||
       !signupData.phone
     ) {
-      console.log("All fields are required");
+      toast.error(errorMessages.feildsRequire);
       return;
     }
+
+    if (!signupData.avatar) {
+      toast.error(errorMessages.uploadAvatar);
+      return;
+    }
+
     try {
       const response = await SignupUser(signupData);
       console.log("user signup success", response);
@@ -95,7 +102,7 @@ const SignupForm = ({ setSignupForm, setModal }) => {
             />
             <label
               htmlFor="file-upload"
-              className="flex items-center justify-center w-full h-12 px-4 border border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 focus:outline-none focus:border-blue-500"
+              className="flex items-center justify-center w-full h-12 px-4 border border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-orange-500 focus:outline-none focus:border-orange-500"
             >
               <AttachFile className="text-gray-400" />
               <MyPrimaryText
