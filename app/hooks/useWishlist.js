@@ -30,17 +30,14 @@ export const useWishlist = (serviceId) => {
 
   // if user want to add any service to their wishlist
   const handleAddWishlist = async () => {
-    if (isAuthenticated) {
-      if (serviceId) {
-        try {
-          const response = await addWishlist(userId, serviceId);
-          console.log("response", response);
-          toast.success(response.message || "Wishlist added successfully");
-          dispatch(setWishlistsToRedux(response.data.services));
-        } catch (error) {
-          console.log("error", error);
-        }
-      }
+    try {
+      const response = await addWishlist(userId, serviceId);
+      console.log("response", response);
+      toast.success(response.message || "Wishlist added successfully");
+      dispatch(setWishlistsToRedux(response.data.services));
+    } catch (error) {
+      console.log("error", error);
+      toast.error(error.response.data.message || "Something went wrong");
     }
   };
 

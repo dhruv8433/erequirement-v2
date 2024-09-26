@@ -15,9 +15,15 @@ import { setCart } from "../reducer/cartReducer";
  * @returns {Object} - Cart data, other info, and action functions.
  */
 
-export function useCart(userId) {
-  const cartData = useSelector((state) => state?.cart?.cart?.service);
-  const otherInfo = useSelector((state) => state.cart.cart);
+export function useCart() {
+  let cartData, otherInfo;
+  const userId = useSelector((state) => state.auth?.user?.user?._id);
+
+  if (userId) {
+    cartData = useSelector((state) => state?.cart?.cart?.service);
+    otherInfo = useSelector((state) => state?.cart?.cart);
+  }
+
   const dispatch = useDispatch();
 
   const loadCart = async () => {
