@@ -6,12 +6,13 @@ import MySkeleton from "@/app/custom/MySkeleton";
 import NoResult from "@/app/assets/no-result.png";
 import ServiceCard from "@/app/common/ServiceCard";
 import { MyPrimaryText } from "@/app/custom/MyText";
+import { MyCardBox } from "@/app/custom/MyBox";
 
 const CategoriesDetailed = ({ subCategory, id, loading, slug, error }) => {
   const locale = useLocale();
   const t = useTranslations("categories");
   return (
-    <div className="my-4 min-h-[500px]">
+    <MyCardBox className="my-4 p-4 min-h-[500px] rounded-2xl">
       {error.statusCode !== 404 ? (
         <Grid container spacing={3}>
           {loading
@@ -47,7 +48,7 @@ const CategoriesDetailed = ({ subCategory, id, loading, slug, error }) => {
           <MyPrimaryText title={t("no_result")} className={"text-xl"} />
         </div>
       )}
-    </div>
+    </MyCardBox>
   );
 };
 

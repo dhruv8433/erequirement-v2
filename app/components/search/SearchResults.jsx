@@ -3,13 +3,15 @@ import Provider from "@/app/common/Provider"; // Assuming ProviderCard exists fo
 import ServiceCard from "@/app/common/ServiceCard";
 import { MyHeading } from "@/app/custom/MyText";
 import { useSearch } from "@/app/hooks/useSearch";
+import { Divider, Grid } from "@mui/material";
+import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
+import { MyCardBox } from "@/app/custom/MyBox";
+import { useLocale, useTranslations } from "next-intl";
 import {
   BreadCrumbSkeleton,
   CategorySkeleton,
 } from "@/app/custom/CustomSkeleton";
-import { Divider, Grid } from "@mui/material";
-import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 const SearchResults = ({ query }) => {
   const { searchResult, loading } = useSearch(query);
@@ -21,6 +23,8 @@ const SearchResults = ({ query }) => {
   }, [query]); // Triggered when query changes
 
   const t = useTranslations("search");
+
+  const locale = useLocale();
 
   return (
     <div>
@@ -43,23 +47,31 @@ const SearchResults = ({ query }) => {
           title={"Services"}
           className={"my-4 text-xl font-semibold"}
         />
-
         {/* Render loading skeleton or services */}
-        {loading ? (
-          Array.from({ length: 5 }).map((_, index) => (
-            <CategorySkeleton key={index} />
-          ))
-        ) : searchResult?.service?.length > 0 ? (
+
+        <MyCardBox className="p-4 rounded-2xl">
           <Grid container spacing={3}>
-            {searchResult.service.map((service, index) => (
-              <Grid key={index} item xs={12} md={2}>
-                <ServiceCard key={index} service={service} />
-              </Grid>
-            ))}
+            {loading ? (
+              Array.from({ length: 5 }).map((_, index) => (
+                <Grid key={index} item xs={12} sm={4} md={2}>
+                  <CategorySkeleton key={index} />
+                </Grid>
+              ))
+            ) : searchResult?.service?.length > 0 ? (
+              searchResult.service.map((service, index) => (
+                <Grid key={index} item xs={12} sm={4} md={2}>
+                  <Link
+                    href={`/${locale}/services/${service.serviceID}/${service.Slug}`}
+                  >
+                    <ServiceCard key={index} service={service} />
+                  </Link>
+                </Grid>
+              ))
+            ) : (
+              <p>{t("no_service")}</p> // Fallback when no services are found
+            )}
           </Grid>
-        ) : (
-          <p>{t("no_service")}</p> // Fallback when no services are found
-        )}
+        </MyCardBox>
       </div>
 
       <Divider className="" />
