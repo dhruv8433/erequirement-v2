@@ -129,3 +129,14 @@ export const ProfileLinks = [
     icon: <DeleteOutline color="error" />,
   },
 ];
+
+export const errorMessages = {
+  wentWrong: "Something went wrong! Please try again later.",
+  feildsRequire: "All feilds are required!",
+  CartAdd: "Please add items to the cart before proceeding.",
+  selectDateTime: "Please select date and time before proceeding.",
+  scheduleFailed: "Failed to create schedule. Please try again.",
+  addAddress: "Please select or add a new address before payment.",
+  loginError: "Something went wrong! Please check your credentials.",
+  uploadAvatar: "Please upload your avatar.",
+};
