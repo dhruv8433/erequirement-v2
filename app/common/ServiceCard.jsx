@@ -8,8 +8,8 @@ const ServiceCard = ({ service }) => {
         {/* Image with scaling effect on hover */}
         <img
           src={service.serviceImg}
-          className="h-full w-full object-cover transform transition-transform duration-300 group-hover:scale-105"
-          alt={service.name || "image" + service.id}
+          className="h-full w-full object-cover transform transition-transform duration-300 group-hover:scale-105 flex justify-center items-center flex-col"
+          alt={service.ServiceName || "image" + service.id}
         />
 
         {/* Overlay with text, background fades on hover */}
