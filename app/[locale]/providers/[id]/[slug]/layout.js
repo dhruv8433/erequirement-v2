@@ -37,14 +37,14 @@ const Layout = ({ children }) => {
           activeIndex={2}
         />
       )}
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
           {singleProviderLoading ? (
             <ProviderDetailedSkeleton />
           ) : (
             <>
               {/* Provider Detailed Card */}
-              <MyCardBox className="m-2 rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
+              <MyCardBox className="rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
                 <div>
                   {/* banner image */}
                   <div className="banner h-[300px] w-full overflow-hidden">
