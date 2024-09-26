@@ -38,8 +38,9 @@ const ServiceInfo = ({ service }) => {
             {t("price")}:{" "}
             <span className="primary-text">${service.DiscountedPrice}</span>
           </h2>
-          <p className="text-sm line-through">
-            {t("actual_price")}: ${service.ActualPrice}
+          <p className="text-sm">
+            {t("actual_price")}:{" "}
+            <span className=" line-through">${service.ActualPrice}</span>
           </p>
         </div>
         <div className="flex items-center my-4">
