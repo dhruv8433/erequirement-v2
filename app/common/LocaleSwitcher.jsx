@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
+import { MyCardBox } from "../custom/MyBox";
+import MyOption from "../custom/MyOption";
 
 const supportedLocales = ["en", "hi", "de"];
 
@@ -41,14 +43,21 @@ export default function LocaleSwitcher() {
   return (
     <div className="border-2 rounded px-2">
       <p className="sr-only">Change Language</p>
+
       <select
         value={locale} // Bind to local state
-        className="py-2 w-full bg-transparent"
+        className="py-2 w-full bg-transparent " // Transparent bg, text color based on theme
         onChange={onSelectChange}
       >
-        <option value="en">English</option>
-        <option value="hi">Hindi</option>
-        <option value="de">German</option>
+        <MyOption className="bg-transparent" value="en">
+          English
+        </MyOption>
+        <MyOption className="bg-transparent" value="hi">
+          Hindi
+        </MyOption>
+        <MyOption className="bg-transparent" value="de">
+          German
+        </MyOption>
       </select>
     </div>
   );
