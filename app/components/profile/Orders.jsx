@@ -26,7 +26,7 @@ const Orders = ({ userId }) => {
       {/* orders */}
       {userOrdersLoading ? (
         <h1>loading...</h1>
-      ) : userOrders ? (
+      ) : userOrders.length > 0 ? (
         userOrders.map((order) => (
           <div key={order._id} className="border rounded-2xl my-3 p-4">
             {/* Order Details */}
@@ -97,7 +97,7 @@ const Orders = ({ userId }) => {
           </div>
         ))
       ) : (
-        <div>
+        <div className="flex flex-col items-center justify-center min-h-[600px]">
           <img src={NoOrders.src} className="h-48 w-48" alt="" />
           <h1>{t("no_orders")}</h1>
         </div>
