@@ -12,6 +12,7 @@ const AddressSelection = ({
   EditAddressModalOpen,
 }) => {
   const t = useTranslations("profile");
+  console.log("address from profile", addresses);
   return (
     <FormControl component="fieldset" className="w-full my-4">
       <RadioGroup
@@ -20,7 +21,7 @@ const AddressSelection = ({
         className="w-full"
       >
         <Grid container>
-          {addresses?.lenght > 0 ? (
+          {addresses && addresses.length > 0 ? (
             addresses.map((address, index) => (
               <Grid item xs={12} md={6} key={address._id}>
                 {" "}
