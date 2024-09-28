@@ -16,17 +16,29 @@ import { setCart } from "../reducer/cartReducer";
  */
 
 export function useCart() {
-  let cartData, otherInfo;
-  const userId = useSelector((state) => state.auth?.user?.user?._id);
+  let cartData = null,
+    otherInfo = null;
+  const isUserAuthenticated = useSelector(
+    (state) => state.auth.isAuthenticated
+  );
+
+  let userId;
+  if (isUserAuthenticated) {
+    userId = useSelector((state) => state.auth?.user?.user?._id);
+  }
 
   if (userId) {
     cartData = useSelector((state) => state?.cart?.cart?.service);
     otherInfo = useSelector((state) => state?.cart?.cart);
   }
 
+  // Ensure cartData exists before accessing any properties on it
+  const hasCartData = cartData && cartData.length > 0;
+
   const dispatch = useDispatch();
 
   const loadCart = async () => {
+    if (!userId) return; // Make sure userId exists before fetching
     try {
       const data = await fetchCartData(userId);
       dispatch(setCart(data.data));
@@ -44,6 +56,7 @@ export function useCart() {
   }, [userId]);
 
   const handleRemove = async (serviceId) => {
+    if (!userId) return;
     try {
       const response = await removeItemFromCart(userId, serviceId);
       if (response.success) {
@@ -60,6 +73,7 @@ export function useCart() {
   };
 
   const handleUpdateQuantity = async (serviceId, qty) => {
+    if (!userId) return;
     try {
       const response = await updateQuantityInCart(userId, serviceId, qty);
       if (response.success) {
@@ -76,6 +90,7 @@ export function useCart() {
   };
 
   const AddServiceToCart = async (serviceId) => {
+    if (!userId) return;
     try {
       const response = await addToCart(userId, serviceId);
       if (response.success) {
@@ -92,7 +107,7 @@ export function useCart() {
   };
 
   return {
-    cartData,
+    cartData: hasCartData ? cartData : [],
     otherInfo,
     handleRemove,
     handleUpdateQuantity,
