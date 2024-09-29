@@ -20,7 +20,7 @@ const ProviderServices = () => {
     <div>
       <MyCardBox className="provider-card mx-1 rounded-2xl m-2 mb-4 p-2">
         <div className="my-4">
-          <Grid container spacing={2}>
+          <Grid container spacing={2} data-aos="fade-up">
             {serviceLoading
               ? Array.from({ length: 6 }, (_, index) => (
                   <Grid key={index} item xs={12} sm={6} md={4}>
