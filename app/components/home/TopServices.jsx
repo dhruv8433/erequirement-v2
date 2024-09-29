@@ -14,7 +14,7 @@ const TopServices = ({ data, loading }) => {
 
   const t = useTranslations("home");
   return (
-    <div>
+    <div data-aos="fade-up">
       <MyHeading
         title={t("top_services")}
         className={"text-2xl my-2 font-semibold"}
@@ -25,7 +25,7 @@ const TopServices = ({ data, loading }) => {
             <MySkeleton variant={"rectangular"} height={200} width={200} />
           ) : (
             data.slice(0, 6).map((service, index) => (
-              <Grid key={service.id || index} item xs={12} sm={6} md={2}>
+              <Grid key={service.id || index} item xs={12} sm={6} md={2} data-aos="fade-up">
                 <Link
                   href={`${locale}/services/${service.serviceID}/${service.Slug}`}
                 >

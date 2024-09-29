@@ -11,10 +11,19 @@ import Footer from "../components/Footer/Footer";
 import { ProviderStore } from "../store/StoreProvider";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme, darkTheme } from "../theme/theme";
+import "aos/dist/aos.css"; // Import AOS styles
+import AOS from "aos";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children, params }) {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // animation duration
+      // once: true, // whether animation should happen only once
+    });
+  }, []);
   return (
     <html lang={params.locale}>
       <body className={inter.className}>

@@ -6,7 +6,7 @@ import { MyHeading } from "./MyText";
 
 const MyBreadcrumb = ({ breadcrumbs, activeIndex, title }) => {
   return (
-    <div className="my-5">
+    <div className="my-5" data-aos="fade-up">
       <MyHeading title={title} className={"text-2xl my-2 font-semibold"} />
       <Breadcrumbs
         separator={<ChevronRight fontSize="small" />}

@@ -12,7 +12,7 @@ import { MyBreakPointSwiper } from "@/app/custom/MySwiper";
 
 const Categories = ({ data, loading }) => {
   return (
-    <div className="my-4">
+    <div className="my-4" data-aos="fade-up">
       <div className="flex gap-4">
         {loading ? (
           <div className="flex gap-12">

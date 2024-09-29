@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  TableBody,
-  TableCell,
-  TableRow,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { TableBody, TableCell, TableRow, IconButton } from "@mui/material";
 import { Add, Remove, Delete } from "@mui/icons-material";
 
 const CartItem = ({
@@ -53,9 +47,7 @@ const CartItem = ({
                   <Remove fontSize="small" />
                 </IconButton>
               </div>
-              <h1 className="mx-3">
-                {qty}
-              </h1>
+              <h1 className="mx-3">{qty}</h1>
               <div className="primary-bg hover:bg-orange-500">
                 <IconButton onClick={() => onIncrement(service._id, qty + 1)}>
                   <Add fontSize="small" />
@@ -67,7 +59,7 @@ const CartItem = ({
 
         {/* Price */}
         <TableCell align="right">
-          <Typography variant="h6">${service.DiscountedPrice}</Typography>
+          <h1>${service.DiscountedPrice}</h1>
         </TableCell>
 
         {/* Actions */}

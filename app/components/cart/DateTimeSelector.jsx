@@ -51,11 +51,11 @@ const DateTimeSelector = ({
 
   const t = useTranslations("cart");
   return (
-    <MyCardBox className="p-4 rounded-2xl overflow-hidden">
+    <MyCardBox className="p-4 rounded-2xl overflow-hidden" data-aos="fade-up">
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <MyHeading title={t("available_date")} className={"font-semibold"} />
-          <div className="calendar my-4">
+          <MyHeading title={t("available_date")} className={"font-semibold"} data-aos="fade-up"/>
+          <div className="calendar my-4" data-aos="fade-up">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateCalendar
                 className="custom-calendar"
@@ -72,7 +72,7 @@ const DateTimeSelector = ({
         </Grid>
         <Grid item xs={12} md={6}>
           <MyHeading title={t("available_time")} className={"font-semibold"} />
-          <div className="flex my-8 flex-col">
+          <div className="flex my-8 flex-col" data-aos="fade-up">
             <RadioGroup
               className="space-y-5"
               value={selectedDateTimeSlot?.time || ""}
@@ -84,9 +84,10 @@ const DateTimeSelector = ({
                   value={timeSlot}
                   control={<Radio />}
                   label={
-                    <span className="text-lg font-medium">{timeSlot}</span>
+                    <span className="text-lg font-medium" data-aos="fade-up">{timeSlot}</span>
                   }
                   className="border border-gray-200 p-2 rounded-lg shadow-sm transition duration-200 max-w-full w-full"
+                  data-aos="fade-up"
                 />
               ))}
             </RadioGroup>

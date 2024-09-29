@@ -28,11 +28,14 @@ const CartTable = ({
   const t = useTranslations("cart");
 
   return (
-    <MyCardBox className="rounded-2xl">
+    <MyCardBox className="rounded-2xl" data-aos="fade-up">
       {cartData && cartData.length > 0 ? (
-        <div className="border p-3 rounded-2xl border-dashed">
+        <div
+          className="border p-3 rounded-2xl border-dashed"
+          data-aos="fade-up"
+        >
           <TableContainer>
-            <Table>
+            <Table data-aos="fade-up">
               <TableHead>
                 <TableRow>
                   <TableCell>{t("service_img")}</TableCell>
@@ -74,10 +77,22 @@ const CartTable = ({
           </div>
         </div>
       ) : (
-        <div className="flex w-full items-center flex-col justify-center min-h-[500px]">
-          <img src={EmptyCartImg.src} alt="" className="h-40 w-40" />
-          <h1 className="text-center text-2xl my-2">{t("no_item")}</h1>
-          <h1 className="my-2">{t("no_item_msg")}</h1>
+        <div
+          className="flex w-full items-center flex-col justify-center min-h-[500px]"
+          data-aos="fade-up"
+        >
+          <img
+            data-aos="fade-up"
+            src={EmptyCartImg.src}
+            alt=""
+            className="h-40 w-40"
+          />
+          <h1 data-aos="fade-up" className="text-center text-2xl my-2">
+            {t("no_item")}
+          </h1>
+          <h1 data-aos="fade-up" className="my-2">
+            {t("no_item_msg")}
+          </h1>
           <Link href={`/${locale}/providers`}>
             <MyHeading title={t("browse")} />
           </Link>

@@ -30,7 +30,7 @@ const Slider = ({ data, loading }) => {
   };
 
   return (
-    <>
+    <div data-aos="zoom-in">
       {loading ? (
         <MySkeleton height={"500px"} width={"100%"} />
       ) : (
@@ -63,7 +63,7 @@ const Slider = ({ data, loading }) => {
           />
         </>
       </div>
-    </>
+    </div>
   );
 };
 

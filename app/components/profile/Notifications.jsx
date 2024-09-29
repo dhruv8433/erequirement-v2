@@ -19,14 +19,14 @@ const Notifications = () => {
         <h1>loading...</h1>
       ) : notifications.length > 0 ? (
         notifications.map((notification) => (
-          <div className="p-4 border border-dashed rounded-md my-3">
+          <div className="p-4 border border-dashed rounded-md my-3" data-aos="fade-up">
             <div className="flex items-center gap-4 w-full">
               <NotificationsOutlined />
               <div className="w-full">
-                <h1>{notification.notify}</h1>
+                <h1 data-aos="fade-up">{notification.notify}</h1>
                 <div className="flex justify-between">
-                  <h1>{dayjs(notification.timestamp).format("DD-MM-YYYY")}</h1>
-                  <h1>{dayjs(notification.timestamp).format("HH:mm")}</h1>
+                  <h1 data-aos="fade-up">{dayjs(notification.timestamp).format("DD-MM-YYYY")}</h1>
+                  <h1 data-aos="fade-up">{dayjs(notification.timestamp).format("HH:mm")}</h1>
                 </div>
               </div>
             </div>

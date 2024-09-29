@@ -9,19 +9,27 @@ const UserReviews = ({ reviews }) => {
           <div key={review._id} className="p-6 rounded-2xl ">
             {/* User Info */}
             <div className="flex items-center mb-4">
-              <Avatar src={review.userAvatar} alt={review.userName} />
+              <Avatar
+                src={review.userAvatar}
+                alt={review.userName}
+                data-aos="fade-up"
+              />
               <div className="ml-4">
-                <h1 className="font-semibold text-lg">{review.userName}</h1>
-                <p className="text-sm text-gray-500">
+                <h1 className="font-semibold text-lg" data-aos="fade-up">
+                  {review.userName}
+                </h1>
+                <p className="text-sm text-gray-500" data-aos="fade-up">
                   {new Date(review.createdAt).toLocaleDateString()}
                 </p>
               </div>
             </div>
 
             {/* Rating and Review */}
-            <div className="mb-4">
+            <div className="mb-4" data-aos="fade-up">
               <Rating value={review.rating} readOnly />
-              <p className="mt-2 ">{review.review}</p>
+              <p className="mt-2" data-aos="fade-up">
+                {review.review}
+              </p>
             </div>
 
             {/* Review Media (Display all images) */}
@@ -31,8 +39,9 @@ const UserReviews = ({ reviews }) => {
                   <img
                     key={index}
                     src={image}
-                    alt={`Review Media ${index}`}
+                    alt={`Media ${index}`}
                     className="w-20 h-20 object-cover rounded-lg cursor-pointer"
+                    data-aos="fade-up"
                   />
                 ))}
               </div>

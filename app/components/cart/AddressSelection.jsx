@@ -19,6 +19,7 @@ const AddressSelection = ({
         value={selectedAddress.toString()} // Ensure the value matches the selected index
         onChange={handleAddressChange}
         className="w-full"
+        data-aos="fade-up"
       >
         <Grid container>
           {addresses && addresses.length > 0 ? (

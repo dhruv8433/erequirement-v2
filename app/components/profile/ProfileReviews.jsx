@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import ProfileHeading from "./ProfileHeading";
 import { MyCardBox } from "@/app/custom/MyBox";
@@ -9,7 +9,11 @@ import { ReviewCardSkeleton } from "@/app/custom/CustomSkeleton";
 
 const ProfileReviews = () => {
   const t = useTranslations("profile");
-  const { userReviews, userReviewsLoading } = useReviews();
+  const { userReviews, userReviewsLoading, fetchUserReviews } = useReviews();
+
+  useEffect(() => {
+    fetchUserReviews();
+  }, []);
   return (
     <MyCardBox className="p-5 rounded-2xl">
       <ProfileHeading heading={t("reviews")} />

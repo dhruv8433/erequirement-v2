@@ -16,7 +16,7 @@ const ProvidersService = ({ service, index, isProfile }) => {
   const { AddServiceToCart } = useCart();
 
   return (
-    <div>
+    <div data-aos="fade-up">
       {isProfile && (
         <MyCardBox className="relative top-14 ml-[80%] z-10 rounded-full w-min  ">
           <MyIconButton onClick={() => deleteWishlist()}>

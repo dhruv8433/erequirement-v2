@@ -19,7 +19,10 @@ const Subscribe = ({ t }) => {
       <Grid container spacing={2}>
         {/* Left Side: Mobile Phone Image */}
         <Grid item xs={12} md={4}>
-          <div className="flex justify-center md:justify-start">
+          <div
+            className="flex justify-center md:justify-start"
+            data-aos="flip-left"
+          >
             <img
               src={PhoneImage.src}
               alt="Phone Advertisement"
@@ -29,7 +32,7 @@ const Subscribe = ({ t }) => {
         </Grid>
 
         {/* Right Side: Information and Subscription */}
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} data-aos="fade-up">
           <div className="flex flex-col justify-center h-full">
             <MyHeading
               className="text-5xl font-bold primary-text my-8"
@@ -40,7 +43,7 @@ const Subscribe = ({ t }) => {
             <MySecondaryText title={t("subscribe_subtitle")} className="mb-6" />
 
             {/* Subscription Form */}
-            <div className="flex mb-8 ">
+            <div className="flex mb-8" data-aos="fade-up">
               <MyColoredInput
                 type="email"
                 placeholder="Enter your email"
@@ -54,13 +57,13 @@ const Subscribe = ({ t }) => {
             </div>
 
             {/* Additional Content */}
-            <div className="space-y-4">
+            <div className="space-y-4" data-aos="fade-up">
               <MyPrimaryText
                 title={t("why_us")}
                 className="text-3xl font-semibold"
               />
-              <ul className="space-y-2">
-                <li className="flex items-center">
+              <ul className="space-y-2" data-aos="fade-up">
+                <li className="flex items-center" data-aos="fade-up">
                   <MySecondaryBox className="rounded-md p-1">
                     <MyStyledIcon Icon={<CheckCircleIcon />} />
                   </MySecondaryBox>
@@ -69,7 +72,7 @@ const Subscribe = ({ t }) => {
                     className="text-gray-600 ml-2"
                   />
                 </li>
-                <li className="flex items-center">
+                <li className="flex items-center" data-aos="fade-up">
                   <MySecondaryBox className="p-1 rounded-md">
                     <MyStyledIcon Icon={<BuildIcon />} />
                   </MySecondaryBox>
@@ -78,7 +81,7 @@ const Subscribe = ({ t }) => {
                     className="text-gray-600 ml-2"
                   />
                 </li>
-                <li className="flex items-center">
+                <li className="flex items-center" data-aos="fade-up">
                   <MySecondaryBox className="p-1 rounded-md">
                     <MyStyledIcon Icon={<AttachMoneyIcon />} />
                   </MySecondaryBox>
@@ -87,7 +90,7 @@ const Subscribe = ({ t }) => {
                     className="text-gray-600 ml-2"
                   />
                 </li>
-                <li className="flex items-center">
+                <li className="flex items-center" data-aos="fade-up">
                   <MySecondaryBox className="p-1 rounded-md">
                     <MyStyledIcon Icon={<SpeedIcon />} />
                   </MySecondaryBox>

@@ -8,7 +8,10 @@ const Provider = ({ provider }) => {
   const locale = useLocale();
   return (
     <Link href={`/${locale}/providers/${provider.id}/${provider.slug}`}>
-      <MyCardBox className="rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
+      <MyCardBox
+        data-aos="fade-up"
+        className="rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group"
+      >
         <div className="card">
           {/* banner image */}
           <div className="banner h-48 w-[100%] overflow-hidden">

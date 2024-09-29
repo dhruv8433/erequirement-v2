@@ -10,6 +10,7 @@ const CategoryCard = ({ category }) => {
       <MyHoverCardBox
         key={category.id}
         className="border-2 border-gray-700 p-3 m-3 rounded-2xl text-center group hover:pointer"
+        data-aos="fade-up"
       >
         <img
           src={category.image}

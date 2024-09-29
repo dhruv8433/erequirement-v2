@@ -51,7 +51,7 @@ const Page = () => {
               link: `/${locale}/Categories`,
             },
             {
-              title: filterCategories.name,
+              title: filterCategories?.name,
               link: `/${locale}/categories/${filterCategories.id}/${filterCategories.slug}`,
             },
             {

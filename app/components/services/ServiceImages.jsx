@@ -29,6 +29,7 @@ const OtherImage = ({
             src={service.serviceImg}
             alt={`${service.ServiceName}`}
             className="h-full w-full object-cover rounded-xl border border-gray-400"
+            data-aos="fade-up"
           />
         </div>
       </div>
@@ -47,6 +48,7 @@ const OtherImage = ({
               src={img}
               alt={`${service.ServiceName} ${index + 1}`}
               className="h-full w-full object-cover rounded-xl border border-gray-400"
+              data-aos="fade-up"
             />
           </div>
         ))}
@@ -81,6 +83,7 @@ const ServiceImages = ({ service, handleImageClick, selectedImage }) => {
             src={selectedImage ? selectedImage : service.serviceImg}
             alt={service.ServiceName}
             className="h-full w-full object-cover rounded-xl"
+            data-aos="zoom-in"
           />
         </div>
       </div>
