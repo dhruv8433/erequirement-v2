@@ -44,7 +44,10 @@ const Layout = ({ children }) => {
           ) : (
             <>
               {/* Provider Detailed Card */}
-              <MyCardBox className="rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group">
+              <MyCardBox
+                className="rounded-2xl border border-gray-300 overflow-hidden hover:cursor-pointer group"
+                data-aos="zoom-in"
+              >
                 <div>
                   {/* banner image */}
                   <div className="banner h-[300px] w-full overflow-hidden">
