@@ -48,6 +48,7 @@ const Address = ({
           icon={<Add />}
           dashed={true}
           onClickFunction={() => setAddressModal()} // Ensure you define `setAddressModal`
+          data-aos="fade-up"
         />
         <div className="my-4">
           <AddressSelection
