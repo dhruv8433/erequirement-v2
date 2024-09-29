@@ -21,7 +21,7 @@ const Subscribe = ({ t }) => {
         <Grid item xs={12} md={4}>
           <div
             className="flex justify-center md:justify-start"
-            data-aos="zoom-in"
+            data-aos="flip-left"
           >
             <img
               src={PhoneImage.src}
