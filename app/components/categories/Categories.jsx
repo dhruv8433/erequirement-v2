@@ -5,7 +5,7 @@ import { CategorySkeleton } from "@/app/custom/CustomSkeleton";
 
 const Categories = ({ categories, loading }) => {
   return (
-    <div>
+    <div data-aos="fade-up">
       <Grid container>
         {loading
           ? Array.from({ length: 8 }).map((_, index) => (
