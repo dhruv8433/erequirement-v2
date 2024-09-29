@@ -14,12 +14,13 @@ const DeleteAccount = () => {
       <ProfileHeading heading={t("delete_account")} />
       <div className="text-center flex flex-col justify-center items-center min-h-[600px]">
         <img
+          data-aos="fade-up"
           src={DeleteAccountImg.src}
           alt=""
           srcset=""
           className="h-48 w-48"
         />
-        <h1>{t("delete_msg")}</h1>
+        <h1 data-aos="fade-up">{t("delete_msg")}</h1>
         <MyButton
           className={"bg-red-500 px-3 py-1 mt-5"}
           title={t("delete_account")}

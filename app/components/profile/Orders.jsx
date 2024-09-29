@@ -19,7 +19,7 @@ const Orders = ({ userId }) => {
   const { userOrders, userOrdersLoading } = useOrders(userId);
 
   return (
-    <MyCardBox className="border p-5 rounded-2xl">
+    <MyCardBox className="border p-5 rounded-2xl" data-aos="fade-up">
       {/* heading */}
       <ProfileHeading heading={t("orders")} />
 
@@ -28,14 +28,15 @@ const Orders = ({ userId }) => {
         <h1>loading...</h1>
       ) : userOrders.length > 0 ? (
         userOrders.map((order) => (
-          <div key={order._id} className="border rounded-2xl my-3 p-4">
+          <div key={order._id} className="border rounded-2xl my-3 p-4" data-aos="fade-up">
             {/* Order Details */}
             <div className="flex justify-between items-center mb-4">
-              <h1>
+              <h1 data-aos="fade-up">
                 <strong>Order Date:</strong>{" "}
                 {dayjs(order.createdAt).format("DD-MM-YYYY")}
               </h1>
               <h1
+              data-aos="fade-up"
                 className={`border border-dashed px-2 py-1 rounded-md
                 ${
                   order.orderStatus === "pending" &&
@@ -53,7 +54,7 @@ const Orders = ({ userId }) => {
 
             {/* Product Table */}
             <TableContainer className="my-5">
-              <Table>
+              <Table data-aos="fade-up">
                 <TableHead>
                   <TableRow>
                     <TableCell align="left">
@@ -87,10 +88,10 @@ const Orders = ({ userId }) => {
 
             {/* Total Price */}
             <div className="flex justify-between items-center mt-4">
-              <h1 className="text-gray-500">
+              <h1 className="text-gray-500" data-aos="fade-up">
                 <strong>Order ID:</strong> {order._id}
               </h1>
-              <h1>
+              <h1 data-aos="fade-up">
                 <strong>Total Price:</strong> ${order.totalPrice}
               </h1>
             </div>
@@ -98,8 +99,8 @@ const Orders = ({ userId }) => {
         ))
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[600px]">
-          <img src={NoOrders.src} className="h-48 w-48" alt="" />
-          <h1>{t("no_orders")}</h1>
+          <img data-aos="fade-up" src={NoOrders.src} className="h-48 w-48" alt="" />
+          <h1 data-aos="fade-up">{t("no_orders")}</h1>
         </div>
       )}
     </MyCardBox>
