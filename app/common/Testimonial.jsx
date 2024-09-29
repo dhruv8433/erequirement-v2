@@ -8,7 +8,10 @@ const Testimonial = ({ testimonial }) => {
     testimonial;
 
   return (
-    <MyCardBox className="shadow-lg rounded-lg p-6 my-4 max-w-md mx-auto h-[240px]">
+    <MyCardBox
+      className="shadow-lg rounded-lg p-6 my-4 max-w-md mx-auto h-[240px]"
+      data-aos="fade-up"
+    >
       <div className="flex items-center mb-4">
         <Avatar sizes="small" />
         <div className="ml-3">
