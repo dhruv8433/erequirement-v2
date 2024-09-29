@@ -139,4 +139,6 @@ export const errorMessages = {
   addAddress: "Please select or add a new address before payment.",
   loginError: "Something went wrong! Please check your credentials.",
   uploadAvatar: "Please upload your avatar.",
+  promocode: "Invalid Promocode.",
+  promocodeSuccess: "Promocode applied successfully.",
 };
