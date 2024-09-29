@@ -126,6 +126,7 @@ const Cart = ({ user, setAddressModal }) => {
             onIncrement={handleUpdateQuantity}
             onDecrement={handleUpdateQuantity}
             totalPrice={otherInfo?.totalPrice}
+            discountPromo={otherInfo?.discountPrice}
           />
         )}
 
