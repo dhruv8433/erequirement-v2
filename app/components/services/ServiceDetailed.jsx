@@ -21,7 +21,7 @@ const ServiceDetailed = ({ service, loading }) => {
       ) : (
         <Grid
           container
-          spacing={4}
+          spacing={3}
           key={service.serviceID}
           className="rounded-2xl overflow-hidden"
         >
@@ -32,10 +32,10 @@ const ServiceDetailed = ({ service, loading }) => {
               handleImageClick={handleImageClick}
             />
           </Grid>
-          <Grid item xs={12} md={6} className="justify-between p-4">
+          <Grid item xs={12} md={6} className="justify-between">
             <ServiceInfo service={service} />
           </Grid>
-          <Grid item xs={12} className="p-4">
+          <Grid item xs={12} className="">
             <ServiceFaqs service={service} />
           </Grid>
         </Grid>
