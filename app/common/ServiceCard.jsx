@@ -2,7 +2,10 @@ import React from "react";
 
 const ServiceCard = ({ service }) => {
   return (
-    <div className="service-card border-2 rounded-2xl overflow-hidden relative group hover:cursor-pointer">
+    <div
+      className="service-card border-2 rounded-2xl overflow-hidden relative group hover:cursor-pointer"
+      data-aos="fade-up"
+    >
       {/* Container for the image and overlay */}
       <div className="h-[200px] relative overflow-hidden">
         {/* Image with scaling effect on hover */}

@@ -6,11 +6,12 @@ import { MyHeading } from "@/app/custom/MyText";
 import { useTranslations } from "next-intl";
 
 const TopProviders = ({ data, loading }) => {
-  const t = useTranslations('home');
+  const t = useTranslations("home");
   return (
-    <div className="my-4">
+    <div className="my-4" data-aos="fade-up">
       <MyHeading
-        title={t('top_providers')}
+        data-aos="fade-up"
+        title={t("top_providers")}
         className={"text-2xl my-2 font-semibold"}
       />
       <Grid container spacing={2}>
@@ -21,7 +22,7 @@ const TopProviders = ({ data, loading }) => {
               </Grid>
             ))
           : data.slice(0, 4).map((provider) => (
-              <Grid item key={provider.id} xs={12} sm={6} md={3}>
+              <Grid item key={provider.id} xs={12} sm={6} md={3} data-aos="fade-up">
                 <Provider provider={provider} key={provider.id} />
               </Grid>
             ))}

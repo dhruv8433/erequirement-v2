@@ -18,7 +18,7 @@ const Testimonials = ({ testimonials, loading }) => {
           <h1>Loading..</h1>
         ) : (
           testimonials.map((testimonial) => (
-            <SwiperSlide key={testimonial.id}>
+            <SwiperSlide key={testimonial.id} data-aos="fade-up">
               <Testimonial key={testimonial.id} testimonial={testimonial} />
             </SwiperSlide>
           ))
