@@ -76,7 +76,8 @@
         "selected_time": "Selected Time Slot:",
         "select_payment": "Select Payment Method : ",
         "promocode": "Promo Code",
-        "enter_promo": "Enter Promocode"
+        "enter_promo": "Enter Promocode",
+        "promo_discound": "Promocode Discount"
     },
     "search": {
         "no_service": "No services found.",
