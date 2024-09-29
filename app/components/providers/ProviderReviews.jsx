@@ -33,8 +33,8 @@ const ProviderReviews = () => {
           <UserReviews reviews={singleProviderReviews.reviews} />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-[320px]">
-          <img src={NoReviewsFound.src} alt="" className="object-fit mb-2" />
+        <div className="flex flex-col items-center justify-center min-h-[320px]" data-aos="fade-up"> 
+          <img src={NoReviewsFound.src} alt="" className="object-fit mb-2" data-aos="fade-up"/>
           <h1>{t("no_reviews")}</h1>
         </div>
       )}
