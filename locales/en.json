@@ -74,7 +74,10 @@
         "date_time_info": "Selected Date and time info",
         "selected_date": "Selected Date:",
         "selected_time": "Selected Time Slot:",
-        "select_payment": "Select Payment Method : "
+        "select_payment": "Select Payment Method : ",
+        "promocode": "Promo Code",
+        "enter_promo": "Enter Promocode",
+        "promo_discound": "Promocode Discount"
     },
     "search": {
         "no_service": "No services found.",

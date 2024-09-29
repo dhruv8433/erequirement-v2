@@ -30,7 +30,7 @@ export const ProviderSkeletons = () => {
 // Category Skeleton
 export const CategorySkeleton = () => {
   return (
-    <div className="border-2 border-gray-700 p-3 m-3 rounded-2xl text-center w-[20%]">
+    <div className="border-2 border-gray-700 p-3 m-3 rounded-2xl text-center w-full">
       <Skeleton
         variant="rectangular"
         width={210}

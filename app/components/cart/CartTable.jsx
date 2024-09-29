@@ -22,6 +22,7 @@ const CartTable = ({
   onDecrement,
   totalPrice,
   isMiniCart,
+  discountPromo,
 }) => {
   const locale = useLocale();
   const t = useTranslations("cart");
@@ -61,11 +62,13 @@ const CartTable = ({
             <h1>
               {t("subtotal")}: <span>${totalPrice ? totalPrice : 0}</span>
             </h1>
-            <h1>{t("tax")}: $0</h1>
+            <h1>
+              {t("promo_discound")}: ${discountPromo ? discountPromo : 0}
+            </h1>
             <h1 className="text-xl">
               {t("total")}:{" "}
               <span className="primary-text font-semibold">
-                ${totalPrice ? totalPrice : 0}
+                ${totalPrice ? totalPrice - discountPromo : 0}
               </span>
             </h1>
           </div>

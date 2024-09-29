@@ -1,17 +1,22 @@
-import { MyCardBox, MyServiceCard } from "@/app/custom/MyBox";
+import React from "react";
+import Link from "next/link";
+import { useLocale } from "next-intl";
+import { Rating } from "@mui/material";
+import { DeleteOutline } from "@mui/icons-material";
 import MyIconButton from "@/app/custom/MyIconButton";
 import { useWishlist } from "@/app/hooks/useWishlist";
-import { DeleteOutline, DeleteRounded } from "@mui/icons-material";
-import { Rating } from "@mui/material";
-import { useLocale } from "next-intl";
-import Link from "next/link";
-import React from "react";
+import { MyPrimaryButton } from "@/app/custom/MyButton";
+import { MyCardBox, MyServiceCard } from "@/app/custom/MyBox";
+import { useCart } from "@/app/hooks/useCart";
 
 const ProvidersService = ({ service, index, isProfile }) => {
   const locale = useLocale();
   const { deleteWishlist } = useWishlist(service._id);
+
+  const { AddServiceToCart } = useCart();
+
   return (
-    <>
+    <div>
       {isProfile && (
         <MyCardBox className="relative top-14 ml-[80%] z-10 rounded-full w-min  ">
           <MyIconButton onClick={() => deleteWishlist()}>
@@ -52,14 +57,16 @@ const ProvidersService = ({ service, index, isProfile }) => {
                 readOnly
                 size="small"
               />
-              <button className="primary-bg text-white px-3 py-1 rounded-lg hover:bg-orange-600 transition-colors">
-                Add to Cart
-              </button>
             </div>
           </div>
         </MyServiceCard>
       </Link>
-    </>
+      <MyPrimaryButton
+        className="text-white px-3 py-1 rounded-lg hover:bg-orange-600 transition-colors relative bottom-12 ml-[75%]"
+        title={"Add"}
+        onClickFunction={() => AddServiceToCart(service._id)}
+      />
+    </div>
   );
 };
 

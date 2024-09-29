@@ -3,7 +3,7 @@ import Payment from "./Payment";
 import toast from "react-hot-toast";
 import CartTable from "./CartTable";
 import React, { useState, useEffect } from "react";
-import { steps } from "@/app/config/config";
+import { errorMessages, steps } from "@/app/config/config";
 import { useCart } from "@/app/hooks/useCart";
 import MiniCartLayout from "./MiniCartLayout";
 import DateTimeSelector from "./DateTimeSelector";
@@ -47,7 +47,7 @@ const Cart = ({ user, setAddressModal }) => {
   const handleNext = async () => {
     // Step 0 validation: Check if cart is empty
     if (activeStep === 0 && (!cartData || cartData.length === 0)) {
-      toast.error("Please add items to the cart before proceeding.");
+      toast.error(errorMessages.CartAdd);
       return;
     }
 
@@ -56,7 +56,7 @@ const Cart = ({ user, setAddressModal }) => {
       activeStep === 1 &&
       (!selectedDateTimeSlot.date || !selectedDateTimeSlot.time)
     ) {
-      toast.error("Please select date and time before proceeding.");
+      toast.error(errorMessages.selectDateTime);
       return;
     }
 
@@ -66,14 +66,14 @@ const Cart = ({ user, setAddressModal }) => {
         await createSchedule(selectedDateTimeSlot);
       } catch (error) {
         console.error("Error creating schedule:", error);
-        toast.error("Failed to create schedule. Please try again.");
+        toast.error(errorMessages.scheduleFailed);
         return;
       }
     }
 
     // Step 2 validation: Ensure an address is selected
     if (activeStep === 2 && selectedAddress === "") {
-      toast.error("Please select or add a new address before payment.");
+      toast.error(errorMessages.addAddress);
       return;
     }
 
@@ -126,6 +126,7 @@ const Cart = ({ user, setAddressModal }) => {
             onIncrement={handleUpdateQuantity}
             onDecrement={handleUpdateQuantity}
             totalPrice={otherInfo?.totalPrice}
+            discountPromo={otherInfo?.discountPrice}
           />
         )}
 

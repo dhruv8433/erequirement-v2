@@ -7,12 +7,28 @@ import Advertisement from "@/app/common/Advertisement";
 import MySkeleton from "@/app/custom/MySkeleton";
 import { MyColoredInput } from "@/app/custom/MyInput";
 import { MyPrimaryButton } from "@/app/custom/MyButton";
-import Link from "next/link";
 import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation"; // Import useRouter for programmatic navigation
 
 const Slider = ({ data, loading }) => {
   const [query, setQuery] = useState("");
   const locale = useLocale();
+  const router = useRouter(); // Initialize useRouter for navigation
+
+  // Function to handle search when Enter is pressed or button is clicked
+  const handleSearch = () => {
+    if (query.trim()) {
+      router.push(`/${locale}/search/${query}`); // Navigate to search page with query
+    }
+  };
+
+  // Function to handle search when Enter key is pressed
+  const handleSearchOnEnter = (e) => {
+    if (e.key === "Enter") {
+      handleSearch(); // Call handleSearch when "Enter" is pressed
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -38,13 +54,13 @@ const Slider = ({ data, loading }) => {
             className={"w-[500px] rounded-2xl"}
             inputClass={"p-2 rounded-l"}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleSearchOnEnter} // Listen for "Enter" key press
           />
-          <Link href={`/${locale}/search/${query}`}>
-            <MyPrimaryButton
-              title={"search"}
-              className={"rounded-r p-2 hover:bg-orange-500"}
-            />
-          </Link>
+          <MyPrimaryButton
+            title={"search"}
+            className={"rounded-r p-2 hover:bg-orange-500"}
+            onClick={handleSearch} // Call handleSearch on button click
+          />
         </>
       </div>
     </>

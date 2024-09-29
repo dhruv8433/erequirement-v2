@@ -9,60 +9,81 @@ import { MyColoredInput, MyTextArea } from "@/app/custom/MyInput";
 import { MyPrimaryButton } from "@/app/custom/MyButton";
 import {
   EmailOutlined,
-  Map,
   PhoneOutlined,
   PlaceOutlined,
 } from "@mui/icons-material";
+import { useContact } from "@/app/hooks/useContact"; // Ensure the correct path
 
 const Contact = () => {
+  const { ContactToUs, setContactData } = useContact(); // Destructure the hook
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    ContactToUs(); // Invoke the contact action
+  };
+
+  // Handle input changes to update state
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setContactData((prevState) => ({ ...prevState, [name]: value }));
+  };
+
   return (
     <div>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <MySecondaryBox className="p-4 rounded-2xl">
-            <h1 className="text-6xl text-wrap font-semibold">Get In Touch !</h1>
+            <h1 className="text-6xl text-wrap font-semibold">Get In Touch!</h1>
             <div className="form my-10">
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <div className="my-3 rounded">
                   <MyPrimaryText title={"Your Name"} className={"my-2"} />
                   <MyColoredInput
                     type={"text"}
+                    name="name" // Name attribute for state binding
                     inputClass={"p-2 rounded"}
                     placeholder={"Enter Your Name"}
                     className={"border"}
+                    onChange={handleChange} // Update state on change
                   />
                 </div>
                 <div className="my-3 rounded">
                   <MyPrimaryText title={"Your Email"} className={"my-2"} />
                   <MyColoredInput
-                    type={"text"}
+                    type={"email"} // Use type email for validation
+                    name="email"
                     inputClass={"p-2 rounded"}
                     placeholder={"Enter Your Email"}
                     className={"border"}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="my-3 rounded">
                   <MyPrimaryText title={"Your Subject"} className={"my-2"} />
                   <MyColoredInput
                     type={"text"}
+                    name="subject"
                     inputClass={"p-2 rounded"}
                     placeholder={"Enter Subject"}
                     className={"border"}
+                    onChange={handleChange}
                   />
                 </div>
-                <div className="my-3  rounded">
+                <div className="my-3 rounded">
                   <MyPrimaryText title={"Your Message"} className={"my-2"} />
                   <MyTextArea
-                    type={"text"}
+                    name="message" // Bind the textarea
                     placeholder={"Enter Your Message"}
                     className={"border rounded"}
                     cols={10}
+                    onChange={handleChange}
                   />
                 </div>
-
                 <MyPrimaryButton
                   title={"Send Message"}
                   className="mt-6 w-full p-3 rounded"
+                  onClickFunction={handleSubmit} // Trigger form submission
                 />
               </form>
             </div>
@@ -119,9 +140,9 @@ const Contact = () => {
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d206252.80376346345!2d-115.33980707700024!3d36.125164460739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80beb782a4f57dd1%3A0x3accd5e6d5b379a3!2sLas%20Vegas%2C%20NV%2C%20USA!5e0!3m2!1sen!2sin!4v1725680446186!5m2!1sen!2sin"
           width="100%"
           height="450"
-          allowfullscreen=""
+          allowFullScreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
+          referrerPolicy="no-referrer-when-downgrade"
           className="rounded-2xl active:border-none"
         ></iframe>
       </div>

@@ -23,7 +23,7 @@ export function useReviews(providerId) {
 
   const [error, setError] = useState([]);
 
-  const userId = useSelector((state) => state.auth.user.user._id);
+  const userId = useSelector((state) => state?.auth?.user?.user?._id);
   // get user's all reviews
   const [userReviews, setUserReviews] = useState([]);
   const [userReviewsLoading, setUserReviewsLoading] = useState(true);

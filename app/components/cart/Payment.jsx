@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Radio,
   RadioGroup,
@@ -8,9 +8,21 @@ import {
 import { useTranslations } from "next-intl";
 import { MyCardBox } from "@/app/custom/MyBox";
 import { MyPrimaryText } from "@/app/custom/MyText";
+import { MyColoredInput } from "@/app/custom/MyInput";
+import { MyPrimaryButton } from "@/app/custom/MyButton";
+import { usePromocode } from "@/app/hooks/usePromocode";
 
 const Payment = ({ selectedPaymentMethod, handlePaymentChange }) => {
   const t = useTranslations("cart");
+
+  const [promocode, setPromocode] = useState("");
+  const { CheckPromocode } = usePromocode(promocode);
+
+  const handlePromocode = () => {
+    // after valiating promocode, reload cart
+    CheckPromocode();
+  };
+
   return (
     <MyCardBox className="p-6 rounded-xl space-y-4 min-w-max">
       <MyPrimaryText title={t("select_payment")} />
@@ -42,6 +54,24 @@ const Payment = ({ selectedPaymentMethod, handlePaymentChange }) => {
           />
         </RadioGroup>
       </FormControl>
+
+      {/* take promocode for extra disocunt */}
+      <MyPrimaryText title={t("promocode")} />
+      <div className="flex gap-2">
+        <MyColoredInput
+          inputClass={"p-1 rounded-md border"}
+          placeholder={t("enter_promo")}
+          className={"w-[40%]"}
+          value={promocode}
+          onChange={(e) => setPromocode(e.target.value)}
+        />
+        {/* validation promocode when user click on apply button */}
+        <MyPrimaryButton
+          title={t("apply")}
+          className={"p-1 rounded-md"}
+          onClickFunction={handlePromocode}
+        />
+      </div>
     </MyCardBox>
   );
 };

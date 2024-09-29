@@ -11,6 +11,7 @@ import { MyHeading, MyPrimaryText } from "@/app/custom/MyText";
 import GoogleSignupButton from "@/app/common/GoogleSignupButton";
 import { Phone, Visibility, VisibilityOff } from "@mui/icons-material";
 import { MyBorderdButton, MyPrimaryButton } from "@/app/custom/MyButton";
+import { errorMessages } from "@/app/config/config";
 
 const LoginForm = ({ setSignupForm, setModal }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -35,14 +36,14 @@ const LoginForm = ({ setSignupForm, setModal }) => {
       const response = await LoginUser(loginData);
       if (response && response.data) {
         dispatch(login({ user: response.data }));
-        toast.success("Login successful");
+        toast.success(response.message);
         setModal(false);
       } else {
         throw new Error("Unexpected response format");
       }
     } catch (error) {
       console.log("login error", error);
-      toast.error("Login error", error.message); // Changed to error.message for proper string
+      toast.error(error?.response?.message || errorMessages.loginError); // Changed to error.message for proper string
     }
   };
 

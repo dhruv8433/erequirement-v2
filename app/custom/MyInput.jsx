@@ -14,6 +14,7 @@ const MyColoredInput = ({
   name,
   value,
   inputClass,
+  onKeyDown,
 }) => {
   return (
     <div className={`flex items-center ${className}`}>
@@ -25,6 +26,7 @@ const MyColoredInput = ({
         onChange={onChange ? onChange : null}
         name={name}
         value={value}
+        onKeyDown={onKeyDown ? onKeyDown : null}
       />
     </div>
   );
