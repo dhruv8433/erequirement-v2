@@ -24,15 +24,16 @@ const Payment = ({ selectedPaymentMethod, handlePaymentChange }) => {
   };
 
   return (
-    <MyCardBox className="p-6 rounded-xl space-y-4 min-w-max">
+    <MyCardBox className="p-6 rounded-xl space-y-4 min-w-max" data-aos="fade-up">
       <MyPrimaryText title={t("select_payment")} />
-      <FormControl component="fieldset" className="w-full flex flex-col">
+      <FormControl component="fieldset" className="w-full flex flex-col" data-aos="fade-up">
         <RadioGroup
           aria-label="payment-method"
           name="payment-method"
           value={selectedPaymentMethod}
           onChange={handlePaymentChange}
           className="space-y-4 flex flex-col"
+          data-aos="fade-up"
         >
           <FormControlLabel
             value="paypal"
@@ -57,7 +58,7 @@ const Payment = ({ selectedPaymentMethod, handlePaymentChange }) => {
 
       {/* take promocode for extra disocunt */}
       <MyPrimaryText title={t("promocode")} />
-      <div className="flex gap-2">
+      <div className="flex gap-2" data-aos="fade-up">
         <MyColoredInput
           inputClass={"p-1 rounded-md border"}
           placeholder={t("enter_promo")}
