@@ -27,6 +27,7 @@ const MiniCartLayout = ({ children, user, selectedDateTimeSlot }) => {
             onDecrement={handleUpdateQuantity}
             totalPrice={otherInfo?.totalPrice}
             isMiniCart={true}
+            discountPromo={otherInfo?.discountPrice}
           />
           {/* if user select prefferd date and time then we'll render this component */}
           {(selectedDateTimeSlot?.date || selectedDateTimeSlot?.time) && (
