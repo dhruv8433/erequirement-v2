@@ -8,6 +8,7 @@ import {
 } from "@/app/utils/CartService";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../reducer/cartReducer";
+import { errorMessages } from "../config/config";
 
 /**
  * Custom hook to manage cart state and actions.
@@ -90,7 +91,10 @@ export function useCart() {
   };
 
   const AddServiceToCart = async (serviceId) => {
-    if (!userId) return;
+    if (!userId) {
+      toast.error(errorMessages.loginForAdd);
+      return;
+    }
     try {
       const response = await addToCart(userId, serviceId);
       if (response.success) {
