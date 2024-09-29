@@ -70,7 +70,6 @@ export function useReviews(providerId) {
   // fetch reviews when page loads
   useEffect(() => {
     fetchReviews();
-    fetchUserReviews();
   }, []);
 
   // fetch single provider reviews when providerId changes
@@ -88,5 +87,6 @@ export function useReviews(providerId) {
     singleProviderReviewsLoading,
     userReviews,
     userReviewsLoading,
+    fetchUserReviews,
   };
 }
