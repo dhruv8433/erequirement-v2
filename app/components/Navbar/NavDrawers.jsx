@@ -30,12 +30,14 @@ const NavDrawers = ({
         />
       )}
 
-      {/* cart icon */}
-      <Link href={`/${locale}/cart`}>
-        <IconButton>
-          <ShoppingCartOutlined />
-        </IconButton>
-      </Link>
+      {/* cart icon - display only if user is logged in */}
+      {isAuthenticated && userData && (
+        <Link href={`/${locale}/cart`}>
+          <IconButton>
+            <ShoppingCartOutlined />
+          </IconButton>
+        </Link>
+      )}
 
       {/* setttings icon */}
       <IconButton
