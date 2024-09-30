@@ -18,7 +18,6 @@ const MyPrimaryButton = ({ title, className, onClickFunction }) => {
     <PrimaryButtonStyle
       onClick={onClickFunction ? onClickFunction : null}
       className={`${className}`}
-      data-aos="fade-up"
     >
       {title}
     </PrimaryButtonStyle>
@@ -57,7 +56,6 @@ const MyButton = ({ title, icon, className, onClickFunction, dashed }) => {
       onClick={onClickFunction ? onClickFunction : null}
       className={`${className} rounded-md flex items-center justify-center gap-2`}
       dashed={dashed}
-      data-aos="fade-up"
     >
       {icon && <span>{icon}</span>}
       {title}
