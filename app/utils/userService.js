@@ -1,4 +1,6 @@
+import toast from "react-hot-toast";
 import { httpAxios } from "../httpAxios";
+import { errorMessages } from "../config/config";
 
 // signup user
 async function SignupUser(userData) {
@@ -22,6 +24,10 @@ async function SignupUser(userData) {
 
 // login user
 async function LoginUser(userData) {
+  if (!userData.email || !userData.password) {
+    // toast.error(errorMessages.feildsRequire);
+    return;
+  }
   const response = await httpAxios.post("/user/login", {
     email: userData.email,
     password: userData.password,

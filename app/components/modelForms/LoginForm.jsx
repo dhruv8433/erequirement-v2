@@ -31,7 +31,6 @@ const LoginForm = ({ setSignupForm, setModal }) => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login Data:", loginData);
     try {
       const response = await LoginUser(loginData);
       if (response && response.data) {
