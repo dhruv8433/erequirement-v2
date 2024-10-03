@@ -4,9 +4,10 @@ import { useTranslations } from "next-intl";
 import ProfileHeading from "./ProfileHeading";
 import { MyCardBox } from "@/app/custom/MyBox";
 import NoNotification from "@/app/assets/notification.png";
-import { NotificationsOutlined } from "@mui/icons-material";
+import { DeleteOutline, NotificationsOutlined } from "@mui/icons-material";
 import { useNotifications } from "@/app/hooks/useNotifications";
 import { Pagination } from "@mui/material";
+import MyIconButton from "@/app/custom/MyIconButton";
 
 const Notifications = () => {
   const t = useTranslations("profile");
@@ -14,7 +15,7 @@ const Notifications = () => {
 
   return (
     <MyCardBox className="p-5 rounded-xl">
-      <ProfileHeading heading={t("notifications")} />
+      <ProfileHeading heading={t("notifications")} isAction={true} actionTitle={'Delete All'} />
 
       {loading ? (
         <h1>Loading...</h1>
@@ -29,7 +30,12 @@ const Notifications = () => {
               <div className="flex items-center gap-4 w-full">
                 <NotificationsOutlined />
                 <div className="w-full">
-                  <h1 data-aos="fade-up">{notification.notify}</h1>
+                  <div className="flex justify-between items-center">
+                    <h1 data-aos="fade-up">{notification.notify}</h1>
+                    <MyIconButton>
+                      <DeleteOutline fontSize="small" color="error"/>
+                    </MyIconButton>
+                  </div>
                   <div className="flex justify-between">
                     <h1 data-aos="fade-up">
                       {dayjs(notification.timestamp).format("DD-MM-YYYY")}
