@@ -9,6 +9,9 @@ export function useOrders(userId, cartId, orderType) {
   const [userOrders, setUserOrders] = useState([]);
   const [userOrdersLoading, setUserOrdersLoading] = useState(true);
 
+  const [page, setPage] = useState(1); // Default to the first page
+  const limit = 3; // Define the limit for orders per page
+
   async function placeOrder() {
     try {
       setLoading(true);
@@ -23,7 +26,7 @@ export function useOrders(userId, cartId, orderType) {
 
   async function getUserOrders() {
     try {
-      const response = await fetchOrders(userId);
+      const response = await fetchOrders(userId, page, limit);
       setUserOrders(response.data);
       setUserOrdersLoading(false);
     } catch (error) {
@@ -35,7 +38,15 @@ export function useOrders(userId, cartId, orderType) {
   // get user orders
   useEffect(() => {
     getUserOrders();
-  }, []);
+  }, [page, userId]);
 
-  return { order, error, loading, placeOrder, userOrders, userOrdersLoading };
+  return {
+    order,
+    error,
+    loading,
+    placeOrder,
+    userOrders,
+    userOrdersLoading,
+    setPage,
+  };
 }

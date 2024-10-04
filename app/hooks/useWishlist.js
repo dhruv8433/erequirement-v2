@@ -25,6 +25,9 @@ export const useWishlist = (serviceId) => {
   const [wishlists, setWishlists] = useState([]);
   const [wishlistsLoading, setWishlistsLoading] = useState(true);
 
+  const [page, setPage] = useState(1);
+  const limit = 9;
+
   // handle add wishlist in redux
   const dispatch = useDispatch();
 
@@ -44,11 +47,11 @@ export const useWishlist = (serviceId) => {
   // get particualr user's all wishlist services
   const fetchUsersWishlists = async () => {
     try {
-      const response = await getWishlist(userId);
+      const response = await getWishlist(userId, page, limit);
       console.log("response", response);
-      setWishlists(response.data.services);
+      setWishlists(response.data);
       setWishlistsLoading(false);
-      dispatch(setWishlistsToRedux(response.data.services));
+      dispatch(setWishlistsToRedux(response.data));
     } catch (error) {
       setWishlistsLoading(false);
       console.log("error", error);
@@ -57,7 +60,7 @@ export const useWishlist = (serviceId) => {
 
   useEffect(() => {
     if (!serviceId) fetchUsersWishlists();
-  }, []);
+  }, [page, userId]);
 
   const deleteWishlist = async () => {
     try {
@@ -70,5 +73,11 @@ export const useWishlist = (serviceId) => {
     }
   };
 
-  return { handleAddWishlist, wishlists, wishlistsLoading, deleteWishlist };
+  return {
+    handleAddWishlist,
+    wishlists,
+    wishlistsLoading,
+    deleteWishlist,
+    setPage,
+  };
 };
