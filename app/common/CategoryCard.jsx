@@ -15,6 +15,7 @@ const CategoryCard = ({ category }) => {
           src={category.image}
           alt={category.name || "Category" + category.id}
           className="object-contain aspect-square h-[120px] w-full transition-transform duration-500 ease-in-out transform group-hover:scale-105"
+          loading="lazy"
         />
         <h1>{category.name}</h1>
       </MyHoverCardBox>

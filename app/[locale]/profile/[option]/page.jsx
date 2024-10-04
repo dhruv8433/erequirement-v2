@@ -11,6 +11,7 @@ import ProfileAddress from "@/app/components/profile/ProfileAddress";
 import ProfileReviews from "@/app/components/profile/ProfileReviews";
 import Notifications from "@/app/components/profile/Notifications";
 import DeleteAccount from "@/app/components/profile/DeleteAccount";
+import OrderDetailed from "@/app/components/profile/OrderDetailed";
 
 const page = () => {
   const { option } = useParams();
