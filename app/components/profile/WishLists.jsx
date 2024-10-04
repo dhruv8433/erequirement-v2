@@ -13,10 +13,11 @@ import Link from "next/link";
 
 const WishLists = () => {
   const t = useTranslations("profile");
-  const { wishlists, wishlistsLoading, setPage } = useWishlist();
+  const { wishlists, wishlistsLoading, setPage, deleteAllWishlists } =
+    useWishlist();
 
   const allWishLists = useSelector(
-    (state) => state.wishlist.wishlists.wishlist.services
+    (state) => state.wishlist.wishlists.wishlist?.services
   );
   const wishlistInfo = useSelector((state) => state.wishlist.wishlists);
   console.log("all ", allWishLists);
@@ -24,7 +25,12 @@ const WishLists = () => {
 
   return (
     <MyCardBox className="p-5 rounded-2xl">
-      <ProfileHeading heading={t("wishlists")} />
+      <ProfileHeading
+        heading={t("wishlists")}
+        actionTitle={"Remove All"}
+        isAction={allWishLists && allWishLists?.length > 0}
+        actionEvent={deleteAllWishlists}
+      />
 
       {/* services cards */}
       <div className="my-4">
@@ -35,7 +41,7 @@ const WishLists = () => {
                 <ProviderServiceSkeleton />
               </Grid>
             ))
-          ) : allWishLists.length > 0 ? (
+          ) : allWishLists && allWishLists?.length > 0 ? (
             <>
               {allWishLists.map((service, index) => (
                 <Grid item xs={12} md={4} key={index}>
@@ -63,7 +69,6 @@ const WishLists = () => {
               <img
                 src={FavImage.src}
                 alt=""
-                srcset=""
                 className="h-48 w-48 text-center"
               />
               <h1 className="text-center">{t("no_wishlist")}</h1>

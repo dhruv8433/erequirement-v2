@@ -9,10 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addWishlist,
   getWishlist,
+  removeAllWishlists,
   removeWishlist,
 } from "../utils/WishlistService";
 import { useEffect, useState } from "react";
-import { setWishlistsToRedux } from "../reducer/wishlistReducer";
+import {
+  removeAll,
+  removeWishlistById,
+  setWishlistsToRedux,
+} from "../reducer/wishlistReducer";
 
 export const useWishlist = (serviceId) => {
   // check for user authentication and get user id
@@ -66,10 +71,22 @@ export const useWishlist = (serviceId) => {
     try {
       const response = await removeWishlist(userId, serviceId);
       toast.success(response.message);
-      // refetch all wishlists of particular user
-      await fetchUsersWishlists();
+      const deletePArticuler = dispatch(removeWishlistById(serviceId));
+      console.log("delete", deletePArticuler);
     } catch (error) {
       console.log("error", error);
+    }
+  };
+
+  const deleteAllWishlists = async () => {
+    try {
+      const resposne = await removeAllWishlists(userId);
+      toast.success(resposne.message || "All wishlists deleted successfully");
+      // refetch all wishlists of particular user
+      await fetchUsersWishlists();
+      dispatch(removeAll());
+    } catch (error) {
+      console.log("Error in removing all wishlists", error);
     }
   };
 
@@ -79,5 +96,6 @@ export const useWishlist = (serviceId) => {
     wishlistsLoading,
     deleteWishlist,
     setPage,
+    deleteAllWishlists,
   };
 };

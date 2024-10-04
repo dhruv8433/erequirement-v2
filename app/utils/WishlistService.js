@@ -12,7 +12,9 @@ async function addWishlist(userId, serviceId) {
 
 // get particular user's all wishlist services
 async function getWishlist(userId, offset, limit) {
-  const response = await httpAxios.get(`/profile/get-wishlist/${userId}?offset=${offset - 1}&limit=${limit}`);
+  const response = await httpAxios.get(
+    `/profile/get-wishlist/${userId}?offset=${offset - 1}&limit=${limit}`
+  );
   return response.data;
 }
 
@@ -25,4 +27,9 @@ async function removeWishlist(userId, serviceId) {
   return response.data;
 }
 
-export { addWishlist, getWishlist, removeWishlist };
+async function removeAllWishlists(userId) {
+  const response = await httpAxios.delete(`/profile/delete-wishlist/${userId}`);
+  return response.data;
+}
+
+export { addWishlist, getWishlist, removeWishlist, removeAllWishlists };
