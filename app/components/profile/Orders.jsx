@@ -1,25 +1,19 @@
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import ProfileHeading from "./ProfileHeading";
 import { useOrders } from "@/app/hooks/useOrders";
-import dayjs from "dayjs"; // Import dayjs for date formatting
-import {
-  Pagination,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import { MyCardBox } from "@/app/custom/MyBox";
+import { Pagination } from "@mui/material";
+import { MyCardBox, MyPrimaryBox } from "@/app/custom/MyBox";
 import NoOrders from "@/app/assets/orders.png";
+import OrderCard from "./OrderCard";
+import Link from "next/link";
 
 const Orders = ({ userId }) => {
   const t = useTranslations("profile");
   const { userOrders, userOrdersLoading, setPage } = useOrders(userId);
 
   console.log("userOrders", useOrders);
+  const locale = useLocale();
 
   return (
     <MyCardBox className="border p-5 rounded-2xl" data-aos="fade-up">
@@ -32,78 +26,18 @@ const Orders = ({ userId }) => {
       ) : userOrders.orders.length > 0 ? (
         <div>
           {userOrders.orders.map((order) => (
-            <div
+            <Link
               key={order._id}
-              className="border rounded-2xl my-3 p-4"
-              data-aos="fade-up"
+              href={`/${locale}/profile/orders/${order._id}`}
             >
-              {/* Order Details */}
-              <div className="flex justify-between items-center mb-4">
-                <h1 data-aos="fade-up">
-                  <strong>Order Date:</strong>{" "}
-                  {dayjs(order.createdAt).format("DD-MM-YYYY")}
-                </h1>
-                <h1
-                  data-aos="fade-up"
-                  className={`border border-dashed px-2 py-1 rounded-md
-                ${
-                  order.orderStatus === "pending" &&
-                  "border-yellow-200 text-yellow-500"
-                }
-                ${
-                  order.orderStatus === "completed" &&
-                  "border-green-200 text-green-500"
-                }
-                `}
-                >
-                  {order.orderStatus}
-                </h1>
-              </div>
-
-              {/* Product Table */}
-              <TableContainer className="my-5">
-                <Table data-aos="fade-up">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="left">
-                        <strong>Product</strong>
-                      </TableCell>
-                      <TableCell align="right" className="w-[200px]">
-                        <strong>Price</strong>
-                      </TableCell>
-                      <TableCell align="right" className="w-[200px]">
-                        <strong>Quantity</strong>
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {order.service.map((item, index) => (
-                      <TableRow key={index}>
-                        <TableCell align="left">
-                          {item.product.ServiceName}
-                        </TableCell>
-                        <TableCell align="right" className="w-[200px]">
-                          {item.product.DiscountedPrice}
-                        </TableCell>
-                        <TableCell align="right" className="w-[200px]">
-                          {item.quantity}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-
-              {/* Total Price */}
-              <div className="flex justify-between items-center mt-4">
-                <h1 className="text-gray-500" data-aos="fade-up">
-                  <strong>Order ID:</strong> {order._id}
-                </h1>
-                <h1 data-aos="fade-up">
-                  <strong>Total Price:</strong> ${order.totalPrice}
-                </h1>
-              </div>
-            </div>
+              <MyPrimaryBox
+                key={order._id}
+                className="border rounded-2xl my-3 p-4"
+                data-aos="fade-up"
+              >
+                <OrderCard order={order} />
+              </MyPrimaryBox>
+            </Link>
           ))}
           <div className="flex justify-center mt-2">
             <Pagination
