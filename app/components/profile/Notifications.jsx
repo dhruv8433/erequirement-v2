@@ -11,11 +11,22 @@ import MyIconButton from "@/app/custom/MyIconButton";
 
 const Notifications = () => {
   const t = useTranslations("profile");
-  const { loading, notifications, setPage } = useNotifications();
+  const {
+    loading,
+    notifications,
+    setPage,
+    deleteUserNotification,
+    DeleteUserAllNotifications,
+  } = useNotifications();
 
   return (
     <MyCardBox className="p-5 rounded-xl">
-      <ProfileHeading heading={t("notifications")} isAction={true} actionTitle={'Delete All'} />
+      <ProfileHeading
+        heading={t("notifications")}
+        actionTitle={"Delete All"}
+        actionEvent={DeleteUserAllNotifications}
+        isAction={notifications.messages.length > 0}
+      />
 
       {loading ? (
         <h1>Loading...</h1>
@@ -32,8 +43,10 @@ const Notifications = () => {
                 <div className="w-full">
                   <div className="flex justify-between items-center">
                     <h1 data-aos="fade-up">{notification.notify}</h1>
-                    <MyIconButton>
-                      <DeleteOutline fontSize="small" color="error"/>
+                    <MyIconButton
+                      onClick={() => deleteUserNotification(notification._id)}
+                    >
+                      <DeleteOutline fontSize="small" color="error" />
                     </MyIconButton>
                   </div>
                   <div className="flex justify-between">

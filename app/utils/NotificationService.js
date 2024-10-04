@@ -11,4 +11,24 @@ async function getUserNotifications(userId, page = 1, limit = 10) {
   return response.data;
 }
 
-export { getUserNotifications };
+// remove specific notification based on user id and notification id
+async function removeSpecificNotification(userId, notificationId) {
+  const response = await httpAxios.delete(
+    `/profile/notification/${userId}/${notificationId}`
+  );
+
+  return response.data;
+}
+
+// remove all notification based on user id
+async function removeAllNotifications(userId) {
+  const response = await httpAxios.delete(`/profile/notification/${userId}`);
+
+  return response.data;
+}
+
+export {
+  getUserNotifications,
+  removeAllNotifications,
+  removeSpecificNotification,
+};

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getUserNotifications } from "../utils/NotificationService";
+import {
+  getUserNotifications,
+  removeAllNotifications,
+  removeSpecificNotification,
+} from "../utils/NotificationService";
+import toast from "react-hot-toast";
 
 /**
  * Notification hook
@@ -38,10 +43,35 @@ export const useNotifications = () => {
     }
   }, [userId, page]); // Run effect when userId or page changes
 
+  const deleteUserNotification = async (notificationId) => {
+    try {
+      const response = await removeSpecificNotification(userId, notificationId);
+      console.log("notification removed successfully", response);
+      fetchNotifications(page);
+    } catch (error) {
+      console.log("notification removed successfully", error);
+    }
+  };
+
+  const DeleteUserAllNotifications = async () => {
+    try {
+      const response = await removeAllNotifications(userId);
+      console.log("notification removed successfully", response);
+      toast.success(
+        response.message || "All Notification removed successfully"
+      );
+      fetchNotifications(page);
+    } catch (error) {
+      console.log("notification removed error", error);
+    }
+  };
+
   // Return notifications, loading state, and a function to update the page
   return {
     notifications,
     loading,
     setPage,
+    deleteUserNotification,
+    DeleteUserAllNotifications,
   };
 };
