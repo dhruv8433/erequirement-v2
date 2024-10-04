@@ -17,7 +17,6 @@ const DeleteAccount = () => {
           data-aos="fade-up"
           src={DeleteAccountImg.src}
           alt=""
-          srcset=""
           className="h-48 w-48"
         />
         <h1 data-aos="fade-up">{t("delete_msg")}</h1>
