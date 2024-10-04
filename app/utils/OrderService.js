@@ -11,8 +11,10 @@ async function PlaceOrder(cartId, userId, orderType) {
   return response.data;
 }
 
-async function fetchOrders(userId) {
-  const response = await httpAxios.get(`/order/get-orders/${userId}`);
+async function fetchOrders(userId, offset, limit) {
+  const response = await httpAxios.get(
+    `/order/get-orders/${userId}?offset=${offset - 1}&limit=${limit}`
+  );
   return response.data;
 }
 

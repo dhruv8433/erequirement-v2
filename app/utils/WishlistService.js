@@ -11,8 +11,8 @@ async function addWishlist(userId, serviceId) {
 }
 
 // get particular user's all wishlist services
-async function getWishlist(userId) {
-  const response = await httpAxios.get(`/profile/get-wishlist/${userId}`);
+async function getWishlist(userId, offset, limit) {
+  const response = await httpAxios.get(`/profile/get-wishlist/${userId}?offset=${offset - 1}&limit=${limit}`);
   return response.data;
 }
 
