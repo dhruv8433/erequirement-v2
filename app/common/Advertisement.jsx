@@ -10,6 +10,7 @@ const Advertisement = ({ ads }) => {
         className="object-cover aspect-video h-full w-full "
         width={"100%"}
         alt=""
+        loading="lazy"
       />
       ;
     </Box>
