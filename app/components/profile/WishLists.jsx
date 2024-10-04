@@ -1,6 +1,6 @@
 import { useWishlist } from "@/app/hooks/useWishlist";
 import React from "react";
-import { Grid } from "@mui/material";
+import { Grid, Pagination } from "@mui/material";
 import { useSelector } from "react-redux";
 import FavImage from "@/app/assets/fav.png";
 import { useLocale, useTranslations } from "next-intl";
@@ -13,9 +13,13 @@ import Link from "next/link";
 
 const WishLists = () => {
   const t = useTranslations("profile");
-  const { wishlists, wishlistsLoading } = useWishlist();
+  const { wishlists, wishlistsLoading, setPage } = useWishlist();
 
-  const allWishLists = useSelector((state) => state.wishlist.wishlists);
+  const allWishLists = useSelector(
+    (state) => state.wishlist.wishlists.wishlist.services
+  );
+  const wishlistInfo = useSelector((state) => state.wishlist.wishlists);
+  console.log("all ", allWishLists);
   const locale = useLocale();
 
   return (
@@ -32,17 +36,28 @@ const WishLists = () => {
               </Grid>
             ))
           ) : allWishLists.length > 0 ? (
-            allWishLists.map((service, index) => (
-              <Grid item xs={12} md={4} key={index}>
-                <div key={index}>
-                  <ProvidersService
-                    index={index}
-                    service={service.product}
-                    isProfile={true}
-                  />
-                </div>
-              </Grid>
-            ))
+            <>
+              {allWishLists.map((service, index) => (
+                <Grid item xs={12} md={4} key={index}>
+                  <div key={index}>
+                    <ProvidersService
+                      index={index}
+                      service={service.product}
+                      isProfile={true}
+                    />
+                  </div>
+                </Grid>
+              ))}
+              <br />
+              <div className="w-full flex justify-center">
+                <Pagination
+                  count={wishlistInfo.totalPages} // Use totalPages from the wishlistInfo state
+                  color="primary"
+                  onChange={(event, value) => setPage(value)} // Update the page on pagination change
+                  page={wishlistInfo.offset + 1} // Set the current active page
+                />
+              </div>
+            </>
           ) : (
             <div className="flex flex-col justify-center min-h-[620px] text-center items-center w-full">
               <img
