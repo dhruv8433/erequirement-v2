@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { httpAxios } from "../httpAxios";
 import { errorMessages } from "../config/config";
+import { useSelector } from "react-redux";
 
 // signup user
 async function SignupUser(userData) {
@@ -64,4 +65,24 @@ async function DeleteAccount(userId) {
   return response.data;
 }
 
-export { LoginUser, SignupUser, SignupWithGoogle, LogoutUser, DeleteAccount };
+async function UpdateUser(userData, userId) {
+
+  const response = await httpAxios.put("/user/edit-user", {
+    userId: userId,
+    fullname: userData.fullname,
+    email: userData.email,
+    phone: userData.phone,
+    avatar: userData.avatar,
+  });
+
+  return response.data;
+}
+
+export {
+  LoginUser,
+  SignupUser,
+  SignupWithGoogle,
+  LogoutUser,
+  DeleteAccount,
+  UpdateUser,
+};
