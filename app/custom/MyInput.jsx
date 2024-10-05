@@ -15,6 +15,7 @@ const MyColoredInput = ({
   value,
   inputClass,
   onKeyDown,
+  disabled,
 }) => {
   return (
     <div className={`flex items-center ${className}`}>
@@ -22,11 +23,14 @@ const MyColoredInput = ({
       <Coloredinput
         type={type}
         placeholder={placeholder}
-        className={`flex-grow outline-none bg-transparent ${inputClass}`}
+        className={`flex-grow outline-none bg-transparent ${inputClass} ${
+          disabled ? "text-gray-400" : ""
+        }`}
         onChange={onChange ? onChange : null}
         name={name}
         value={value}
         onKeyDown={onKeyDown ? onKeyDown : null}
+        disabled={disabled}
       />
     </div>
   );
