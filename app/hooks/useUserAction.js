@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteAccount, LogoutUser } from "../utils/userService";
+import { DeleteAccount, LogoutUser, UpdateUser } from "../utils/userService";
 import { useEffect, useState } from "react";
-import { logoutFromRedux } from "../reducer/authReducer";
+import { login, logoutFromRedux } from "../reducer/authReducer";
 import { useRouter } from "next/navigation"; // Correct import for useRouter
 import toast from "react-hot-toast";
 
@@ -53,9 +53,21 @@ export const useUserAction = () => {
     }
   }
 
+  async function UpdateUserProfile(userData) {
+    try {
+      const response = await UpdateUser(userData, userId);
+      console.log("User updated:", response.data);
+      dispatch(login({ user: response.data }));
+      toast.success(response.message || "User updated successfully");
+    } catch (error) {
+      console.log("Error updating user", error);
+    }
+  }
+
   return {
     logout,
     UserLogout,
     DeleteUserAccount,
+    UpdateUserProfile,
   };
 };

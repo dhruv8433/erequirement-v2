@@ -11,11 +11,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { MyCardBox, MyHoverCardBox } from "@/app/custom/MyBox";
 import MyIconButton from "@/app/custom/MyIconButton";
 import {
-  ArrowDropDown,
   ArrowDropDownOutlined,
   ArrowDropUpOutlined,
-  ArrowUpward,
-  ArrowUpwardOutlined,
   EditOutlined,
 } from "@mui/icons-material";
 import EditUserModal from "@/app/model/EditUserModal";
@@ -118,8 +115,8 @@ const ProfileNavigation = () => {
 
       {/* Edit user modal */}
       <MyModal open={openEdit} setOpen={setOpenEdit}>
-        <MyCardBox className="p-2 rounded-2xl">
-          <EditUserModal />
+        <MyCardBox className="p-2 rounded-2xl" width={{xs: "300px", md: "400px"}}>
+          <EditUserModal setOpenEdit={setOpenEdit} />
         </MyCardBox>
       </MyModal>
     </MyCardBox>
