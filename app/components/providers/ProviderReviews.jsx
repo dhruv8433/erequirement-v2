@@ -7,8 +7,16 @@ import { useProviders } from "@/app/hooks/useProviders";
 import { UserReviewsSkeleton } from "@/app/custom/CustomSkeleton";
 import NoReviewsFound from "@/app/assets/no-reviews.png";
 import { useTranslations } from "next-intl";
+import { Pagination } from "@mui/material";
 
-const ProviderReviews = ({ loading, reviews, error }) => {
+const ProviderReviews = ({
+  loading,
+  reviews,
+  error,
+  setPage,
+  totalPages,
+  offset,
+}) => {
   console.log("single reviews", reviews);
   const t = useTranslations("providers");
 
@@ -23,6 +31,14 @@ const ProviderReviews = ({ loading, reviews, error }) => {
           <ReviewAnalysis reviewAnalysis={reviews.analysis.analytics} />
           {/* user reviews */}
           <UserReviews reviews={reviews.reviews} />
+          <div className="flex justify-center mt-2">
+            <Pagination
+              count={totalPages} // Use totalPages from the userOrders state
+              color="primary"
+              onChange={(event, value) => setPage(value)} // Update the page on pagination change
+              page={offset + 1} // Set the current active page
+            />
+          </div>
         </div>
       ) : (
         <div

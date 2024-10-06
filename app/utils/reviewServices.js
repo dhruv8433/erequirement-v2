@@ -17,8 +17,10 @@ async function getParticularUserReviews(userId, offset, limit) {
   return response.data;
 }
 
-async function getParticularServiceReviews(serviceId) {
-  const response = await httpAxios.get(`/review/service/${serviceId}`);
+async function getParticularServiceReviews(serviceId, offset, limit) {
+  const response = await httpAxios.get(
+    `/review/service/${serviceId}?offset=${offset - 1}&limit=${limit}`
+  );
   return response.data;
 }
 
