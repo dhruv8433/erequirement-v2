@@ -13,6 +13,9 @@ export function useServices(id, serviceId) {
   const [providerService, setProviderServices] = useState([]);
   const [serviceLoading, setServiceLoading] = useState(true);
 
+  const limit = 6;
+  const [page, setPage] = useState(1);
+
   async function fetchService() {
     try {
       const response = await getServices(serviceId);
@@ -26,7 +29,7 @@ export function useServices(id, serviceId) {
 
   async function fetchProviderServices(id) {
     try {
-      const serviceData = await getProviderServices(id);
+      const serviceData = await getProviderServices(id, page, limit);
       setProviderServices(serviceData.data);
       setServiceLoading(false);
     } catch (error) {
@@ -35,14 +38,15 @@ export function useServices(id, serviceId) {
   }
 
   useEffect(() => {
-    fetchService(serviceId);
+    if (serviceId) fetchService(serviceId);
     fetchProviderServices(id);
-  }, []);
+  }, [page]);
 
   return {
     service,
     loading,
     providerService,
     serviceLoading,
+    setPage,
   };
 }
