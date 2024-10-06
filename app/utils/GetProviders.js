@@ -1,8 +1,10 @@
 import { httpAxios } from "../httpAxios";
 
 // utils for getting providers
-export async function getProviders() {
-  const response = await httpAxios.get("/get-providers");
+export async function getProviders(offert, limit) {
+  const response = await httpAxios.get(
+    `/get-providers?offset=${offert - 1}&limit=${limit}`
+  );
   return response.data;
 }
 
