@@ -8,33 +8,33 @@ import { UserReviewsSkeleton } from "@/app/custom/CustomSkeleton";
 import NoReviewsFound from "@/app/assets/no-reviews.png";
 import { useTranslations } from "next-intl";
 
-const ProviderReviews = () => {
-  const { id } = useParams();
-  const { singleProvider, singleProviderLoading } = useProviders(id);
-  // fetch reviews of single provider based on their id
-  const { singleProviderReviews, singleProviderReviewsLoading, error } =
-    useReviews(singleProvider._id);
-
-  console.log("single reviews", singleProviderReviews);
+const ProviderReviews = ({ loading, reviews, error }) => {
+  console.log("single reviews", reviews);
   const t = useTranslations("providers");
 
   return (
     <div className="my-2">
-      {singleProviderReviewsLoading ? (
+      {loading ? (
         // loading skeleton
         <UserReviewsSkeleton />
       ) : error.statusCode !== 404 ? (
         <div className="my-4">
           {/* reviews analysis */}
-          <ReviewAnalysis
-            reviewAnalysis={singleProviderReviews.analysis.analytics}
-          />
+          <ReviewAnalysis reviewAnalysis={reviews.analysis.analytics} />
           {/* user reviews */}
-          <UserReviews reviews={singleProviderReviews.reviews} />
+          <UserReviews reviews={reviews.reviews} />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-[320px]" data-aos="fade-up"> 
-          <img src={NoReviewsFound.src} alt="" className="object-fit mb-2" data-aos="fade-up"/>
+        <div
+          className="flex flex-col items-center justify-center min-h-[320px]"
+          data-aos="fade-up"
+        >
+          <img
+            src={NoReviewsFound.src}
+            alt=""
+            className="object-fit mb-2"
+            data-aos="fade-up"
+          />
           <h1>{t("no_reviews")}</h1>
         </div>
       )}
