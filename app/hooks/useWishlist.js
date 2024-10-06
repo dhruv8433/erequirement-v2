@@ -23,7 +23,7 @@ export const useWishlist = (serviceId) => {
   // check for user authentication and get user id
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const userId = isAuthenticated
-    ? useSelector((state) => state.auth.user.user._id)
+    ? useSelector((state) => state.auth?.user?.user?._id)
     : null;
 
   // state for wishlist

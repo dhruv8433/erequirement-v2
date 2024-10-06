@@ -18,7 +18,7 @@ export function useReviews(providerId) {
   // Pagination state
   const [page, setPage] = useState(1);
   const providerLimit = 2; // Limit for provider and service reviews
-  const userLimit = 5; // Limit for user reviews
+  const userLimit = 3; // Limit for user reviews
 
   // single provider reviews based on their id
   const [singleProviderReviews, setSingleProviderReviews] = useState([]);
