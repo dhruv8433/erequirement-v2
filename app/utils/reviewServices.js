@@ -10,8 +10,10 @@ async function getParticularProviderReviews(id) {
   return response.data;
 }
 
-async function getParticularUserReviews(userId) {
-  const response = await httpAxios.get(`/review/user/${userId}`);
+async function getParticularUserReviews(userId, offset, limit) {
+  const response = await httpAxios.get(
+    `/review/user/${userId}?offset=${offset - 1}&limit=${limit}`
+  );
   return response.data;
 }
 
@@ -49,6 +51,7 @@ async function addProviderReview(providerId, userId, reviewData) {
     throw error; // Optionally throw the error to handle it later
   }
 }
+
 async function addServiceReview(serviceId, userId, reviewData) {
   // Create FormData object to handle multipart form submission
   const formData = new FormData();
