@@ -15,8 +15,75 @@ async function getParticularUserReviews(userId) {
   return response.data;
 }
 
+async function getParticularServiceReviews(serviceId) {
+  const response = await httpAxios.get(`/review/service/${serviceId}`);
+  return response.data;
+}
+
+async function addProviderReview(providerId, userId, reviewData) {
+  // Create FormData object to handle multipart form submission
+  const formData = new FormData();
+
+  // Append data to FormData
+  formData.append("id", providerId);
+  formData.append("userId", userId);
+  formData.append("rating", reviewData.rating);
+  formData.append("review", reviewData.review);
+
+  // Check if an image was selected and append the file
+  if (reviewData.selectedImage) {
+    formData.append("media", reviewData.selectedImage);
+  }
+
+  try {
+    // Send POST request with FormData
+    const response = await httpAxios.post(`/review/provider`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // Set the correct content type
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error submitting review:", error);
+    throw error; // Optionally throw the error to handle it later
+  }
+}
+async function addServiceReview(serviceId, userId, reviewData) {
+  // Create FormData object to handle multipart form submission
+  const formData = new FormData();
+
+  // Append data to FormData
+  formData.append("id", serviceId);
+  formData.append("userId", userId);
+  formData.append("rating", reviewData.rating);
+  formData.append("review", reviewData.review);
+
+  // Check if an image was selected and append the file
+  if (reviewData.selectedImage) {
+    formData.append("media", reviewData.selectedImage);
+  }
+
+  try {
+    // Send POST request with FormData
+    const response = await httpAxios.post(`/review/service`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // Set the correct content type
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error submitting review:", error);
+    throw error; // Optionally throw the error to handle it later
+  }
+}
+
 export {
   getProvidersReviews,
   getParticularProviderReviews,
   getParticularUserReviews,
+  getParticularServiceReviews,
+  addProviderReview,
+  addServiceReview,
 };

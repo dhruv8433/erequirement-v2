@@ -18,4 +18,9 @@ async function fetchOrders(userId, offset, limit) {
   return response.data;
 }
 
-export { PlaceOrder, fetchOrders };
+async function fetchOrderById(userId, orderId) {
+  const response = await httpAxios.get(`/order/get-order/${userId}/${orderId}`);
+  return response.data;
+}
+
+export { PlaceOrder, fetchOrders, fetchOrderById };
