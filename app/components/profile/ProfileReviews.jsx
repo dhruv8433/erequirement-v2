@@ -16,7 +16,7 @@ const ProfileReviews = () => {
   useEffect(() => {
     fetchUserReviews();
   }, [page]);
-  
+
   return (
     <MyCardBox className="p-5 rounded-2xl">
       <ProfileHeading heading={t("reviews")} />
@@ -31,7 +31,7 @@ const ProfileReviews = () => {
               count={userReviews.totalPages} // Use totalPages from the userOrders state
               color="primary"
               onChange={(event, value) => setPage(value)} // Update the page on pagination change
-              page={userReviews.offset + 1} // Set the current active page
+              page={userReviews.currnetPage} // Set the current active page
             />
           </div>
         </>

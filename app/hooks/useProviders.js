@@ -12,7 +12,7 @@ export function useProviders(providerId) {
   const [singleProvider, setSingleProvider] = useState({});
   const [singleProviderLoading, setSingleProviderLoading] = useState(true);
 
-  const limit = 12;
+  const limit = 8;
   const [page, setPage] = useState(1);
 
   async function fetchProviders() {

@@ -44,7 +44,7 @@ const Orders = ({ userId }) => {
               count={userOrders.totalPages} // Use totalPages from the userOrders state
               color="primary"
               onChange={(event, value) => setPage(value)} // Update the page on pagination change
-              page={userOrders.offset + 1} // Set the current active page
+              page={userOrders.currentPage} // Set the current active page
             />
           </div>
         </div>

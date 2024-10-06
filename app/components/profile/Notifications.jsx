@@ -66,7 +66,7 @@ const Notifications = () => {
               count={notifications.totalPages} // Use totalPages from the notifications state
               color="primary"
               onChange={(event, value) => setPage(value)} // Update the page on pagination change
-              page={notifications.offset + 1} // Set the current active page
+              page={notifications.currentPage + 1} // Set the current active page
             />
           </div>
         </>
