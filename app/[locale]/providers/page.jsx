@@ -24,12 +24,12 @@ const page = () => {
         activeIndex={1}
       />
       <Providers providers={providers.data} loading={loading} />
-      <div className="flex justify-center mt-2">
+      <div className="flex justify-center my-4">
         <Pagination
-          count={providers.totalPages} // Use totalPages from the userOrders state
+          count={providers.totalPages} // Use totalPages from the providers state
           color="primary"
           onChange={(event, value) => setPage(value)} // Update the page on pagination change
-          page={providers.offset + 1} // Set the current active page
+          page={providers.currentPage} // Set the current active page
         />
       </div>
     </div>
