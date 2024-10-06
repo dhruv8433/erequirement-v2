@@ -60,7 +60,7 @@ const WishLists = () => {
                   count={wishlistInfo.totalPages} // Use totalPages from the wishlistInfo state
                   color="primary"
                   onChange={(event, value) => setPage(value)} // Update the page on pagination change
-                  page={wishlistInfo.offset + 1} // Set the current active page
+                  page={wishlistInfo.currentPage} // Set the current active page
                 />
               </div>
             </>

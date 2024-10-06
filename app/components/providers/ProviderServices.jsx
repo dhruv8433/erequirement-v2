@@ -40,7 +40,7 @@ const ProviderServices = () => {
               count={providerService.totalPages} // Use totalPages from the userOrders state
               color="primary"
               onChange={(event, value) => setPage(value)} // Update the page on pagination change
-              page={providerService.offset + 1} // Set the current active page
+              page={providerService.currentPage} // Set the current active page
             />
           </div>
         </div>
