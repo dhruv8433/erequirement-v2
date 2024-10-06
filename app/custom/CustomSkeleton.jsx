@@ -1,6 +1,19 @@
-import { Avatar, Divider, Grid, Rating, Skeleton } from "@mui/material";
+import {
+  Avatar,
+  Divider,
+  Grid,
+  IconButton,
+  Rating,
+  Skeleton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import { MyCardBox, MyServiceCard } from "./MyBox";
-import { ChevronRight } from "@mui/icons-material";
+import { ChevronRight, DeleteOutline, NotificationsOutlined } from "@mui/icons-material";
 import {
   AccessTime,
   CollectionsOutlined,
@@ -509,6 +522,92 @@ export const UserReviewsSkeleton = () => {
       </div>
 
       <ReviewCardSkeleton />
+    </div>
+  );
+};
+
+export const OrderCardSkeleton = () => {
+  return (
+    <div className="border rounded-2xl my-2 p-4">
+      {/* Order Date and Status Skeleton */}
+      <div className="flex justify-between items-center mb-4">
+        <Skeleton variant="text" width={150} height={30} />
+        <Skeleton variant="rectangular" width={100} height={30} />
+      </div>
+
+      {/* Product Table Skeleton */}
+      <OrderTableSkeleton />
+
+      {/* Total Price and Order ID Skeleton */}
+      <div className="flex justify-between items-center mt-4">
+        <Skeleton variant="text" width={200} height={30} />
+        <Skeleton variant="text" width={100} height={30} />
+      </div>
+    </div>
+  );
+};
+
+export const OrderTableSkeleton = () => {
+  return (
+    <TableContainer className="my-5">
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              <Skeleton variant="text" width={100} height={30} />
+            </TableCell>
+            <TableCell align="right">
+              <Skeleton variant="text" width={50} height={30} />
+            </TableCell>
+            <TableCell align="right">
+              <Skeleton variant="text" width={50} height={30} />
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {[...Array(3)].map((_, index) => (
+            <TableRow key={index}>
+              <TableCell>
+                <Skeleton variant="text" width={150} height={30} />
+              </TableCell>
+              <TableCell align="right">
+                <Skeleton variant="text" width={50} height={30} />
+              </TableCell>
+              <TableCell align="right">
+                <Skeleton variant="text" width={50} height={30} />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+};
+
+export const NotificationSkeleton = () => {
+  return (
+    <div className="p-4 border border-dashed rounded-md my-3">
+      <div className="flex items-center gap-4 w-full">
+        <NotificationsOutlined />
+        <div className="w-full">
+          <div className="flex justify-between items-center">
+            {/* Notification Text Skeleton */}
+            <Skeleton variant="text" width="70%" height={30} />
+            {/* Delete Button Skeleton */}
+            <Skeleton variant="circular" width={40} height={40}>
+              <IconButton>
+                <DeleteOutline fontSize="small" color="error" />
+              </IconButton>
+            </Skeleton>
+          </div>
+          <div className="flex justify-between">
+            {/* Date Skeleton */}
+            <Skeleton variant="text" width="30%" height={20} />
+            {/* Time Skeleton */}
+            <Skeleton variant="text" width="20%" height={20} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

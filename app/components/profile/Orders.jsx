@@ -7,6 +7,7 @@ import { MyCardBox, MyPrimaryBox } from "@/app/custom/MyBox";
 import NoOrders from "@/app/assets/orders.png";
 import OrderCard from "./OrderCard";
 import Link from "next/link";
+import { OrderCardSkeleton } from "@/app/custom/CustomSkeleton";
 
 const Orders = ({ userId }) => {
   const t = useTranslations("profile");
@@ -22,7 +23,9 @@ const Orders = ({ userId }) => {
 
       {/* orders */}
       {userOrdersLoading ? (
-        <h1>loading...</h1>
+        Array.from({ length: 2 }).map((_, index) => (
+          <OrderCardSkeleton index={index} />
+        ))
       ) : userOrders.orders.length > 0 ? (
         <div>
           {userOrders.orders.map((order) => (
