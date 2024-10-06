@@ -23,13 +23,16 @@ const Page = () => {
   const { providers, loading } = useProviders();
   const { categories } = useCategories();
 
-  // Ensure that singleSubCategory is loaded and contains providers
-  const filteredProviders = providers.filter((provider) =>
-    singleSubCategory?.providers?.includes(provider.id)
-  );
+  console.log("Providers", providers);
+  
+  // Ensure that providers and providers.data exist before filtering
+  const filteredProviders =
+    providers?.data?.filter((provider) =>
+      singleSubCategory?.providers?.includes(provider.id)
+    ) || [];
 
   // getting first object from array of categories -- filter out
-  const filterCategories = categories.filter(
+  const filterCategories = categories?.filter(
     (category) => category.id == id
   )[0];
 
@@ -52,7 +55,7 @@ const Page = () => {
             },
             {
               title: filterCategories?.name,
-              link: `/${locale}/categories/${filterCategories.id}/${filterCategories.slug}`,
+              link: `/${locale}/categories/${filterCategories?.id}/${filterCategories?.slug}`,
             },
             {
               title: singleSubCategory.ServiceName,
