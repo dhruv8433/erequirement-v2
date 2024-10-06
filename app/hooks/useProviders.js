@@ -12,10 +12,13 @@ export function useProviders(providerId) {
   const [singleProvider, setSingleProvider] = useState({});
   const [singleProviderLoading, setSingleProviderLoading] = useState(true);
 
+  const limit = 12;
+  const [page, setPage] = useState(1);
+
   async function fetchProviders() {
     try {
-      const response = await getProviders();
-      setProviders(response.data);
+      const response = await getProviders(page, limit);
+      setProviders(response);
       setLoading(false);
     } catch (error) {
       console.log("Error in fetching providers", error);
@@ -36,10 +39,10 @@ export function useProviders(providerId) {
   // fetch providers when page loads
   useEffect(() => {
     fetchProviders();
-  }, []);
+  }, [page]);
 
   useEffect(() => {
-    fetchSingleProvider(providerId);
+    if (providerId) fetchSingleProvider(providerId);
   }, []);
 
   return {
@@ -47,5 +50,6 @@ export function useProviders(providerId) {
     loading,
     singleProvider,
     singleProviderLoading,
+    setPage,
   };
 }

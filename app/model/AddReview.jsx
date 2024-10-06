@@ -100,6 +100,7 @@ const AddReview = ({ isService, serviceId }) => {
           } // Update title with image name
           icon={reviewData.selectedImage ? "" : <Add />}
           className={"w-full p-5"}
+          type={"button"}
           onClickFunction={() => {
             fileInputRef.current?.click(); // Trigger file input click
           }}

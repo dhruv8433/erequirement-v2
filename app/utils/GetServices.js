@@ -1,14 +1,18 @@
 import { httpAxios } from "../httpAxios";
 
 // Particular provider servics
-export async function getProviderServices(id) {
-  const response = await httpAxios.get(`/get-services/provider/${id}`);
+export async function getProviderServices(id, offset, limit) {
+  const response = await httpAxios.get(
+    `/get-services/provider/${id}?offset=${offset - 1}&limit=${limit}`
+  );
   return response.data;
 }
 
 // utils for getting services
-export async function getServices() {
-  const response = await httpAxios.get("/get-services");
+export async function getServices(offset, limit) {
+  const response = await httpAxios.get(
+    `/get-services?offset=${offset - 1}&limit=${limit}`
+  );
   return response.data;
 }
 

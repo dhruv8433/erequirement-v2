@@ -1,8 +1,3 @@
-/**
- * Custom hook to manage Reviews and it's actions.
- * @params {providerId} - Providers Id for getting particualr provider reviews
- */
-
 import { useEffect, useState } from "react";
 import {
   addProviderReview,
@@ -20,6 +15,11 @@ export function useReviews(providerId) {
   const [allProvidersReview, setAllProvidersReview] = useState([]);
   const [providersReviewLoading, setProvidersReviewLoading] = useState(true);
 
+  // Pagination state
+  const [page, setPage] = useState(1);
+  const providerLimit = 2; // Limit for provider and service reviews
+  const userLimit = 5; // Limit for user reviews
+
   // single provider reviews based on their id
   const [singleProviderReviews, setSingleProviderReviews] = useState([]);
   const [singleProviderReviewsLoading, setSingleProviderReviewsLoading] =
@@ -28,6 +28,7 @@ export function useReviews(providerId) {
   const [error, setError] = useState([]);
 
   const userId = useSelector((state) => state?.auth?.user?.user?._id);
+
   // get user's all reviews
   const [userReviews, setUserReviews] = useState([]);
   const [userReviewsLoading, setUserReviewsLoading] = useState(true);
@@ -38,10 +39,10 @@ export function useReviews(providerId) {
 
   const [reviewAdded, setReviewAdded] = useState(false);
 
-  // all providers reviews
+  // all providers reviews with pagination
   async function fetchReviews() {
     try {
-      const response = await getProvidersReviews();
+      const response = await getProvidersReviews(page, providerLimit);
       setAllProvidersReview(response.data);
       setProvidersReviewLoading(false);
     } catch (error) {
@@ -50,10 +51,14 @@ export function useReviews(providerId) {
     }
   }
 
-  // single provider reviews based on their id
+  // single provider reviews based on their id with limit and pagination
   async function fetchSingleProviderReviews() {
     try {
-      const response = await getParticularProviderReviews(providerId);
+      const response = await getParticularProviderReviews(
+        providerId,
+        page,
+        providerLimit
+      );
       setSingleProviderReviews(response.data);
       setSingleProviderReviewsLoading(false);
     } catch (error) {
@@ -63,10 +68,14 @@ export function useReviews(providerId) {
     }
   }
 
-  // single provider reviews based on their id
+  // single service reviews with limit and pagination
   async function fetchSingleServiceReviews(serviceId) {
     try {
-      const response = await getParticularServiceReviews(serviceId);
+      const response = await getParticularServiceReviews(
+        serviceId,
+        page,
+        providerLimit
+      );
       setServiceReviews(response.data);
       setServiceLoading(false);
     } catch (error) {
@@ -76,10 +85,10 @@ export function useReviews(providerId) {
     }
   }
 
-  // get particular user's reviews based on their id
+  // get particular user's reviews with limit
   async function fetchUserReviews() {
     try {
-      const response = await getParticularUserReviews(userId);
+      const response = await getParticularUserReviews(userId, page, userLimit);
       console.log("user reviews", response.data);
       setUserReviews(response.data);
       setUserReviewsLoading(false);
@@ -95,8 +104,7 @@ export function useReviews(providerId) {
     try {
       const response = await addProviderReview(providerID, userId, reviewData);
       toast.success(response.message || "Review added successfully");
-      const fetched = await fetchSingleProviderReviews(providerID);
-      console.log("fetched", fetched);
+      await fetchSingleProviderReviews(providerID);
       setReviewAdded(true);
       return response.data;
     } catch (error) {
@@ -110,8 +118,7 @@ export function useReviews(providerId) {
     try {
       const response = await addServiceReview(serviceId, userId, reviewData);
       toast.success(response.message || "Review added successfully");
-      const fetched = await fetchSingleServiceReviews(serviceId);
-      console.log("fetched", fetched);
+      await fetchSingleServiceReviews(serviceId);
       setReviewAdded(true);
       return response.data;
     } catch (error) {
@@ -121,17 +128,14 @@ export function useReviews(providerId) {
     }
   }
 
-  // fetch reviews when page loads
-  useEffect(() => {
-    fetchReviews();
-  }, []);
-
-  // fetch single provider reviews when providerId changes
+  // fetch reviews when page or providerId changes
   useEffect(() => {
     if (providerId) {
       fetchSingleProviderReviews(providerId);
+    } else {
+      fetchReviews();
     }
-  }, [providerId]);
+  }, [page, providerId]);
 
   return {
     error,
@@ -149,5 +153,7 @@ export function useReviews(providerId) {
     fetchSingleProviderReviews,
     reviewAdded,
     AddServiceReview,
+    setPage, // For controlling pagination
+    page,
   };
 }

@@ -9,12 +9,18 @@ import AddReview from "@/app/model/AddReview";
 
 const ServiceFaqs = ({ service }) => {
   const t = useTranslations("service");
-  const { fetchSingleServiceReviews, serviceReviews, serviceLoading, error } =
-    useReviews();
+  const {
+    fetchSingleServiceReviews,
+    serviceReviews,
+    serviceLoading,
+    error,
+    setPage,
+    page,
+  } = useReviews();
 
   useEffect(() => {
     fetchSingleServiceReviews(service._id);
-  }, []);
+  }, [page]);
 
   // open review model
   const [openReview, setOpenReview] = useState(false);
@@ -83,6 +89,9 @@ const ServiceFaqs = ({ service }) => {
             reviews={serviceReviews}
             loading={serviceLoading}
             error={error}
+            setPage={setPage}
+            totalPages={serviceReviews.totalPages}
+            offset={serviceReviews.offset}
           />
         </div>
       </MyCardBox>

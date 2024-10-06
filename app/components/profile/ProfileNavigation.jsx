@@ -47,9 +47,11 @@ const ProfileNavigation = () => {
         <div className="flex items-center gap-5 px-5 py-2">
           <Avatar className="profile-avatar" src={user ? user.avatar : ""} />
           <div className="user">
-            <h1 className="text-2xl font-semibold">{user.fullname}</h1>
-            <h1>{user.email}</h1>
-            <h1>{user.phone}</h1>
+            <h1 className="text-2xl font-semibold">
+              {user ? user.fullname : "test"}
+            </h1>
+            <h1>{user ? user.email : "test"}</h1>
+            <h1>{user ? user.phone : "test"}</h1>
           </div>
         </div>
 
@@ -115,7 +117,10 @@ const ProfileNavigation = () => {
 
       {/* Edit user modal */}
       <MyModal open={openEdit} setOpen={setOpenEdit}>
-        <MyCardBox className="p-2 rounded-2xl" width={{xs: "300px", md: "400px"}}>
+        <MyCardBox
+          className="p-2 rounded-2xl"
+          width={{ xs: "300px", md: "400px" }}
+        >
           <EditUserModal setOpenEdit={setOpenEdit} />
         </MyCardBox>
       </MyModal>

@@ -20,8 +20,12 @@ const page = () => {
   const { id } = useParams();
   const { singleProvider, singleProviderLoading } = useProviders(id);
   // fetch reviews of single provider based on their id
-  const { singleProviderReviews, singleProviderReviewsLoading, error } =
-    useReviews(singleProvider._id);
+  const {
+    singleProviderReviews,
+    singleProviderReviewsLoading,
+    error,
+    setPage,
+  } = useReviews(singleProvider._id);
 
   return (
     <MyCardBox className="p-4 rounded-2xl">
@@ -39,6 +43,9 @@ const page = () => {
         loading={singleProviderReviewsLoading}
         reviews={singleProviderReviews}
         error={error}
+        offset={singleProviderReviews.offset}
+        totalPages={singleProviderReviews.totalPages}
+        setPage={setPage}
       />
 
       <MyModal open={openReview} setOpen={setOpenReview}>
