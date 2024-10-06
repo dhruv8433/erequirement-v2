@@ -5,8 +5,10 @@ async function getProvidersReviews() {
   return response.data;
 }
 
-async function getParticularProviderReviews(id) {
-  const response = await httpAxios.get(`/review/provider/${id}`);
+async function getParticularProviderReviews(id, offset, limit) {
+  const response = await httpAxios.get(
+    `/review/provider/${id}?offset=${offset - 1}&limit=${limit}`
+  );
   return response.data;
 }
 
