@@ -22,10 +22,10 @@ export const useUserAction = () => {
       dispatch(logoutFromRedux());
 
       // Redirect the user to the homepage
-      router.forward("/");
 
       // Show success message
       toast.success(response.data.message || "Logged out successfully");
+      router.push("/");
 
       console.log("Response:", response.data);
     } catch (error) {
