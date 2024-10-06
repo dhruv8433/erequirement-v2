@@ -129,3 +129,9 @@
 // .profile .css-mhc70k-MuiGrid-root > .MuiGrid-item {
 //     padding-top: 0 !important;
 // }
+
+/* Custom CSS for Pagination */
+.MuiPaginationItem-root .Mui-selected {
+    background-color: $OrangePrimary !important; /* Make sure to use your primary color */
+    color: white !important;
+}

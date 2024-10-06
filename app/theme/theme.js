@@ -5,6 +5,7 @@ const lightTheme = createTheme({
     mode: "light",
     primary: {
       main: "#ff9a00", // Orange color
+      default: "#ff9a00",
     },
     background: {
       default: "#eee", // light gray
@@ -36,6 +37,7 @@ const darkTheme = createTheme({
     mode: "dark",
     primary: {
       main: "#ff9a00", // Orange color
+      default: "#ff9a00",
     },
     background: {
       default: "#292929", // light black
