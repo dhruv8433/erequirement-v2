@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchOrders, PlaceOrder } from "../utils/OrderService";
+import { fetchOrderById, fetchOrders, PlaceOrder } from "../utils/OrderService";
 
-export function useOrders(userId, cartId, orderType) {
+export function useOrders(userId, cartId, orderType, orderId) {
   const [order, setOrder] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -11,6 +11,9 @@ export function useOrders(userId, cartId, orderType) {
 
   const [page, setPage] = useState(1); // Default to the first page
   const limit = 3; // Define the limit for orders per page
+
+  const [singleOrder, setSingleOrder] = useState([]);
+  const [singleOrderLoading, setSingleOrderLoading] = useState(true);
 
   async function placeOrder() {
     try {
@@ -35,9 +38,20 @@ export function useOrders(userId, cartId, orderType) {
     }
   }
 
+  async function getSingleOrder() {
+    try {
+      const response = await fetchOrderById(userId, orderId);
+      setSingleOrder(response.data);
+      setSingleOrderLoading(false);
+    } catch (error) {
+      console.log("error in fetching single order", error);
+    }
+  }
+
   // get user orders
   useEffect(() => {
-    getUserOrders();
+    if (userId) getUserOrders();
+    if (orderId) getSingleOrder();
   }, [page, userId]);
 
   return {
@@ -48,5 +62,7 @@ export function useOrders(userId, cartId, orderType) {
     userOrders,
     userOrdersLoading,
     setPage,
+    singleOrder,
+    singleOrderLoading,
   };
 }

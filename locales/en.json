@@ -40,7 +40,10 @@
         "avg_rating": "Average Rating",
         "total_reviews": "Total Reviews",
         "star_count": "Star Count",
-        "no_reviews": "No Reivews Found for this provider"
+        "no_reviews": "No Reivews Found for this provider",
+        "add_review": "Add Review",
+        "add_pic": "Upload Pictures",
+        "submit": "Submit Review"
     },
     "contact": {
         "home": "Home",
@@ -55,7 +58,9 @@
         "price": "Price",
         "actual_price": "Actual Price",
         "faqs": "FAQs",
-        "tags": "Tags"
+        "tags": "Tags",
+        "reviews": "Customer Reviews & Ratings",
+        "add_review": "Add Review"
     },
     "cart": {
         "service_img": "Service Image",

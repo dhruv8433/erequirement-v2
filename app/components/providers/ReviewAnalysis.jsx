@@ -6,10 +6,10 @@ import React from "react"; // Import React to define the component
 
 const ReviewAnalysis = ({ reviewAnalysis }) => {
   // Extracting the total number of reviews, using 1 as a fallback to avoid division by zero
-  const totalReviews = reviewAnalysis.totalReviews || 1;
+  const totalReviews = reviewAnalysis?.totalReviews || 1;
 
   // Extracting the star count data, with default values for each star if no data is available
-  const starCounts = reviewAnalysis.starCounts || {
+  const starCounts = reviewAnalysis?.starCounts || {
     1: 0,
     2: 0,
     3: 0,
@@ -36,7 +36,7 @@ const ReviewAnalysis = ({ reviewAnalysis }) => {
                   className="text-3xl font-semibold primary-text"
                 >
                   {/* Display average rating from reviewAnalysis */}
-                  {reviewAnalysis.averageRating}
+                  {reviewAnalysis ? reviewAnalysis?.averageRating?.toFixed(2) : 0}
                 </h1>
               </div>
             </div>
@@ -57,7 +57,7 @@ const ReviewAnalysis = ({ reviewAnalysis }) => {
                   className="text-3xl font-semibold primary-text"
                 >
                   {/* Display total reviews from reviewAnalysis */}
-                  {reviewAnalysis.totalReviews}
+                  {reviewAnalysis ? reviewAnalysis?.totalReviews : 0}
                 </h1>
               </div>
             </div>

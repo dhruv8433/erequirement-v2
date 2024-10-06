@@ -1,9 +1,24 @@
-import { MyCardBox, MyServiceCard } from "@/app/custom/MyBox";
+import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import React from "react";
+import { useReviews } from "@/app/hooks/useReviews";
+import { MyCardBox, MyServiceCard } from "@/app/custom/MyBox";
+import { MyBorderdButton } from "@/app/custom/MyButton";
+import ProviderReviews from "../providers/ProviderReviews";
+import MyModal from "@/app/custom/MyModal";
+import AddReview from "@/app/model/AddReview";
 
 const ServiceFaqs = ({ service }) => {
   const t = useTranslations("service");
+  const { fetchSingleServiceReviews, serviceReviews, serviceLoading, error } =
+    useReviews();
+
+  useEffect(() => {
+    fetchSingleServiceReviews(service._id);
+  }, []);
+
+  // open review model
+  const [openReview, setOpenReview] = useState(false);
+
   return (
     <div>
       <MyCardBox
@@ -31,7 +46,11 @@ const ServiceFaqs = ({ service }) => {
         </h2>
         <div className="flex flex-wrap space-x-2" data-aos="fade-up">
           {service.Tags.map((tag, index) => (
-            <MyServiceCard key={index} className="px-3 py-1 rounded-full" data-aos="fade-up">
+            <MyServiceCard
+              key={index}
+              className="px-3 py-1 rounded-full"
+              data-aos="fade-up"
+            >
               <span
                 data-aos="fade-up"
                 className="primary-text font-semibold  text-sm"
@@ -42,6 +61,37 @@ const ServiceFaqs = ({ service }) => {
           ))}
         </div>
       </MyCardBox>
+
+      <MyCardBox className="p-4 rounded-2xl my-4">
+        <div className="flex justify-between mb-3">
+          <h2
+            data-aos="fade-up"
+            className="text-xl font-bold mb-2 primary-text"
+          >
+            {t("reviews")}
+          </h2>
+
+          <MyBorderdButton
+            title={t("add_review")}
+            className={"px-2"}
+            onClickFunction={() => setOpenReview(true)}
+          />
+        </div>
+
+        <div className="add-review">
+          <ProviderReviews
+            reviews={serviceReviews}
+            loading={serviceLoading}
+            error={error}
+          />
+        </div>
+      </MyCardBox>
+
+      <MyModal open={openReview} setOpen={setOpenReview}>
+        <MyCardBox className="rounded-2xl" width={{ xs: "300px", md: "400px" }}>
+          <AddReview isService={true} serviceId={service._id} />
+        </MyCardBox>
+      </MyModal>
     </div>
   );
 };
