@@ -5,9 +5,10 @@ import { useLocale, useTranslations } from "next-intl";
 import MyBreadcrumb from "@/app/custom/MyBreadcrumb";
 import { useProviders } from "@/app/hooks/useProviders";
 import Providers from "@/app/components/providers/Providers";
+import { Pagination } from "@mui/material";
 
 const page = () => {
-  const { providers, loading } = useProviders();
+  const { providers, loading, setPage } = useProviders();
 
   const locale = useLocale();
   const t = useTranslations("providers");
@@ -22,7 +23,15 @@ const page = () => {
         ]}
         activeIndex={1}
       />
-      <Providers providers={providers} loading={loading} />
+      <Providers providers={providers.data} loading={loading} />
+      <div className="flex justify-center mt-2">
+        <Pagination
+          count={providers.totalPages} // Use totalPages from the userOrders state
+          color="primary"
+          onChange={(event, value) => setPage(value)} // Update the page on pagination change
+          page={providers.offset + 1} // Set the current active page
+        />
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
-import { Grid, Rating } from "@mui/material";
+import { Grid, Pagination, Rating } from "@mui/material";
 import { MyCardBox, MyServiceCard } from "@/app/custom/MyBox";
 import { useServices } from "@/app/hooks/useServices";
 import { useParams } from "next/navigation";
@@ -14,7 +14,9 @@ const ProviderServices = () => {
   const locale = useLocale();
 
   const { id } = useParams();
-  const { providerService, serviceLoading } = useServices(id);
+  const { providerService, serviceLoading, setPage } = useServices(id);
+
+  console.log("provider service", providerService);
 
   return (
     <div>
@@ -27,12 +29,20 @@ const ProviderServices = () => {
                     <ProviderServiceSkeleton />
                   </Grid>
                 ))
-              : providerService.map((service, index) => (
+              : providerService.services.map((service, index) => (
                   <Grid item xs={12} sm={6} md={4} key={index}>
                     <ProvidersService service={service} index={index} />
                   </Grid>
                 ))}
           </Grid>
+          <div className="flex justify-center mt-2">
+            <Pagination
+              count={providerService.totalPages} // Use totalPages from the userOrders state
+              color="primary"
+              onChange={(event, value) => setPage(value)} // Update the page on pagination change
+              page={providerService.offset + 1} // Set the current active page
+            />
+          </div>
         </div>
       </MyCardBox>
     </div>
