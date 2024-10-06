@@ -21,7 +21,7 @@ const ProfileReviews = () => {
       {userReviewsLoading ? (
         <ReviewCardSkeleton />
       ) : userReviews.length > 0 ? (
-        userReviews.map((review) => <UserReviews reviews={review} />)
+        <UserReviews reviews={userReviews} />
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[630px]">
           <img src={NoReviewsFound.src} alt="" className="object-fit mb-2" />
