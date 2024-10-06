@@ -13,11 +13,12 @@ const PrimaryButtonStyle = styled.button`
   background-color: ${({ theme }) => theme.palette.button.default};
 `;
 
-const MyPrimaryButton = ({ title, className, onClickFunction }) => {
+const MyPrimaryButton = ({ title, className, onClickFunction, type }) => {
   return (
     <PrimaryButtonStyle
       onClick={onClickFunction ? onClickFunction : null}
       className={`${className}`}
+      type={type}
     >
       {title}
     </PrimaryButtonStyle>
@@ -36,13 +37,14 @@ const MyBorderdButton = ({
   className,
   onClickFunction,
   dashed,
+  type,
 }) => {
   return (
     <BorderdButtonStyle
       onClick={onClickFunction ? onClickFunction : null}
       className={`${className} rounded-md flex items-center justify-center gap-2`}
       dashed={dashed}
-      data-aos="fade-up"
+      type={type}
     >
       {icon && <span>{icon}</span>}
       {title}
