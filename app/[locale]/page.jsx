@@ -31,7 +31,7 @@ export default function Home() {
     // Check if the error is "not_authenticated" and if the toast hasn't been shown yet
     if (paramValue === "not_authenticated" && !toastShownRef.current) {
       console.log("not_authenticated");
-      toast.error("Please login to continue");
+      toast.error("You need to login to access this page");
       dispatch(logoutFromRedux());
       toastShownRef.current = true; // Mark the toast as shown
     }

@@ -7,6 +7,8 @@ import { SignupWithGoogle } from "../utils/userService";
 import { useDispatch } from "react-redux";
 import { login } from "../reducer/authReducer";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+
 
 const GoogleSignupButton = ({ SetModal }) => {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const GoogleSignupButton = ({ SetModal }) => {
       dispatch(login({ user: saveUserInfo.data }));
       toast.success(saveUserInfo.message);
       // close modal after google signup
+      Cookies.set("user", true);
       SetModal(false);
     } catch (error) {
       console.error("Error signing in with Google: ", error);

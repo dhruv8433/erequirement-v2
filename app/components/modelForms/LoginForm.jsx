@@ -37,9 +37,7 @@ const LoginForm = ({ setSignupForm, setModal }) => {
       if (response && response.data) {
         dispatch(login({ user: response.data }));
         toast.success(response.message);
-        Cookies.set("user", true, {
-          expires: 7, // Cookie expiration in days
-        });
+        Cookies.set("user", true);
 
         setModal(false);
       } else {
