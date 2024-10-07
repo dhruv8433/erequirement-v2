@@ -40,7 +40,7 @@ const Footer = () => {
             <Grid item xs={12} md={3}>
               <div className="px-3 my-4">
                 <h1 className="my-4 text-xl font-semibold">Privacy & Terms</h1>
-                <Link href={`/${locale}/terms`} className="hover:text-orange-500 hover:underline">
+                <Link href={`/${locale}/privacy-policy`} className="hover:text-orange-500 hover:underline">
                   <h1 className="m-2">Privacy Policy</h1>
                 </Link>
                 <Link href={`/${locale}/terms`} className="hover:text-orange-500 hover:underline">
