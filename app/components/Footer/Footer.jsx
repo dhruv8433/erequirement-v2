@@ -5,20 +5,23 @@ import Routes from "@/app/Routes/Routes";
 import { Facebook, Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 import { Divider, Grid } from "@mui/material";
 import React from "react";
+import Link from "next/link";
+import { useLocale } from "next-intl";
 
 const Footer = () => {
+  const locale = useLocale();
   return (
     <MySecondaryBox>
       <MyContainer>
         <div className="p-3">
-          <h1 className="text-2xl font-semibold ml-2 my-3">{WebName}</h1>
+          <h1 className="text-2xl font-semibold ml-2 my-3 primary-text">{WebName}</h1>
           <Divider />
         </div>
         <div className="p-3">
           <Grid container>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={3}>
               <div className="px-3">
-                <h1 className="my-4 text-xl font-medium">About us</h1>
+                <h1 className="my-4 text-xl font-semibold">About us</h1>
                 <p>
                   At ERequirement, you can find all the service related to home.
                   we can provide home cleaning, laundry, electric repair,
@@ -28,15 +31,26 @@ const Footer = () => {
                 </p>
               </div>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={3}>
               <div className="px-3 my-4">
-                <h1 className="my-4 text-xl font-medium">Quick Links</h1>
-                <Routes />
+                <h1 className="my-4 text-xl font-semibold">Quick Links</h1>
+                <Routes isFooter={true} />
               </div>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={3}>
               <div className="px-3 my-4">
-                <h1 className="my-4 text-xl font-medium">Contact US</h1>
+                <h1 className="my-4 text-xl font-semibold">Privacy & Terms</h1>
+                <Link href={`/${locale}/terms`} className="hover:text-orange-500 hover:underline">
+                  <h1 className="m-2">Privacy Policy</h1>
+                </Link>
+                <Link href={`/${locale}/terms`} className="hover:text-orange-500 hover:underline">
+                  <h1 className="m-2">Terms and Condition</h1>
+                </Link>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <div className="px-3 my-4">
+                <h1 className="my-4 text-xl font-semibold">Contact US</h1>
                 <ul className="space-y-2">
                   <li className="text-gray-400">
                     1234 Market St, San Francisco, CA

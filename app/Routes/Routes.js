@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import { routes } from "../config/config";
 import { usePathname } from "next/navigation";
 
-const Routes = ({ isResponsive }) => {
+const Routes = ({ isResponsive, isFooter }) => {
   const locale = useLocale();
   const pathname = usePathname();
 
@@ -24,7 +24,7 @@ const Routes = ({ isResponsive }) => {
             href={hasLocaleInPath ? `${link.url}` : `/${locale}/${link.url}`}
             className={`flex items-center ${
               isResponsive && "hover:bg-gray-300 p-1 rounded-md"
-            }`}
+            } ${isFooter && "hover:text-orange-500 hover:underline"}`}
           >
             {isResponsive && <Icon className="h-auto w-auto">{link.icon}</Icon>}
             <h1 className={`m-2 ${isActive ? "text-orange-500" : ""}`}>
