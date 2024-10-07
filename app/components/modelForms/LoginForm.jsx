@@ -12,6 +12,7 @@ import GoogleSignupButton from "@/app/common/GoogleSignupButton";
 import { Phone, Visibility, VisibilityOff } from "@mui/icons-material";
 import { MyBorderdButton, MyPrimaryButton } from "@/app/custom/MyButton";
 import { errorMessages } from "@/app/config/config";
+import Cookies from "js-cookie";
 
 const LoginForm = ({ setSignupForm, setModal }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,6 +37,10 @@ const LoginForm = ({ setSignupForm, setModal }) => {
       if (response && response.data) {
         dispatch(login({ user: response.data }));
         toast.success(response.message);
+        Cookies.set("user", true, {
+          expires: 7, // Cookie expiration in days
+        });
+
         setModal(false);
       } else {
         throw new Error("Unexpected response format");

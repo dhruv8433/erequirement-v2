@@ -3,8 +3,6 @@ import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 
 export default async function LocaleLayout({ children, params }) {
   const locale = params.locale;
-  console.log("LocaleLayout params:", params); // Log params
-  console.log("Current locale in LocaleLayout:", locale); // Log the current locale
   unstable_setRequestLocale(locale);
 
   try {
