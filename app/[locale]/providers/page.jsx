@@ -7,11 +7,19 @@ import { useProviders } from "@/app/hooks/useProviders";
 import Providers from "@/app/components/providers/Providers";
 import { Pagination } from "@mui/material";
 
-const page = () => {
+const Page = () => {
   const { providers, loading, setPage } = useProviders();
 
   const locale = useLocale();
   const t = useTranslations("providers");
+
+  // Debugging current page updates
+  console.log("Providers state:", providers);
+
+  const handlePageChange = (event, value) => {
+    console.log("Pagination clicked, page:", value);
+    setPage(value); // This should trigger a state change and update providers.currentPage
+  };
 
   return (
     <div>
@@ -26,14 +34,14 @@ const page = () => {
       <Providers providers={providers.data} loading={loading} />
       <div className="flex justify-center my-4">
         <Pagination
-          count={providers.totalPages} // Use totalPages from the providers state
+          count={providers.totalPages}
           color="primary"
-          onChange={(event, value) => setPage(value)} // Update the page on pagination change
-          page={providers.currentPage} // Set the current active page
+          onChange={handlePageChange}
+          page={providers.currentPage} // Ensure currentPage is correctly passed
         />
       </div>
     </div>
   );
 };
 
-export default page;
+export default Page;
