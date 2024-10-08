@@ -142,4 +142,5 @@ export const errorMessages = {
   promocode: "Invalid Promocode.",
   promocodeSuccess: "Promocode applied successfully.",
   loginForAdd: "Please login to add item to cart.",
+  phoneLength: "Phone number must be 10 digits.",
 };

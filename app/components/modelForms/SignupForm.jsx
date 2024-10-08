@@ -61,6 +61,11 @@ const SignupForm = ({ setSignupForm, setModal }) => {
       return;
     }
 
+    if (signupData.phone.length > 10) {
+      toast.error(errorMessages.phoneLength);
+      return;
+    }
+
     try {
       const response = await SignupUser(signupData);
       console.log("user signup success", response);
