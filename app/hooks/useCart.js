@@ -43,6 +43,7 @@ export function useCart() {
     try {
       const data = await fetchCartData(userId);
       dispatch(setCart(data.data));
+      console.log("cart loaded", data.data)
     } catch (error) {
       const errorMessage =
         error.response?.data?.errors || "Failed to load cart data.";

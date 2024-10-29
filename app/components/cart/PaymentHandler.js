@@ -1,100 +1,57 @@
-import { clearCart } from "@/app/reducer/cartReducer";
-import {
-  CashOnDelivary,
-  createPaypalOrder,
-  CreateStripeCheckoutSession,
-} from "@/app/utils/createOrder";
+import { createPaypalOrder } from "@/app/utils/createOrder";
 import { PlaceOrder } from "@/app/utils/OrderService";
+import axios from "axios";
 import toast from "react-hot-toast";
+import { loadStripe } from "@stripe/stripe-js";
+import { httpAxios } from "@/app/httpAxios";
 
-// Function to dynamically load the Stripe script
-const loadStripeScript = () => {
-  return new Promise((resolve, reject) => {
-    // Check if Stripe is already loaded in the window
-    if (window.Stripe) {
-      // Resolve the promise with the existing Stripe object
-      resolve(window.Stripe);
-      return;
-    }
-
-    // Create a script element to load Stripe.js
-    const script = document.createElement("script");
-    script.src = "https://js.stripe.com/v3/"; // Source URL for Stripe.js
-    script.onload = () => {
-      // Check if Stripe is available after the script has loaded
-      if (window.Stripe) {
-        // Resolve the promise with the Stripe object
-        resolve(window.Stripe);
-      } else {
-        // Reject the promise if Stripe failed to load
-        reject(new Error("Stripe library failed to load."));
-      }
-    };
-    script.onerror = () => reject(new Error("Failed to load Stripe script")); // Handle script loading errors
-    document.body.appendChild(script); // Append the script to the document body
-  });
-};
-
-// Function to dynamically load the PayPal script
-const loadPayPalScript = () => {
-  return new Promise((resolve, reject) => {
-    if (window.paypal) {
-      resolve(window.paypal);
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = `https://www.paypal.com/sdk/js?client-id=${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`;
-    script.onload = () => {
-      if (window.paypal) {
-        resolve(window.paypal);
-      } else {
-        reject(new Error("PayPal library failed to load."));
-      }
-    };
-    script.onerror = () => reject(new Error("Failed to load PayPal SDK."));
-    document.body.appendChild(script);
-  });
-};
-
-// Function to handle payment through Stripe
-export const PaymentHandler = async (paymentType, cartData, userId) => {
-
-  // if payment method is stripe
+// Function to initialize and handle Stripe payment
+export const PaymentHandler = async (paymentType, cartData, userId, cartId) => {
   if (paymentType === "Stripe") {
     console.log("Initiating Stripe...");
-    // Check if the payment type is Stripe
     try {
-      // Extract session ID from the response
-      const response = await CreateStripeCheckoutSession(cartData);
-      const sessionId = response.id;
+      // Create a checkout session by calling your backend API
+      const { data } = await httpAxios.post(
+        "/payment/stripe/create-checkout-session",
+        {
+          cartData,
+          paymentMethod: "stripe",
+          metadata: {
+            userId,
+            cartId,
+          },
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      // Load the Stripe script and create a Stripe instance
-      const Stripe = await loadStripeScript();
-      const stripe = Stripe(process.env.NEXT_PUBLIC_STRIPE_KEY); // Initialize Stripe with public key
+      // Load Stripe and create an instance
+      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
-      // Redirect the user to the Stripe checkout page
-      await stripe.redirectToCheckout({ sessionId });
+      if (stripe) {
+        const result = await stripe.redirectToCheckout({ sessionId: data.id });
+        if (result.error) {
+          console.error("Stripe Checkout error:", result.error.message);
+        }
+      } else {
+        console.error("Stripe is not available.");
+      }
     } catch (error) {
-      // Log any errors encountered during the payment process
-      console.error("Error handling payment:", error);
+      console.error("Error creating checkout session:", error.message);
     }
   }
 
-  // if payment method is paypal
+  // PayPal Payment handling
   if (paymentType === "Paypal") {
     try {
       console.log("Initializing PayPal...");
-
-      // Create PayPal order by calling the backend API
       const response = await createPaypalOrder(cartData);
       const orderId = response;
-
-      // Check if the environment is sandbox or live
       const paypalEnvironment =
         "https://www.sandbox.paypal.com/checkoutnow?token=";
-
-      // Redirect the user to PayPal for the payment
       const approvalUrl = `${paypalEnvironment}${orderId}`;
       window.location.href = approvalUrl;
     } catch (error) {
@@ -102,10 +59,9 @@ export const PaymentHandler = async (paymentType, cartData, userId) => {
     }
   }
 
-  // if payment method is cod
+  // Cash on Delivery (COD) Payment handling
   if (paymentType === "cod") {
     try {
-      // call directly place order api with cartId, userId and payment method
       console.log("userID", userId);
       const response = await PlaceOrder(cartData._id, userId, "cod");
       toast.success(response.message);

@@ -12,7 +12,7 @@ import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
 import dayjs from "dayjs"; // Importing dayjs for date/time formatting
 import { PaymentHandler } from "./PaymentHandler";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "@/app/reducer/cartReducer";
 
 // Helper function for formatting dates and times using dayjs
@@ -33,6 +33,8 @@ const Cart = ({ user, setAddressModal }) => {
   );
   const cartId = cartData && cartData[0]?._id; // Assuming the cart item has the cart ID
   const { createSchedule, schedule } = useSchedule(cartId);
+
+  const RefreshCartId = useSelector((state) => state?.cart?.cart?._id);
 
   // Initialize selected date and time if a schedule already exists
   useEffect(() => {
@@ -96,11 +98,22 @@ const Cart = ({ user, setAddressModal }) => {
     if (selectedPaymentMethod === "paypal") {
       // send other info because it directly have access of total amount
       const response = await PaymentHandler("Paypal", otherInfo);
+      dispatch(clearCart());
+      // after place order go back to home
+      router.push("/");
     } else if (selectedPaymentMethod === "stripe") {
-      const response = await PaymentHandler("Stripe", cartData);
+      const response = await PaymentHandler(
+        "Stripe",
+        cartData,
+        user?._id,
+        RefreshCartId
+      ).then(() => {
+        dispatch(clearCart());
+        // after place order go back to home
+        router.push("/");
+      });
     } else if (selectedPaymentMethod === "cod") {
       const response = await PaymentHandler("cod", otherInfo, user?._id);
-      // remove from redux
       dispatch(clearCart());
       // after place order go back to home
       router.push("/");
