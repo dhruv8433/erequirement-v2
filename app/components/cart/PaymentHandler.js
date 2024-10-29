@@ -3,6 +3,7 @@ import { PlaceOrder } from "@/app/utils/OrderService";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
+import { httpAxios } from "@/app/httpAxios";
 
 // Function to initialize and handle Stripe payment
 export const PaymentHandler = async (paymentType, cartData, userId, cartId) => {
@@ -10,8 +11,8 @@ export const PaymentHandler = async (paymentType, cartData, userId, cartId) => {
     console.log("Initiating Stripe...");
     try {
       // Create a checkout session by calling your backend API
-      const { data } = await axios.post(
-        "http://localhost:8000/api/v2/payment/stripe/create-checkout-session",
+      const { data } = await httpAxios.post(
+        "/payment/stripe/create-checkout-session",
         {
           cartData,
           paymentMethod: "stripe",
