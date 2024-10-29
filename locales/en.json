@@ -82,7 +82,8 @@
         "select_payment": "Select Payment Method : ",
         "promocode": "Promo Code",
         "enter_promo": "Enter Promocode",
-        "promo_discound": "Promocode Discount"
+        "promo_discound": "Promocode Discount",
+        "apply": "Apply"
     },
     "search": {
         "no_service": "No services found.",
