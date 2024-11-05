@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { useState, useEffect } from "react";
+import { errorMessages } from "../config/config";
+import { setCart } from "../reducer/cartReducer";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCartData,
   addToCart,
   removeItemFromCart,
   updateQuantityInCart,
 } from "@/app/utils/CartService";
-import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "../reducer/cartReducer";
-import { errorMessages } from "../config/config";
 
 /**
  * Custom hook to manage cart state and actions.

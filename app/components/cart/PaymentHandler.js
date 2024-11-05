@@ -1,9 +1,8 @@
-import { createPaypalOrder } from "@/app/utils/createOrder";
-import { PlaceOrder } from "@/app/utils/OrderService";
-import axios from "axios";
 import toast from "react-hot-toast";
-import { loadStripe } from "@stripe/stripe-js";
 import { httpAxios } from "@/app/httpAxios";
+import { loadStripe } from "@stripe/stripe-js";
+import { PlaceOrder } from "@/app/utils/OrderService";
+import { createPaypalOrder } from "@/app/utils/createOrder";
 
 // Function to initialize and handle Stripe payment
 export const PaymentHandler = async (paymentType, cartData, userId, cartId) => {

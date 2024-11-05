@@ -97,23 +97,20 @@ const Cart = ({ user, setAddressModal }) => {
   const handlePayment = async () => {
     if (selectedPaymentMethod === "paypal") {
       // send other info because it directly have access of total amount
-      const response = await PaymentHandler("Paypal", otherInfo);
+      await PaymentHandler("Paypal", otherInfo);
       dispatch(clearCart());
       // after place order go back to home
       router.push("/");
     } else if (selectedPaymentMethod === "stripe") {
-      const response = await PaymentHandler(
-        "Stripe",
-        cartData,
-        user?._id,
-        RefreshCartId
-      ).then(() => {
-        dispatch(clearCart());
-        // after place order go back to home
-        router.push("/");
-      });
+      await PaymentHandler("Stripe", cartData, user?._id, RefreshCartId).then(
+        () => {
+          dispatch(clearCart());
+          // after place order go back to home
+          router.push("/");
+        }
+      );
     } else if (selectedPaymentMethod === "cod") {
-      const response = await PaymentHandler("cod", otherInfo, user?._id);
+      await PaymentHandler("cod", otherInfo, user?._id);
       dispatch(clearCart());
       // after place order go back to home
       router.push("/");
