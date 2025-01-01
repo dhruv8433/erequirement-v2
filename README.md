@@ -14,3 +14,4 @@
 ## External Apis
 
 - Stripe
+- Paypal
