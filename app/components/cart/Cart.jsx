@@ -102,13 +102,10 @@ const Cart = ({ user, setAddressModal }) => {
       // after place order go back to home
       router.push("/");
     } else if (selectedPaymentMethod === "stripe") {
-      await PaymentHandler("Stripe", cartData, user?._id, RefreshCartId).then(
-        () => {
-          dispatch(clearCart());
-          // after place order go back to home
-          router.push("/");
-        }
-      );
+      await PaymentHandler("Stripe", cartData, user?._id, RefreshCartId);
+      dispatch(clearCart());
+      // after place order go back to home
+      router.push("/");
     } else if (selectedPaymentMethod === "cod") {
       await PaymentHandler("cod", otherInfo, user?._id);
       dispatch(clearCart());

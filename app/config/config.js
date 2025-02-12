@@ -16,6 +16,8 @@ import {
 export const ApiUrl = "https://e-requirement-backend-v2.vercel.app/api/v2";
 export const BaseUrl = "https://e-requirement-backend-v2.vercel.app/";
 
+export const LocalUrl = 'http://localhost:8000/api/v2';
+
 export const WebName = "ERequirement";
 
 // Website Routes

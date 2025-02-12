@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/react"
 
 export default async function LocaleLayout({ children, params }) {
   const locale = params.locale;
