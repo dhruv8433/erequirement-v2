@@ -46,9 +46,9 @@ export default function Home() {
     <div>
       {/* Categories */}
       <div className="my-4">
-        <Categories data={data?.categorys} loading={loading} />
+        <Categories data={data?.categories} loading={loading} />
         <Slider data={data?.swiper} loading={loading} />
-        <TopProviders data={data?.top_categories} loading={loading} />
+        <TopProviders data={data?.top_providers} loading={loading} />
         <TopServices data={data?.top_services} loading={loading} />
         {/* Subscriber */}
         <Subscribe t={t} />
