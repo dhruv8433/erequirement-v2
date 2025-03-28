@@ -1,5 +1,6 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, IconButton, useTheme } from "@mui/material";
+import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import { useSelector } from "react-redux";
 import { useCart } from "@/app/hooks/useCart";
 import { MyBorderdButton, MyPrimaryButton } from "@/app/custom/MyButton";
@@ -63,14 +64,33 @@ const ServiceImages = ({ service, handleImageClick, selectedImage }) => {
     ? useSelector((state) => state.auth.user.user._id)
     : null;
 
-  console.log("service", service);
-
   const { AddServiceToCart } = useCart(userId);
   const { handleAddWishlist } = useWishlist(service._id);
 
+  const handleShare = async () => {
+    const shareData = {
+      title: service.ServiceName,
+      text: `Check out this service: ${service.ServiceName}`,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (error) {
+        console.error("Error sharing", error);
+      }
+    } else {
+      navigator.clipboard.writeText(shareData.url);
+      alert("Link copied to clipboard!");
+    }
+  };
+
+  const theme = useTheme();
+
   return (
-    <div>
-      <div className="flex space-x-2">
+    <div className="relative">
+      <div className="flex space-x-2 relative">
         <OtherImage
           xs={"none"}
           md={"block"}
@@ -78,13 +98,21 @@ const ServiceImages = ({ service, handleImageClick, selectedImage }) => {
           direction={"flex-col"}
           handleImageClick={handleImageClick}
         />
-        <div className="w-full h-[400px] mb-4">
+        <div className="w-full h-[400px] mb-4 relative">
           <img
             src={selectedImage ? selectedImage : service.serviceImg}
             alt={service.ServiceName}
             className="h-full w-full object-cover rounded-xl"
             data-aos="zoom-in"
           />
+          {/* Move Share Icon to Image */}
+          <IconButton
+            className="absolute top-2 right-2  shadow-md rounded-full !z-20"
+            style={{ position: "absolute", top: "10px", right: "10px", backgroundColor: theme.palette.background.default}}
+            onClick={handleShare}
+          >
+            <ShareOutlinedIcon />
+          </IconButton>
         </div>
       </div>
       <OtherImage
