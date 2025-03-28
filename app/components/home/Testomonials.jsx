@@ -17,9 +17,9 @@ const Testimonials = ({ testimonials, loading }) => {
         {loading ? (
           <h1>Loading..</h1>
         ) : (
-          testimonials.slice(0,10).map((testimonial) => testimonial.rating > 3 && (
-            <SwiperSlide key={testimonial.id}>
-              <Testimonial key={testimonial.id} testimonial={testimonial} />
+          testimonials.slice(0, 10).filter(testimonial => testimonial.rating > 3).map((filteredTestimonial) => (
+            <SwiperSlide key={filteredTestimonial.id}>
+              <Testimonial key={filteredTestimonial.id} testimonial={filteredTestimonial} />
             </SwiperSlide>
           ))
         )}
