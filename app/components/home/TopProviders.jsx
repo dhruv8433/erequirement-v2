@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 const TopProviders = ({ data, loading }) => {
   const t = useTranslations("home");
   return (
-    <div className="my-4" data-aos="fade-up">
+    <div className="my-4 relative -z-10" data-aos="fade-up">
       <MyHeading
         data-aos="fade-up"
         title={t("top_providers")}

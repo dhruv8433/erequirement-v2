@@ -7,7 +7,7 @@ const Advertisement = ({ ads }) => {
       <img
         src={ads.image}
         height={"100%"}
-        className="object-cover aspect-video h-full w-full "
+        className="object-fill aspect-video h-full w-full "
         width={"100%"}
         alt=""
         loading="lazy"
