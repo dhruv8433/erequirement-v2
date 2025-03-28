@@ -17,7 +17,7 @@ const Testimonials = ({ testimonials, loading }) => {
         {loading ? (
           <h1>Loading..</h1>
         ) : (
-          testimonials.map((testimonial) => (
+          testimonials.slice(0,10).map((testimonial) => testimonial.rating > 3 && (
             <SwiperSlide key={testimonial.id}>
               <Testimonial key={testimonial.id} testimonial={testimonial} />
             </SwiperSlide>
