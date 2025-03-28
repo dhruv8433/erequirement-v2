@@ -14,9 +14,10 @@ const Routes = ({ isResponsive, isFooter }) => {
   return (
     <>
       {routes.map((link) => {
-        const isActive =
-          pathname ===
-          (hasLocaleInPath ? `${link.url}` : `/${locale}/${link.url}`);
+
+       const isActive =
+       (pathname === `/${locale}` && link.url === "") || // Ensure home route is matched correctly
+       pathname === (hasLocaleInPath ? `${link.url}` : `/${locale}/${link.url}`);
 
         return (
           <Link
@@ -27,7 +28,7 @@ const Routes = ({ isResponsive, isFooter }) => {
             } ${isFooter && "hover:text-orange-500 hover:underline"}`}
           >
             {isResponsive && <Icon className="h-auto w-auto">{link.icon}</Icon>}
-            <h1 className={`m-2 ${isActive ? "text-orange-500" : ""}`}>
+            <h1 className={`m-2 ${isActive ? "text-orange-600 font-bold" : ""}`}>
               {link.name}
             </h1>
           </Link>
