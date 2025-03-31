@@ -1,9 +1,10 @@
 import { MyPrimaryButton } from "@/app/custom/MyButton";
 import { SettingsOutlined, ShoppingCartOutlined } from "@mui/icons-material";
-import { Avatar, IconButton } from "@mui/material";
+import { Avatar, Badge, IconButton } from "@mui/material";
 import { useLocale } from "next-intl";
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const NavDrawers = ({
   isAuthenticated,
@@ -13,6 +14,9 @@ const NavDrawers = ({
   isLaptopScreen,
 }) => {
   const locale = useLocale();
+
+  const cartDataQty = useSelector((state) => state.cart.cart?.service);
+  console.log("cartDataQty", cartDataQty);
 
   return (
     <div className="user flex items-center gap-2">
@@ -34,7 +38,9 @@ const NavDrawers = ({
       {isAuthenticated && userData && (
         <Link href={`/${locale}/cart`}>
           <IconButton>
-            <ShoppingCartOutlined />
+            <Badge badgeContent={cartDataQty?.length} color="primary">
+              <ShoppingCartOutlined />
+            </Badge>
           </IconButton>
         </Link>
       )}

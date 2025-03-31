@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { login, logoutFromRedux } from "../reducer/authReducer";
 import { useRouter } from "next/navigation"; // Correct import for useRouter
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 
 export const useUserAction = () => {
   const userId = useSelector((state) => state.auth.user?.user?._id);
@@ -15,17 +16,16 @@ export const useUserAction = () => {
 
   async function UserLogout() {
     try {
-      const response = await LogoutUser();
-      setLogout(response.data);
+      const response = await LogoutUser(userId);
+      // setLogout(response.data);
+
+      Cookies.remove("user"); // Remove the token cookie
 
       // Dispatch the Redux action to remove user state
       dispatch(logoutFromRedux());
 
-      // Redirect the user to the homepage
-
       // Show success message
       toast.success(response.data.message || "Logged out successfully");
-      router.push("/");
 
       console.log("Response:", response.data);
     } catch (error) {

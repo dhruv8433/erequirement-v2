@@ -51,8 +51,10 @@ async function SignupWithGoogle(user) {
   return response.data;
 }
 
-async function LogoutUser() {
-  const response = await httpAxios.post("/user/logout");
+async function LogoutUser(userId) {
+  const response = await httpAxios.post("/user/logout", {
+    userId: userId
+  });
   return response.data;
 }
 

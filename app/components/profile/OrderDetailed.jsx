@@ -8,6 +8,8 @@ import { MyPrimaryText } from "@/app/custom/MyText";
 import { Divider, Rating } from "@mui/material";
 import Link from "next/link";
 import { useLocale } from "next-intl";
+import { downloadInvoice } from "@/app/utils/downloadInvoice";
+import slugify from "slugify";
 
 const OrderDetailed = ({ orderId }) => {
   const userId = useSelector((state) => state.auth.user.user._id);
@@ -20,7 +22,7 @@ const OrderDetailed = ({ orderId }) => {
   );
 
   const locale = useLocale();
-  console.log("order", singleOrder)
+  console.log("order", singleOrder);
 
   return (
     <div>
@@ -35,8 +37,15 @@ const OrderDetailed = ({ orderId }) => {
             <h1>Status : {singleOrder.orderStatus}</h1>
           </div>
           <OrderTable order={singleOrder} />
-          <div className="flex">
+          <div className="flex justify-between">
             <h1>Order Id: {orderId}</h1>
+            <button
+              onClick={() => {
+                downloadInvoice(singleOrder);
+              }}
+            >
+              Download Invoice
+            </button>
           </div>
 
           <div className="my-5">
@@ -46,7 +55,8 @@ const OrderDetailed = ({ orderId }) => {
                 {singleOrder.service[0].product.ProviderName}
               </span>
             </h1>
-            <Link href={`/${locale}/profile/orders/${orderId}/review`}>
+            {/* http://localhost:3000/en/providers/${providerId}/${providerSlug}/reviews */}
+            <Link href={`/${locale}/providers/${singleOrder?.service[0]?.product?.ProviderId}/${slugify(singleOrder?.service[0]?.product?.ProviderName).toLowerCase()}/reviews`}>
               <MyPrimaryText
                 title={`Add your review`}
                 className={"hover:underline hover:cursor-pointer"}
