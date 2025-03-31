@@ -38,7 +38,7 @@ const NavDrawers = ({
       {isAuthenticated && userData && (
         <Link href={`/${locale}/cart`}>
           <IconButton>
-            <Badge badgeContent={cartDataQty.length} color="primary">
+            <Badge badgeContent={cartDataQty?.length} color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </IconButton>
