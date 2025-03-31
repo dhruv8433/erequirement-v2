@@ -3,10 +3,13 @@ import { useTranslations } from "next-intl";
 import ProfileHeading from "../components/profile/ProfileHeading";
 import { MyBorderdButton, MyPrimaryButton } from "../custom/MyButton";
 import { useUserAction } from "../hooks/useUserAction";
+import { useRouter } from "next/navigation";
 
 const LogoutModel = ({ setLogoutModel }) => {
   const t = useTranslations("profile");
   const { UserLogout } = useUserAction();
+
+  const router  = useRouter();
   return (
     <div>
       <ProfileHeading heading={t("logout_title")} />
@@ -18,7 +21,9 @@ const LogoutModel = ({ setLogoutModel }) => {
         <MyBorderdButton
           title={t("logout")}
           className={"px-2 py-1 rounded-md"}
-          onClickFunction={() => UserLogout()}
+          onClickFunction={() => {UserLogout()
+            router.push("/")
+          }}
         />
         <MyPrimaryButton
           title={t("stay")}
