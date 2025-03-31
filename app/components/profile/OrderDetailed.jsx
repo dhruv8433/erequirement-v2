@@ -5,10 +5,9 @@ import { OrderTable } from "./OrderCard";
 import { MyCardBox } from "@/app/custom/MyBox";
 import dayjs from "dayjs";
 import { MyPrimaryText } from "@/app/custom/MyText";
-import { Divider, Rating } from "@mui/material";
 import Link from "next/link";
 import { useLocale } from "next-intl";
-import { downloadInvoice } from "@/app/utils/downloadInvoice";
+import DownloadInvoice from "@/app/utils/downloadInvoice";
 import slugify from "slugify";
 
 const OrderDetailed = ({ orderId }) => {
@@ -40,8 +39,9 @@ const OrderDetailed = ({ orderId }) => {
           <div className="flex justify-between">
             <h1>Order Id: {orderId}</h1>
             <button
+            className="border border-orange-500 text-orange-500 rounded-md px-4 py-2 hover:bg-orange-500 hover:text-white transition duration-300"
               onClick={() => {
-                downloadInvoice(singleOrder);
+                DownloadInvoice(singleOrder);
               }}
             >
               Download Invoice
