@@ -71,7 +71,7 @@ const Slider = ({ data, loading }) => {
           <MyColoredInput
             placeholder="Enter Service, Provider, Tags to search"
             className="w-full mt-[-30px] z-10"
-            inputClass="p-3"
+            inputClass="p-3 z-10 rounded-l"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
