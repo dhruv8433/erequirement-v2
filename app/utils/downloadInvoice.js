@@ -1,55 +1,86 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-export const downloadInvoice = async (order) => {
+const DownloadInvoice = (order) => {
+  if (!order || !order.service) {
+    console.error("Invalid order data");
+    return;
+  }
+
   const doc = new jsPDF();
+  const pageWidth = doc.internal.pageSize.getWidth();
 
-  // Website Logo
-  const img = new Image();
-  img.src = "/logo.png"; // Replace with your logo path
+  // Invoice Title
+  doc.setFontSize(22);
+  doc.setTextColor(44, 62, 80);
+  doc.text("ERequirement Invoice", pageWidth / 2, 15, { align: "center" });
 
-  doc.addImage(img, "PNG", 15, 10, 100, 30);
+  // Divider Line
+  doc.setDrawColor(200);
+  doc.line(14, 20, pageWidth - 14, 20);
 
-  doc.setFontSize(14);
-  doc.text("Invoice", 100, 40, { align: "center", marginTop: 50, fontWeight: "bold" });
-
-  // Customer & Order Details
+  // Order & Payment Details
   doc.setFontSize(12);
-  doc.setFont("helvetica", "normal");
-  doc.text(`Order ID: ${order._id}`, 15, 55);
-  doc.text(`Date: ${new Date(order.createdAt).toLocaleDateString()}`, 15, 65);
-  doc.text(`Status: ${order.orderStatus.toUpperCase()}`, 15, 75);
-  doc.text(`Payment Type: ${order.paymentType.toUpperCase()}`, 15, 85);
-  doc.text(`Total Price: $${order.totalPrice.toFixed(2)}`, 15, 95);
-
-  // Line Divider
-  doc.setDrawColor(150);
-  doc.line(15, 105, 195, 105);
-
-  // Services Table
   doc.setFont("helvetica", "bold");
-  doc.text("Services:", 15, 115);
-  
-  autoTable(doc, {
-    startY: 120,
-    head: [["#", "Service Name", "Price ($)"]],
-    body: order.service.map((service, index) => [
+  doc.text(`Order ID: ${order._id || "N/A"}`, 14, 30);
+  doc.text(`Date: ${new Date(order.createdAt).toLocaleDateString()}`, 14, 38);
+  doc.text(`Payment: ${order.paymentType?.toUpperCase() || "N/A"}`, 14, 46);
+  doc.text(`Order Status: ${order.orderStatus?.toUpperCase() || "N/A"}`, 14, 54);
+
+  // Product Table Header
+  const tableColumn = ["#", "Service Name", "Qty", "Price ($)", "Total ($)"];
+  const tableRows = [];
+
+  let grandTotal = 0;
+  order.service.forEach((service, index) => {
+    const price = service.product?.DiscountedPrice || 0;
+    const quantity = service.quantity || 1; // Default to 1 if quantity is missing
+    const total = price * quantity;
+    grandTotal += total;
+
+    tableRows.push([
       index + 1,
       service.product?.ServiceName || "Unknown Service",
-      `$${service.product?.DiscountedPrice?.toFixed(2) || "N/A"}`
-    ]),
-    theme: "grid",
-    styles: { fontSize: 10 },
-    headStyles: { fillColor: [22, 160, 133] }, // Green header
+      quantity,
+      `$${price.toFixed(2)}`,
+      `$${total.toFixed(2)}`,
+    ]);
   });
 
+  // Use autoTable for full-width formatting
+  autoTable(doc, {
+    startY: 65,
+    head: [tableColumn],
+    body: tableRows,
+    theme: "grid",
+    headStyles: { fillColor: [255, 140, 0], textColor: 255, fontSize: 12 }, // Orange header
+    styles: { fontSize: 10, cellPadding: 3 },
+    tableWidth: "auto",
+    columnStyles: {
+      0: { cellWidth: 15, halign: "center" }, // Serial Number
+      1: { cellWidth: "auto" }, // Service Name auto-adjusts
+      2: { cellWidth: 20, halign: "center" }, // Quantity
+      3: { cellWidth: 35, halign: "right" }, // Price
+      4: { cellWidth: 40, halign: "right" }, // Total
+    },
+  });
+
+  // Total Summary Section
+  const summaryStartY = doc.lastAutoTable.finalY + 10;
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "bold");
+  doc.text(`Subtotal: $${grandTotal.toFixed(2)}`, pageWidth - 50, summaryStartY);
+
   // Footer Section
-  const finalY = doc.lastAutoTable.finalY + 10;
   doc.setFontSize(10);
   doc.setFont("helvetica", "bold");
-  doc.text("Thank you for choosing ERequirement!", 15, finalY + 10);
+  doc.text("Thank you for choosing ERequirement!", 14, summaryStartY + 20);
   doc.setFont("helvetica", "normal");
-  doc.text("Visit our website: www.erequirement.com", 15, finalY + 20);
-  
-  doc.save(`Invoice-${order._id}.pdf`);
+  doc.text("Visit our website: www.erequirement.com", 14, summaryStartY + 28);
+  doc.text("Support: support@erequirement.com | +91 98765 43210", 14, summaryStartY + 36);
+
+  // Save PDF
+  doc.save(`ERequirement_Invoice_${order._id || "Unknown"}.pdf`);
 };
+
+export default DownloadInvoice;
