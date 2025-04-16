@@ -1,9 +1,10 @@
 import { MyPrimaryButton } from "@/app/custom/MyButton";
+import { useCart } from "@/app/hooks/useCart";
 import { SettingsOutlined, ShoppingCartOutlined } from "@mui/icons-material";
 import { Avatar, Badge, IconButton } from "@mui/material";
 import { useLocale } from "next-intl";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const NavDrawers = ({
@@ -15,8 +16,14 @@ const NavDrawers = ({
 }) => {
   const locale = useLocale();
 
-  const cartDataQty = useSelector((state) => state.cart.cart?.service);
-  console.log("cartDataQty", cartDataQty);
+  const {cartData} = useCart();
+  console.log("cartDataQty", cartData?.length || 0);
+
+  let cartDataQty;
+  
+  useEffect(() => {
+    cartDataQty = cartData ? cartData.length : 0;
+  },[cartData])
 
   return (
     <div className="user flex items-center gap-2">
@@ -38,7 +45,7 @@ const NavDrawers = ({
       {isAuthenticated && userData && (
         <Link href={`/${locale}/cart`}>
           <IconButton>
-            <Badge badgeContent={cartDataQty?.length} color="primary">
+            <Badge badgeContent={cartDataQty} color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </IconButton>
