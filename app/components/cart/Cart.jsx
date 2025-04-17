@@ -1,23 +1,26 @@
-import Address from "./Address";
-import Payment from "./Payment";
+"use client";
+
 import toast from "react-hot-toast";
-import CartTable from "./CartTable";
+import { useLocale } from "next-intl";
 import React, { useState, useEffect } from "react";
-import { errorMessages, steps } from "@/app/config/config";
-import { useCart } from "@/app/hooks/useCart";
-import MiniCartLayout from "./MiniCartLayout";
-import DateTimeSelector from "./DateTimeSelector";
-import { useSchedule } from "@/app/hooks/useSchedule"; // Custom hook
-import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
-import dayjs from "dayjs"; // Importing dayjs for date/time formatting
-import { PaymentHandler } from "./PaymentHandler";
 import { useRouter } from "next/navigation";
+import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
+
+// Components
+import { CartStep0, CartStep1, CartStep2, CartStep3 } from "./CartSteps";
+
+// Config & Hooks
+import { useCart } from "@/app/hooks/useCart";
+import { PaymentHandler } from "./PaymentHandler";
+import { useSchedule } from "@/app/hooks/useSchedule";
+import { errorMessages, steps } from "@/app/config/config";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "@/app/reducer/cartReducer";
 
-// Helper function for formatting dates and times using dayjs
-const formatDate = (date) => dayjs(date).format("YYYY-MM-DD"); // Format as needed
-const formatTime = (time) => time; // Keep time as is or adjust formatting if necessary
+// Dayjs
+import dayjs from "dayjs";
+const formatDate = (date) => dayjs(date).format("YYYY-MM-DD");
+const formatTime = (time) => time;
 
 const Cart = ({ user, setAddressModal }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -26,17 +29,26 @@ const Cart = ({ user, setAddressModal }) => {
     time: null,
     date: null,
   });
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("paypal");
 
-  // Fetch cart data and schedule
-  const { cartData, otherInfo, handleRemove, handleUpdateQuantity } = useCart(
-    user?._id
-  );
-  const cartId = cartData && cartData[0]?._id; // Assuming the cart item has the cart ID
+  const {
+    cartData = [], // Fallback to empty array
+    otherInfo,
+    handleRemove,
+    handleUpdateQuantity,
+    loadingServiceId,
+  } = useCart(user?._id);
+
+  const cartState = useSelector((state) => state?.cart?.cart || {});
+  const cartItems = Array.isArray(cartState?.items) ? cartState.items : [];
+  const cartId = cartItems?.[0]?._id || null;
+  const refreshCartId = cartState?._id || 0;
+
   const { createSchedule, schedule } = useSchedule(cartId);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const locale = useLocale();
 
-  const RefreshCartId = useSelector((state) => state?.cart?.cart?._id);
-
-  // Initialize selected date and time if a schedule already exists
   useEffect(() => {
     if (schedule) {
       setSelectedDateTimeSlot({
@@ -47,13 +59,11 @@ const Cart = ({ user, setAddressModal }) => {
   }, [schedule]);
 
   const handleNext = async () => {
-    // Step 0 validation: Check if cart is empty
-    if (activeStep === 0 && (!cartData || cartData.length === 0)) {
+    if (activeStep === 0 && (!Array.isArray(cartData) || cartData.length === 0)) {
       toast.error(errorMessages.CartAdd);
       return;
     }
 
-    // Step 1 validation: Ensure date & time are selected
     if (
       activeStep === 1 &&
       (!selectedDateTimeSlot.date || !selectedDateTimeSlot.time)
@@ -62,7 +72,6 @@ const Cart = ({ user, setAddressModal }) => {
       return;
     }
 
-    // Create a schedule when completing Step 1
     if (activeStep === 1) {
       try {
         await createSchedule(selectedDateTimeSlot);
@@ -73,44 +82,37 @@ const Cart = ({ user, setAddressModal }) => {
       }
     }
 
-    // Step 2 validation: Ensure an address is selected
     if (activeStep === 2 && selectedAddress === "") {
       toast.error(errorMessages.addAddress);
       return;
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setActiveStep((prev) => prev + 1);
   };
 
-  const handleBack = () =>
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const handleBack = () => setActiveStep((prev) => prev - 1);
 
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("paypal");
-
-  const handlePaymentChange = (event) => {
+  const handlePaymentChange = (event) =>
     setSelectedPaymentMethod(event.target.value);
-  };
-
-  const router = useRouter();
-  const dispatch = useDispatch();
 
   const handlePayment = async () => {
-    if (selectedPaymentMethod === "paypal") {
-      // send other info because it directly have access of total amount
-      await PaymentHandler("Paypal", otherInfo);
+    try {
+      if (selectedPaymentMethod === "paypal") {
+        await PaymentHandler("Paypal", otherInfo);
+      } else if (selectedPaymentMethod === "stripe") {
+        await PaymentHandler("Stripe", cartData, user?._id, refreshCartId);
+      } else if (selectedPaymentMethod === "cod") {
+        await PaymentHandler("cod", otherInfo, user?._id);
+      } else {
+        toast.error("Invalid payment method");
+        return;
+      }
+
       dispatch(clearCart());
-      // after place order go back to home
-      router.push("/");
-    } else if (selectedPaymentMethod === "stripe") {
-      await PaymentHandler("Stripe", cartData, user?._id, RefreshCartId);
-      dispatch(clearCart());
-      // after place order go back to home
-      router.push("/");
-    } else if (selectedPaymentMethod === "cod") {
-      await PaymentHandler("cod", otherInfo, user?._id);
-      dispatch(clearCart());
-      // after place order go back to home
-      router.push("/");
+      router.push(`/${locale}/payment-success`);
+    } catch (error) {
+      console.error("Payment error:", error);
+      toast.error("Payment failed. Please try again.");
     }
   };
 
@@ -127,50 +129,44 @@ const Cart = ({ user, setAddressModal }) => {
       <div className="rounded-2xl my-10">
         {/* Step 0: Cart Table */}
         {activeStep === 0 && (
-          <CartTable
-            cartData={cartData}
+          <CartStep0
+            cartData={Array.isArray(cartData) ? cartData : []}
             onRemove={handleRemove}
-            onIncrement={handleUpdateQuantity}
-            onDecrement={handleUpdateQuantity}
+            onUpdateQuantity={handleUpdateQuantity}
             totalPrice={otherInfo?.totalPrice}
             discountPromo={otherInfo?.discountPrice}
+            loading={loadingServiceId}
           />
         )}
 
-        {/* Step 1: Date and Time Selector */}
+        {/* Step 1: DateTime Selection */}
         {activeStep === 1 && (
-          <MiniCartLayout selectedDateTimeSlot={selectedDateTimeSlot}>
-            <DateTimeSelector
-              cartItem={cartData[0].product}
-              selectedDateTimeSlot={selectedDateTimeSlot}
-              setSelectedDateTimeSlot={setSelectedDateTimeSlot}
-            />
-          </MiniCartLayout>
+          <CartStep1
+            selectedDateTimeSlot={selectedDateTimeSlot}
+            setSelectedDateTimeSlot={setSelectedDateTimeSlot}
+            cartItem={cartData?.[0]?.product}
+            schedule={schedule}
+          />
         )}
 
         {/* Step 2: Address Selection */}
         {activeStep === 2 && (
-          <MiniCartLayout
+          <CartStep2
             user={user}
+            selectedAddress={selectedAddress}
+            setSelectedAddress={setSelectedAddress}
+            setAddressModal={setAddressModal}
             selectedDateTimeSlot={selectedDateTimeSlot}
-          >
-            <Address
-              user={user}
-              selectedAddress={selectedAddress}
-              setSelectedAddress={setSelectedAddress}
-              setAddressModal={setAddressModal}
-            />
-          </MiniCartLayout>
+          />
         )}
 
         {/* Step 3: Payment */}
         {activeStep === 3 && (
-          <MiniCartLayout selectedDateTimeSlot={selectedDateTimeSlot}>
-            <Payment
-              handlePaymentChange={handlePaymentChange}
-              selectedPaymentMethod={selectedPaymentMethod}
-            />
-          </MiniCartLayout>
+          <CartStep3
+            selectedDateTimeSlot={selectedDateTimeSlot}
+            selectedPaymentMethod={selectedPaymentMethod}
+            handlePaymentChange={handlePaymentChange}
+          />
         )}
       </div>
 

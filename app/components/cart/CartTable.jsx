@@ -23,6 +23,7 @@ const CartTable = ({
   totalPrice,
   isMiniCart,
   discountPromo,
+  loading
 }) => {
   const locale = useLocale();
   const t = useTranslations("cart");
@@ -56,6 +57,7 @@ const CartTable = ({
                   onIncrement={onIncrement}
                   onDecrement={onDecrement}
                   isMiniCart={isMiniCart}
+                  loading={loading}
                 />
               ))}
             </Table>

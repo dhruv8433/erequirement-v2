@@ -1,6 +1,7 @@
 import React from "react";
 import { TableBody, TableCell, TableRow, IconButton } from "@mui/material";
 import { Add, Remove, Delete } from "@mui/icons-material";
+import { ClipLoader } from "react-spinners";
 
 const CartItem = ({
   service,
@@ -9,6 +10,7 @@ const CartItem = ({
   onDecrement,
   qty,
   isMiniCart,
+  loading,
 }) => {
   return (
     <TableBody>
@@ -43,13 +45,29 @@ const CartItem = ({
           <TableCell>
             <div className="flex items-center border w-max rounded-md overflow-hidden">
               <div className="primary-bg hover:bg-orange-500">
-                <IconButton onClick={() => onDecrement(service._id, qty - 1)}>
+                <IconButton
+                  onClick={() => onDecrement(service._id, qty - 1)}
+                  disabled={loading === service._id}
+                >
+                  {" "}
                   <Remove fontSize="small" />
                 </IconButton>
               </div>
-              <h1 className="mx-3">{qty}</h1>
+
+              <h1 className="mx-3">
+                {" "}
+                {loading === service._id ? (
+                  <ClipLoader size={16} color="primary" />
+                ) : (
+                  qty
+                )}
+              </h1>
+
               <div className="primary-bg hover:bg-orange-500">
-                <IconButton onClick={() => onIncrement(service._id, qty + 1)}>
+                <IconButton
+                  onClick={() => onIncrement(service._id, qty + 1)}
+                  disabled={loading === service._id}
+                >
                   <Add fontSize="small" />
                 </IconButton>
               </div>
