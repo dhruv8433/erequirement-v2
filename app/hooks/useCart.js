@@ -10,41 +10,30 @@ import {
   updateQuantityInCart,
 } from "@/app/utils/CartService";
 
-/**
- * Custom hook to manage cart state and actions.
- * @param {string} userId - The ID of the user.
- * @returns {Object} - Cart data, other info, and action functions.
- */
-
 export function useCart() {
-  let cartData = null,
-    otherInfo = null;
   const isUserAuthenticated = useSelector(
     (state) => state.auth.isAuthenticated
   );
+  const userId = useSelector((state) => state.auth?.user?.user?._id);
 
-  let userId;
-  if (isUserAuthenticated) {
-    userId = useSelector((state) => state.auth?.user?.user?._id);
-  }
-
-  if (userId) {
-    cartData = useSelector((state) => state?.cart?.cart?.service);
-    otherInfo = useSelector((state) => state?.cart?.cart);
-  }
-
-  // Ensure cartData exists before accessing any properties on it
+  // Always call selectors unconditionally
+  const cartData = useSelector((state) => state?.cart?.cart?.service);
+  const otherInfo = useSelector((state) => state?.cart?.cart);
   const hasCartData = cartData && cartData.length > 0;
 
   const dispatch = useDispatch();
+  const [loadingServiceId, setLoadingServiceId] = useState(null);
 
   const loadCart = async () => {
-    if (!userId) return; // Make sure userId exists before fetching
+    if (!userId) return;
     try {
       const data = await fetchCartData(userId);
       dispatch(setCart(data.data));
-      console.log("cart loaded", data.data)
     } catch (error) {
+      const statusCode = error?.response?.status;
+      if (statusCode === 404) {
+        dispatch(setCart(null));
+      }
       const errorMessage =
         error.response?.data?.errors || "Failed to load cart data.";
       console.log("Error", errorMessage);
@@ -76,6 +65,7 @@ export function useCart() {
 
   const handleUpdateQuantity = async (serviceId, qty) => {
     if (!userId) return;
+    setLoadingServiceId(serviceId);
     try {
       const response = await updateQuantityInCart(userId, serviceId, qty);
       if (response.success) {
@@ -83,11 +73,13 @@ export function useCart() {
       } else {
         toast.error(response.errors || "Failed to update quantity.");
       }
-      loadCart();
+      await loadCart();
     } catch (error) {
       const errorMessage =
         error.response?.data?.errors || "Failed to update quantity.";
       toast.error(errorMessage);
+    } finally {
+      setLoadingServiceId(null);
     }
   };
 
@@ -99,10 +91,10 @@ export function useCart() {
     try {
       const response = await addToCart(userId, serviceId);
       if (response.success) {
-        toast.success(response.message || "Item removed successfully.");
+        toast.success(response.message || "Item added to cart.");
         loadCart();
       } else {
-        toast.error(response.errors || "Failed to remove item.");
+        toast.error(response.errors || "Failed to add item.");
       }
     } catch (error) {
       const errorMessage =
@@ -118,5 +110,7 @@ export function useCart() {
     handleUpdateQuantity,
     reloadCart: loadCart,
     AddServiceToCart,
+    loadingServiceId,
   };
 }
+

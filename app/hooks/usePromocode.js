@@ -7,7 +7,7 @@ import { useCart } from "./useCart";
 
 export const usePromocode = (promocode) => {
   const [cartData, setCartData] = useState([]);
-  const cartId = useSelector((state) => state.cart.cart._id);
+  const cartId = useSelector((state) => state?.cart?.cart?._id);
 
   const { reloadCart } = useCart();
 
