@@ -105,7 +105,7 @@ const Cart = ({ user, setAddressModal }) => {
       } else if (selectedPaymentMethod === "stripe") {
         await PaymentHandler(
           "Stripe",
-          { data: cartData, info: otherInfo },
+          { data: cartData, info: otherInfo, locale },
           user?._id,
           refreshCartId
         );
