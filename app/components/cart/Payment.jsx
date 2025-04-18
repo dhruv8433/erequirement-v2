@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { MyCardBox } from "@/app/custom/MyBox";
-import { MyPrimaryText } from "@/app/custom/MyText";
+import { MyHeading, MyPrimaryText } from "@/app/custom/MyText";
 import { MyColoredInput } from "@/app/custom/MyInput";
 import { MyPrimaryButton } from "@/app/custom/MyButton";
 import { usePromocode } from "@/app/hooks/usePromocode";
@@ -24,8 +24,8 @@ const Payment = ({ selectedPaymentMethod, handlePaymentChange }) => {
   };
 
   return (
-    <MyCardBox className="p-6 rounded-xl space-y-4 min-w-max" data-aos="fade-up">
-      <MyPrimaryText title={t("select_payment")} />
+    <MyCardBox className="p-6 rounded-xl space-y-4 min-w-max min-h-full" data-aos="fade-up">
+      <MyHeading className={"font-semibold"} title={t("select_payment")} />
       <FormControl component="fieldset" className="w-full flex flex-col" data-aos="fade-up">
         <RadioGroup
           aria-label="payment-method"
@@ -57,7 +57,7 @@ const Payment = ({ selectedPaymentMethod, handlePaymentChange }) => {
       </FormControl>
 
       {/* take promocode for extra disocunt */}
-      <MyPrimaryText title={t("promocode")} />
+      <MyHeading className={"font-semibold"} title={t("promocode")} />
       <div className="flex gap-2" data-aos="fade-up">
         <MyColoredInput
           inputClass={"p-1 rounded-md border"}

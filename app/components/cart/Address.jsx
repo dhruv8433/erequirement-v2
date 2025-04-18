@@ -40,8 +40,8 @@ const Address = ({
   };
 
   return (
-    <div className="rounded-2xl overflow-hidden">
-      <MyCardBox className="p-4">
+    <div className="rounded-2xl overflow-hidden h-full">
+      <MyCardBox className="p-4 h-full">
         <MyBorderdButton
           title={"Add New Address"}
           className={"border-dashed w-full p-10 my-address-btn"}
