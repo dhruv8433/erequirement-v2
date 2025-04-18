@@ -64,7 +64,7 @@ const DateTimeSelector = ({
 
   const t = useTranslations("cart");
   return (
-    <MyCardBox className="p-4 rounded-2xl overflow-hidden" data-aos="fade-up">
+    <MyCardBox className="p-4 rounded-2xl overflow-hidden min-h-full" data-aos="fade-up">
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <MyHeading
