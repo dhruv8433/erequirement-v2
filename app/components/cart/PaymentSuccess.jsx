@@ -1,8 +1,6 @@
-"use client";
-
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router"; // Use next/router here
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
@@ -13,17 +11,18 @@ const PaymentSuccess = () => {
   const router = useRouter();
 
   useEffect(() => {
-    try {
-      dispatch(clearCart());
-      toast.success("Payment successful!");
-      const timeout = setTimeout(() => {
-        router.push("/");
-      }, 3000);
+    dispatch(clearCart());
+    toast.success("Payment successful!");
 
-      return () => clearTimeout(timeout);
-    } catch (error) {
-      console.error("Error during payment success:", error);
-    }
+    // Ensure the router push is only done if the component is still mounted
+    const timeout = setTimeout(() => {
+      if (router) {
+        router.push("/");
+      }
+    }, 3000);
+
+    // Cleanup function to avoid memory leaks or unnecessary re-renders
+    return () => clearTimeout(timeout);
   }, [dispatch, router]);
 
   return (
