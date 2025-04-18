@@ -103,12 +103,12 @@ const Cart = ({ user, setAddressModal }) => {
       if (selectedPaymentMethod === "paypal") {
         await PaymentHandler("Paypal", otherInfo);
       } else if (selectedPaymentMethod === "stripe") {
-        await PaymentHandler("Stripe", {
-          userId: user?._id,
-          cartId: refreshCartId,
-          locale: locale, 
-        });
-        
+        await PaymentHandler(
+          "Stripe",
+          { data: cartData, info: otherInfo },
+          user?._id,
+          refreshCartId
+        );
       } else if (selectedPaymentMethod === "cod") {
         await PaymentHandler("cod", otherInfo, user?._id);
       } else {
