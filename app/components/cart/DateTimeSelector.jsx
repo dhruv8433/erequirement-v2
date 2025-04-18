@@ -1,7 +1,7 @@
 import { MyCardBox } from "@/app/custom/MyBox";
 import { MyHeading } from "@/app/custom/MyText";
 import { useProviders } from "@/app/hooks/useProviders";
-import React from "react";
+import React, { useEffect } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
@@ -14,8 +14,21 @@ const DateTimeSelector = ({
   cartItem,
   selectedDateTimeSlot,
   setSelectedDateTimeSlot,
+  schedule,
+  time,
+  date
 }) => {
-  const { singleProvider } = useProviders(cartItem.ProviderId);
+  // Prefill schedule if already exists
+  useEffect(() => {
+    if (schedule) {
+      setSelectedDateTimeSlot({
+        time: time,
+        date: formatDate(date),
+      });
+    }
+  }, [schedule]);
+
+  const { singleProvider } = useProviders(cartItem?.ProviderId);
 
   // Function to disable dates outside the `advance_booking_days` and dates before today
   const shouldDisableDate = (date) => {
@@ -54,7 +67,11 @@ const DateTimeSelector = ({
     <MyCardBox className="p-4 rounded-2xl overflow-hidden" data-aos="fade-up">
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <MyHeading title={t("available_date")} className={"font-semibold"} data-aos="fade-up"/>
+          <MyHeading
+            title={t("available_date")}
+            className={"font-semibold"}
+            data-aos="fade-up"
+          />
           <div className="calendar my-4" data-aos="fade-up">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateCalendar
@@ -84,7 +101,9 @@ const DateTimeSelector = ({
                   value={timeSlot}
                   control={<Radio />}
                   label={
-                    <span className="text-lg font-medium" data-aos="fade-up">{timeSlot}</span>
+                    <span className="text-lg font-medium" data-aos="fade-up">
+                      {timeSlot}
+                    </span>
                   }
                   className="border border-gray-200 p-2 rounded-lg shadow-sm transition duration-200 max-w-full w-full"
                   data-aos="fade-up"

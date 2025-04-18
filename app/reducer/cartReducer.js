@@ -14,7 +14,7 @@ const CartReducer = createSlice({
       state.loading = false;
     },
     clearCart: (state) => {
-      state.cart = null;
+      state.cart = initialState.cart;
       state.loading = false;
     },
   },

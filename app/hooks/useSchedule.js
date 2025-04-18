@@ -2,7 +2,17 @@ import { useEffect, useState } from "react";
 import { CreateSchedule, getSchedule } from "@/app/utils/ScheduleService";
 import toast from "react-hot-toast";
 
-export const useSchedule = (cartId) => {
+export const useSchedule = (cartId, activeStep) => {
+  if (!cartId) {
+    return {
+      schedule: null,
+      loading: false,
+      error: null,
+      createSchedule: () => {},
+      fetchSchedule: () => {},
+    };
+  }
+
   const [schedule, setSchedule] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,7 +27,7 @@ export const useSchedule = (cartId) => {
         setSchedule(response.data);
         toast.success(response.message);
       } else {
-        toast.error(response.message || "Failed to create schedule.");
+        toast.error("No Schedule Found" || "Failed to create schedule.");
       }
     } catch (err) {
       setError(err.message);
@@ -32,10 +42,15 @@ export const useSchedule = (cartId) => {
     try {
       setLoading(true);
       const response = await getSchedule(cartId);
-      setSchedule(response.data);
+      console.log("scheduleresposne", response);
+      if (response.success) {
+        setSchedule(response.data);
+      } else {
+        toast.error(response.errors);
+      }
     } catch (err) {
-      setError(err.message);
-      toast.error("Failed to fetch schedule.");
+      setError("schedule error", err.message);
+      toast.error("No Schedule Found" || "Failed to fetch schedule.");
     } finally {
       setLoading(false);
     }
@@ -43,8 +58,10 @@ export const useSchedule = (cartId) => {
 
   // TODO - create delete schdule when user cancle order we call that
   useEffect(() => {
-    fetchSchedule();
-  }, []);
+    if (activeStep === 1) {
+      fetchSchedule();
+    }
+  }, [activeStep]);
 
   return {
     schedule,

@@ -1,7 +1,9 @@
 import axios from "axios";
-import { ApiUrl } from "./config/config";
+import { ApiUrl, LocalUrl } from "./config/config";
+
+const isProduction = process.env.NEXT_PUBLIC_PRODUCTION === "true";
 
 export const httpAxios = axios.create({
-  baseURL: ApiUrl,
+  baseURL: isProduction ? ApiUrl : LocalUrl,
   withCredentials: true,
 });

@@ -181,18 +181,7 @@ const SignupForm = ({ setSignupForm, setModal }) => {
       <Divider>OR</Divider>
 
       <div className="mt-4">
-        <Grid container spacing={3}>
-          <Grid item xs={6} md={6}>
-            <GoogleSignupButton SetModal={setModal} />
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <MyBorderdButton
-              title={"Phone"}
-              icon={<PhoneIcon />}
-              className={"w-full p-2"}
-            />
-          </Grid>
-        </Grid>
+        <GoogleSignupButton SetModal={setModal} />
       </div>
     </div>
   );
