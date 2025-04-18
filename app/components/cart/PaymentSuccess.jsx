@@ -13,13 +13,17 @@ const PaymentSuccess = () => {
   const router = useRouter();
 
   useEffect(() => {
-    dispatch(clearCart());
-    toast.success("Payment successful!");
-    const timeout = setTimeout(() => {
-      router.push("/");
-    }, 3000);
+    try {
+      dispatch(clearCart());
+      toast.success("Payment successful!");
+      const timeout = setTimeout(() => {
+        router.push("/");
+      }, 3000);
 
-    return () => clearTimeout(timeout);
+      return () => clearTimeout(timeout);
+    } catch (error) {
+      console.error("Error during payment success:", error);
+    }
   }, [dispatch, router]);
 
   return (
