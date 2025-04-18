@@ -59,7 +59,10 @@ const Cart = ({ user, setAddressModal }) => {
   }, [schedule]);
 
   const handleNext = async () => {
-    if (activeStep === 0 && (!Array.isArray(cartData) || cartData.length === 0)) {
+    if (
+      activeStep === 0 &&
+      (!Array.isArray(cartData) || cartData.length === 0)
+    ) {
       toast.error(errorMessages.CartAdd);
       return;
     }
@@ -100,7 +103,12 @@ const Cart = ({ user, setAddressModal }) => {
       if (selectedPaymentMethod === "paypal") {
         await PaymentHandler("Paypal", otherInfo);
       } else if (selectedPaymentMethod === "stripe") {
-        await PaymentHandler("Stripe", cartData, user?._id, refreshCartId);
+        await PaymentHandler(
+          "Stripe",
+          { data: cartData, info: otherInfo },
+          user?._id,
+          refreshCartId
+        );
       } else if (selectedPaymentMethod === "cod") {
         await PaymentHandler("cod", otherInfo, user?._id);
       } else {

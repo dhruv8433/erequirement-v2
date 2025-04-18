@@ -43,9 +43,16 @@ const OrderCard = ({ order }) => {
         <h1 className="text-gray-500" data-aos="fade-up">
           <strong>Order ID:</strong> {order._id}
         </h1>
-        <h1 data-aos="fade-up">
-          <strong>Total Price:</strong> ${order.totalPrice}
-        </h1>
+        <div className="">
+          <h1 data-aos="fade-up">
+            <strong>Total</strong> ${order.totalPrice}
+          </h1>
+          {order.discountedPrice > 0 && (
+            <h1 data-aos="fade-up">
+              <strong>Discount</strong> ${order.discountedPrice}
+            </h1>
+          )}
+        </div>
       </div>
     </div>
   );
