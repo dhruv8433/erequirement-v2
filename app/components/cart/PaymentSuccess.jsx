@@ -11,18 +11,22 @@ const PaymentSuccess = () => {
   const router = useRouter();
 
   useEffect(() => {
+    let isMounted = true; // Flag to track component mount
+
     dispatch(clearCart());
     toast.success("Payment successful!");
 
-    // Ensure the router push is only done if the component is still mounted
     const timeout = setTimeout(() => {
-      if (router) {
+      if (isMounted) {
         router.push("/");
       }
     }, 3000);
 
-    // Cleanup function to avoid memory leaks or unnecessary re-renders
-    return () => clearTimeout(timeout);
+    // Cleanup on unmount
+    return () => {
+      isMounted = false;
+      clearTimeout(timeout);
+    };
   }, [dispatch, router]);
 
   return (
