@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/router"; // ✅ Correct hook
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
@@ -13,21 +13,14 @@ const PaymentSuccess = () => {
   const router = useRouter();
 
   useEffect(() => {
-    let isMounted = true;
-
     dispatch(clearCart());
     toast.success("Payment successful!");
 
     const timeout = setTimeout(() => {
-      if (isMounted) {
-        router.push("/");
-      }
+      router.push("/");
     }, 3000);
 
-    return () => {
-      isMounted = false;
-      clearTimeout(timeout);
-    };
+    return () => clearTimeout(timeout);
   }, [dispatch, router]);
 
   return (
