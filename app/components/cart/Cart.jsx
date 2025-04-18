@@ -3,7 +3,7 @@
 import toast from "react-hot-toast";
 import { useLocale } from "next-intl";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
 
 // Components
@@ -29,6 +29,7 @@ const Cart = ({ user, setAddressModal }) => {
     time: null,
     date: null,
   });
+  const {locale}=useParams()
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("paypal");
 
   const {
@@ -47,7 +48,6 @@ const Cart = ({ user, setAddressModal }) => {
   const { createSchedule, schedule } = useSchedule(cartId);
   const dispatch = useDispatch();
   const router = useRouter();
-  const locale = useLocale();
 
   useEffect(() => {
     if (schedule) {
@@ -105,7 +105,7 @@ const Cart = ({ user, setAddressModal }) => {
       } else if (selectedPaymentMethod === "stripe") {
         await PaymentHandler(
           "Stripe",
-          { data: cartData, info: otherInfo, locale },
+          { data: cartData, info: otherInfo, locale: locale },
           user?._id,
           refreshCartId
         );
