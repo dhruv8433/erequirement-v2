@@ -13,7 +13,6 @@ export const PaymentHandler = async (paymentType, cartData, userId, cartId) => {
       const { data } = await httpAxios.post(
         "/payment/stripe/create-checkout-session",
         {
-          cartData,
           paymentMethod: "stripe",
           metadata: {
             userId,
