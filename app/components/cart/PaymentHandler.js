@@ -5,7 +5,7 @@ import { PlaceOrder } from "@/app/utils/OrderService";
 import { createPaypalOrder } from "@/app/utils/createOrder";
 
 // Function to initialize and handle Stripe payment
-export const PaymentHandler = async (paymentType, cartData, userId, cartId) => {
+export const PaymentHandler = async (paymentType, cartData, userId, cartId, locale) => {
   if (paymentType === "Stripe") {
     console.log("Initiating Stripe...");
     try {
@@ -17,6 +17,7 @@ export const PaymentHandler = async (paymentType, cartData, userId, cartId) => {
           metadata: {
             userId,
             cartId,
+            locale
           },
         },
         {
